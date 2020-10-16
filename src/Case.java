@@ -24,7 +24,7 @@ public class Case {
 
 	@Override
 	public String toString() {
-		return "Case [natureTerrain=" + natureTerrain + ", lig=" + lig + ", col=" + col + "]";
+		return "Case [natureTerrain=" + this.nature + ", lig=" + this.ligne + ", col=" + this.colonne + "]";
 	}
 }
 

@@ -27,7 +27,7 @@ public class Carte {
 		return cases[lig][col];
 	}
 	
-	boolean voisinExiste(Case src, Direction dir) {
+	public boolean voisinExiste(Case src, Direction dir) {
 		int ligSrc = src.getLigne();
 		int colSrc = src.getColonne();
 		
@@ -44,8 +44,27 @@ public class Carte {
 		default:
 			if (ligSrc == this.getNbLignes()) return false;
 			return (getCase(ligSrc + 1, colSrc) != null);
+		}	
+	}
+	
+	public Case getVoisin(Case src, Direction dir) {
+		int ligSrc = src.getLigne();
+		int colSrc = src.getColonne();
+		
+		switch(dir) {
+		case OUEST:
+			if (colSrc == 0) return null;
+			return getCase(ligSrc, colSrc - 1);
+		case EST:
+			if (colSrc == this.getNbColonnes()) return null;
+			return getCase(ligSrc, colSrc + 1);
+		case NORD:
+			if (ligSrc == 0) return null;
+			return getCase(ligSrc - 1, colSrc);
+		default:
+			if (ligSrc == this.getNbLignes()) return null;
+			return getCase(ligSrc + 1, colSrc);
 		}
-			
 	}
 }
 
