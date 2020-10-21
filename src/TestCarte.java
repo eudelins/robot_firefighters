@@ -84,7 +84,9 @@ class CarteGui implements Simulable {
         	for (int j = 0; j < carte.getNbColonnes(); j++) {
         		Case case_ij = carte.getCase(i, j);
         		Color couleurCase = colorCase(case_ij);
-        		gui.addGraphicalElement(new Rectangle(i * taille_case, j * taille_case, Color.BLACK, couleurCase, taille_case));
+        		int coordX = i * taille_case + taille_case/2;
+        		int coordY = j * taille_case + taille_case/2;
+        		gui.addGraphicalElement(new Rectangle(coordX, coordY, Color.BLACK, couleurCase, taille_case));
         		
         	}
         }
