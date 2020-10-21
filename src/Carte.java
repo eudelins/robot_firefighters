@@ -5,6 +5,11 @@ public class Carte {
 	public Carte(int nbLignes, int nbColonnes, int tailleCases) {
 		this.tailleCases = tailleCases;
 		this.cases = new Case[nbLignes][nbColonnes];
+		for (int i = 0; i < nbLignes; i++) {
+			for (int j = 0; j < nbColonnes; j++) {
+				this.cases[i][j] = new Case(NatureTerrain.TERRAIN_LIBRE, i, j);
+			}
+		}
 	}
 
 	public int getTailleCases() {
