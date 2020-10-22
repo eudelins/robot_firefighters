@@ -10,7 +10,7 @@ public abstract class Robot {
 	}
 	
 	public Robot() {
-		this.position = new Case(NatureTerrain.EAU, 0, 0);
+		this.position = new Case(NatureTerrain.EAU, 0, 0, null);
 		this.quantiteEau  = 0;
 	}
 	

@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.io.File;
 
 import gui.GUISimulator;
 import gui.Rectangle;
@@ -13,10 +14,12 @@ public class TestCarte {
 
 	public static void main(String[] args) {
         // crée la fenêtre graphique dans laquelle dessiner
-        GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
+        // GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
      
         // crée la carte, en l'associant à la fenêtre graphique précédente
-        CarteGui carte = new CarteGui(gui, new Carte(50, 50, 20), Color.decode("#f2ff28"));
+        // CarteGui carte = new CarteGui(gui, new Carte(50, 50, 20), Color.decode("#f2ff28"));
+        
+        DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/carteSujet.map"));
     }
 }
 

@@ -7,10 +7,18 @@ public class Carte {
 		this.cases = new Case[nbLignes][nbColonnes];
 		for (int i = 0; i < nbLignes; i++) {
 			for (int j = 0; j < nbColonnes; j++) {
-				this.cases[i][j] = new Case(NatureTerrain.TERRAIN_LIBRE, i, j);
+				this.cases[i][j] = new Case(NatureTerrain.TERRAIN_LIBRE, i, j, null);
 			}
 		}
 	}
+
+	
+	public Carte(Case[][] carte, int tailleCases) {
+		this.tailleCases = tailleCases;
+		this.cases = carte;
+	}
+	
+		
 
 	public int getTailleCases() {
 		return tailleCases;
