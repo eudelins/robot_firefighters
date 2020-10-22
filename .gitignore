@@ -7,3 +7,7 @@ bin/
 
 #Ignore le fichier lib
 lib/
+
+#Ignore le fichier lib
+lib/*
+
