@@ -4,3 +4,6 @@ bin/
 #Ignore le .classpath et .project
 .classpath
 .project
+
+#Ignore le fichier lib
+lib/
