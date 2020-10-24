@@ -1,10 +1,11 @@
 
 public class RobotARoue extends Robot{
 	
-	public RobotARoue(Case position, int quantiteEau) {
+	public RobotARoue(Case position, int quantiteEau, int vitesse) {
 		assert(quantiteEau <= 5000);
 		this.setPosition(position);
 		this.setQuantiteEau(quantiteEau);
+		this.setVitesse(vitesse);
 	}
 
 	@Override

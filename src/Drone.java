@@ -1,10 +1,11 @@
 
 public class Drone extends Robot {
 
-	public Drone(Case position, int quantiteEau) {
+	public Drone(Case position, int quantiteEau, int vitesse) {
 		assert(quantiteEau <= 10000);
 		this.setPosition(position);
 		this.setQuantiteEau(quantiteEau);
+		this.setVitesse(vitesse);
 	}
 
 	@Override
