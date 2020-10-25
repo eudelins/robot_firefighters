@@ -2,24 +2,28 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import java.io.File;
 
 import gui.GUISimulator;
 import gui.Rectangle;
+import gui.Oval;
 import gui.Simulable;
 import gui.Text;
 
+import robot.*;
+import carte.*;
 
 public class TestCarte {
 
 	public static void main(String[] args) {
         // crée la fenêtre graphique dans laquelle dessiner
-        // GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
+         GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
      
         // crée la carte, en l'associant à la fenêtre graphique précédente
-        // CarteGui carte = new CarteGui(gui, new Carte(50, 50, 20), Color.decode("#f2ff28"));
+		DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/carteSujet.map"));
         
-        DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/carteSujet.map"));
+		CarteGui carte = new CarteGui(gui, newDonnes);
     }
 }
 
@@ -28,10 +32,7 @@ class CarteGui implements Simulable {
 	/** L'interface graphique associée */
     private GUISimulator gui;
     
-    private Carte carte;
-
-    /** La couleur de dessin des cases de la carte */
-    private Color carteColor;	
+    private DonneesSimulation donnees;
 
     /**
      * Crée une carte et la dessine.
@@ -40,11 +41,10 @@ class CarteGui implements Simulable {
      * Simulable.
      * @param color la couleur des cases de la carte
      */
-    public CarteGui(GUISimulator gui, Carte carte, Color carteColor) {
+    public CarteGui(GUISimulator gui, DonneesSimulation donnees) {
         this.gui = gui;
         gui.setSimulable(this);				// association a la gui!
-        this.carte = carte;
-        this.carteColor = carteColor;
+        this.donnees = donnees;
 
         draw();
     }
@@ -60,17 +60,18 @@ class CarteGui implements Simulable {
     }
     
     public static Color colorCase(Case uneCase) {
+    	if (uneCase.getIncendie() != null) return Color.RED;
     	switch (uneCase.getNature()) {
     	case EAU:
     		return Color.BLUE;
     	case FORET:
-    		return Color.GREEN;
+    		return Color.decode("#0f7400");
     	case ROCHE:
     		return Color.GRAY;
     	case TERRAIN_LIBRE:
     		return Color.GREEN;
     	case HABITAT:
-    		return Color.WHITE;
+    		return Color.decode("#92390b");
     	default:
     		return Color.BLACK;
     	}
@@ -81,7 +82,8 @@ class CarteGui implements Simulable {
      */
     private void draw() {
         gui.reset();	// clear the window
-        int taille_case = carte.getTailleCases();
+        Carte carte = donnees.getCarte();
+        int taille_case = carte.getTailleCases() / 100;
         
         for (int i = 0; i < carte.getNbLignes(); i++) {
         	for (int j = 0; j < carte.getNbColonnes(); j++) {
@@ -92,6 +94,14 @@ class CarteGui implements Simulable {
         		gui.addGraphicalElement(new Rectangle(coordX, coordY, Color.BLACK, couleurCase, taille_case));
         		
         	}
+        }
+        
+        Robot[] robots = donnees.getRobot();
+        for (int i = 0; i < robots.length; i++) {
+        	Case caseRobot = robots[i].getPosition();
+        	int coordX = caseRobot.getLigne() * taille_case + taille_case/2;
+        	int coordY = caseRobot.getColonne() * taille_case + taille_case/2;
+        	gui.addGraphicalElement(new Oval(coordX, coordY, Color.BLACK, Color.DARK_GRAY, taille_case/2));
         }
     }
     
