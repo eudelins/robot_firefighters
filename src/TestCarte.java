@@ -1,13 +1,21 @@
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import java.io.File;
+import java.io.IOException;
 
 import gui.GUISimulator;
 import gui.Rectangle;
 import gui.Oval;
+import gui.ImageElement;
 import gui.Simulable;
 import gui.Text;
 
@@ -83,25 +91,29 @@ class CarteGui implements Simulable {
     private void draw() {
         gui.reset();	// clear the window
         Carte carte = donnees.getCarte();
-        int taille_case = carte.getTailleCases() / 100;
+        int tailleCase = carte.getTailleCases() / 100;
         
         for (int i = 0; i < carte.getNbLignes(); i++) {
         	for (int j = 0; j < carte.getNbColonnes(); j++) {
         		Case case_ij = carte.getCase(i, j);
+        		String fileName = "images/foret.jpg";
         		Color couleurCase = colorCase(case_ij);
-        		int coordX = i * taille_case + taille_case/2;
-        		int coordY = j * taille_case + taille_case/2;
-        		gui.addGraphicalElement(new Rectangle(coordX, coordY, Color.BLACK, couleurCase, taille_case));
-        		
+        		int coordX = i * tailleCase + tailleCase/2;
+        		int coordY = j * tailleCase + tailleCase/2;
+        		gui.addGraphicalElement(new Rectangle(coordX, coordY, Color.BLACK, couleurCase, tailleCase));
+//        		ImageElement image = new ImageElement(coordX, coordY, fileName, tailleCase, tailleCase, null);
+//        		gui.addGraphicalElement(image);
         	}
         }
         
         Robot[] robots = donnees.getRobot();
         for (int i = 0; i < robots.length; i++) {
         	Case caseRobot = robots[i].getPosition();
-        	int coordX = caseRobot.getLigne() * taille_case + taille_case/2;
-        	int coordY = caseRobot.getColonne() * taille_case + taille_case/2;
-        	gui.addGraphicalElement(new Oval(coordX, coordY, Color.BLACK, Color.DARK_GRAY, taille_case/2));
+        	int coordX = caseRobot.getLigne() * tailleCase + tailleCase/6;
+        	int coordY = caseRobot.getColonne() * tailleCase + tailleCase/6;
+        	int dimImage = 2 * tailleCase / 3;
+        	String fileName = "images/drone.jpg";
+        	gui.addGraphicalElement(new ImageElement(coordX, coordY, fileName, dimImage, dimImage, null));
         }
     }
     
