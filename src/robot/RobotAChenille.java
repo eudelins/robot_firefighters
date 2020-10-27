@@ -9,16 +9,13 @@ public class RobotAChenille extends Robot {
 		assert(quantiteEau <= 2000);
 	}
 
-//	@Override
-//	public int getVitesse() {
-//		NatureTerrain nature = this.getPosition().getNature();
-//		if (nature == NatureTerrain.ROCHE || nature == NatureTerrain.EAU)
-//			return 0;
-//		else if (nature == NatureTerrain.FORET)
-//			return 30;
-//		else
-//			return 60;
-//	}
+	@Override
+	public void setPosition(Case newPosition) {
+		NatureTerrain nature = newPosition.getNature();
+		assert(nature != NatureTerrain.EAU && nature != NatureTerrain.ROCHE);
+		if (nature == NatureTerrain.FORET) this.setVitesse(this.getVitesse() / 2);;
+		super.setPosition(newPosition);
+	}
 
 	@Override
 	public void deverserEau(int vol) {

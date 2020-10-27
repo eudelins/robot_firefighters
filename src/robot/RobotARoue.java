@@ -6,18 +6,17 @@ public class RobotARoue extends Robot{
 	
 	public RobotARoue(Case position, int quantiteEau, int vitesse) {
 		super(position, quantiteEau, vitesse);
+		assert(position.getNature() == NatureTerrain.HABITAT || position.getNature() == NatureTerrain.TERRAIN_LIBRE);
 		assert(quantiteEau <= 5000);
 	}
 
-//	@Override
-//	public int getVitesse() {
-//		NatureTerrain nature = this.getPosition().getNature();
-//		if (nature == NatureTerrain.TERRAIN_LIBRE || nature == NatureTerrain.HABITAT)
-//			return 80;
-//		else
-//			return 0;
-//	}
-
+	@Override
+	public void setPosition(Case newPosition) {
+		NatureTerrain nature = newPosition.getNature();
+		assert(nature == NatureTerrain.HABITAT || nature == NatureTerrain.TERRAIN_LIBRE);
+		super.setPosition(newPosition);
+	}
+	
 	@Override
 	public void deverserEau(int vol) {
 		int quantiteEauRestante = this.getQuantiteEau();
