@@ -10,10 +10,11 @@ public class DeplacementDebut extends Evenement {
 	private Direction dir;
 	private Carte carte;
 	
-	public DeplacementDebut(long date, Robot robot, Direction dir) {
+	public DeplacementDebut(long date, Robot robot, Direction dir, Carte carte) {
 		super(date);
 		this.robot = robot;
 		this.dir = dir;
+		this.carte = carte;
 	}
 
 	@Override
@@ -21,28 +22,34 @@ public class DeplacementDebut extends Evenement {
 		Case caseActuelle = this.robot.getPosition();
 		int lig = caseActuelle.getLigne();
 		int col = caseActuelle.getColonne();
-		
 		switch (dir) {
 		case NORD:
-			assert(lig > 0);
-			lig -= 1;
+			col--;
 			break;
 		case SUD:
-			assert(lig < carte.getNbLignes() - 1);
-			lig += 1;
+			col++;
 			break;
 		case OUEST:
-			assert(col > 0);
-			col -= 1;
+			lig--;
 			break;
 		case EST:
-			assert(col < carte.getNbColonnes() - 1);
-			col += 1;
+			lig++;
 			break;
 		}
 		
-		Case newPosition = carte.getCase(lig, col);
-		this.robot.setPosition(newPosition);
+		if (col < 0 || lig < 0 || col > (carte.getNbColonnes() - 1) || lig > (carte.getNbLignes() - 1)) {
+			throw new IllegalArgumentException("Le robot sort de la carte");
+		} else {
+			Case newPosition = carte.getCase(lig, col);
+			this.robot.setPosition(newPosition);
+		}
 	}
+	
+//	@Override
+//	public String toString() {
+//		String res = "Deplacement vers ";
+//		res += this.dir + "d'un robot";
+//		return res;
+//	}
 
 }

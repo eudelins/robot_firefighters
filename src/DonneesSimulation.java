@@ -70,7 +70,6 @@ public class DonneesSimulation {
 		for(int i = 0; i < matriceCase.length; i++) {
 			for (int j = 0; j < matriceCase[0].length; j++) {
 				newLine = scan.nextLine();
-				System.out.println(newLine);
 				matriceCase[i][j] = new Case(NatureTerrain.stringToNature(newLine), i, j, null);
 			}
 			newLine = scan.nextLine();  // On se débarasse du commentaire
@@ -87,7 +86,6 @@ public class DonneesSimulation {
 			int lig = scan.nextInt();
 			int col = scan.nextInt();
 			int litres = scan.nextInt();
-			System.out.println(i + ", " + nbIncendies + ", " + lig + ", " + col + ", " + litres);
 			this.incendies[i] = new Incendie(matriceCase[lig][col], litres);
 			matriceCase[lig][col].setIncendie(this.incendies[i]);
 		}
@@ -102,14 +100,12 @@ public class DonneesSimulation {
 			int lig = scan.nextInt();
 			int col = scan.nextInt();
 			String[] finLigne = scan.nextLine().split(" ");
-			System.out.println(finLigne[1]);
 			int vitesse;
 			if (finLigne.length < 3) {
 				vitesse = 0;
 			} else {
 				vitesse = Integer.parseInt(finLigne[2]);
 			}
-			System.out.println(vitesse);
 			switch (finLigne[1]) {
 			case "DRONE":
 				this.robots[i] = new Drone(matriceCase[lig][col], 0, vitesse);

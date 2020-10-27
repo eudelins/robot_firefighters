@@ -18,25 +18,36 @@ import gui.Text;
 
 import robot.*;
 import carte.*;
+import evenement.*;
 
-public class TestCarte {
+public class TestSimulateur {
 
 	public static void main(String[] args) {
-        // crée la fenêtre graphique dans laquelle dessiner
-         GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
-     
-        // crée la carte, en l'associant à la fenêtre graphique précédente
+		   // crée la fenêtre graphique dans laquelle dessiner
+        GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
+    
+       // crée la carte, en l'associant à la fenêtre graphique précédente
 		DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/carteSujet.map"));
-        
-		CarteGui carte = new CarteGui(gui, newDonnes);
-    }
+		
+		Simulateur simul = new Simulateur();
+		Robot drone = newDonnes.getRobot()[0];
+		for (int i = 0; i < 4; i++) {
+			DeplacementDebut move = new DeplacementDebut(i, drone, Direction.NORD, newDonnes.getCarte());
+			simul.ajouteEvenement(move);
+		}
+       
+		SimulateurGui carte = new SimulateurGui(gui, newDonnes, simul);
+	}
+	
+	
+
 }
 
 
-class CarteGui implements Simulable {
+class SimulateurGui implements Simulable {
 	/** L'interface graphique associée */
     private GUISimulator gui;
-    
+    private Simulateur simul;
     private DonneesSimulation donnees;
 
     /**
@@ -46,16 +57,24 @@ class CarteGui implements Simulable {
      * Simulable.
      * @param color la couleur des cases de la carte
      */
-    public CarteGui(GUISimulator gui, DonneesSimulation donnees) {
+    public SimulateurGui(GUISimulator gui, DonneesSimulation donnees, Simulateur simul) {
         this.gui = gui;
         gui.setSimulable(this);				// association a la gui!
         this.donnees = donnees;
-
+        this.simul = simul;
         draw();
     }
 
     @Override
-    public void next() {		
+    public void next() {
+    	if (simul.simulationTerminee()) return;
+    	Evenement premierEvenement = simul.getPremierEvent();
+    	while (premierEvenement != null && simul.getDateSimulation() == premierEvenement.getDate()) {
+    		premierEvenement.execute();
+    		premierEvenement = premierEvenement.getSuivant();
+    	}
+    	simul.setPremierEvent(premierEvenement);
+    	simul.incrementeDate();
         draw();
     }
 
@@ -93,13 +112,10 @@ class CarteGui implements Simulable {
         for (int i = 0; i < carte.getNbLignes(); i++) {
         	for (int j = 0; j < carte.getNbColonnes(); j++) {
         		Case case_ij = carte.getCase(i, j);
-        		String fileName = "images/foret.jpg";
         		Color couleurCase = colorCase(case_ij);
         		int coordX = i * tailleCase + tailleCase/2;
         		int coordY = j * tailleCase + tailleCase/2;
         		gui.addGraphicalElement(new Rectangle(coordX, coordY, Color.BLACK, couleurCase, tailleCase));
-//        		ImageElement image = new ImageElement(coordX, coordY, fileName, tailleCase, tailleCase, null);
-//        		gui.addGraphicalElement(image);
         	}
         }
         
@@ -111,8 +127,6 @@ class CarteGui implements Simulable {
         	int dimImage = 2 * tailleCase / 3;
         	String fileName = "images/drone.jpg";
         	gui.addGraphicalElement(new Oval(coordX, coordY, Color.BLACK, Color.DARK_GRAY, tailleCase/2));
-//        	gui.addGraphicalElement(new ImageElement(coordX, coordY, fileName, dimImage, dimImage, null));
         }
     }
-    
 }
