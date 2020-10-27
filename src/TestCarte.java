@@ -97,7 +97,7 @@ class CarteGui implements Simulable {
         		Color couleurCase = colorCase(case_ij);
         		int coordX = i * tailleCase + tailleCase/2;
         		int coordY = j * tailleCase + tailleCase/2;
-        		gui.addGraphicalElement(new Rectangle(coordX, coordY, Color.BLACK, couleurCase, tailleCase));
+        		gui.addGraphicalElement(new Rectangle(coordY, coordX, Color.BLACK, couleurCase, tailleCase));
 //        		ImageElement image = new ImageElement(coordX, coordY, fileName, tailleCase, tailleCase, null);
 //        		gui.addGraphicalElement(image);
         	}
@@ -110,7 +110,7 @@ class CarteGui implements Simulable {
         	int coordY = caseRobot.getColonne() * tailleCase + tailleCase/2;
         	int dimImage = 2 * tailleCase / 3;
         	String fileName = "images/drone.jpg";
-        	gui.addGraphicalElement(new Oval(coordX, coordY, Color.BLACK, Color.DARK_GRAY, tailleCase/2));
+        	gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK, Color.DARK_GRAY, tailleCase/2));
 //        	gui.addGraphicalElement(new ImageElement(coordX, coordY, fileName, dimImage, dimImage, null));
         }
     }

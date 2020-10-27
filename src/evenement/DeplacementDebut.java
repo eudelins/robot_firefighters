@@ -24,16 +24,16 @@ public class DeplacementDebut extends Evenement {
 		int col = caseActuelle.getColonne();
 		switch (dir) {
 		case NORD:
-			col--;
-			break;
-		case SUD:
-			col++;
-			break;
-		case OUEST:
 			lig--;
 			break;
-		case EST:
+		case SUD:
 			lig++;
+			break;
+		case OUEST:
+			col--;
+			break;
+		case EST:
+			col++;
 			break;
 		}
 		
@@ -44,12 +44,4 @@ public class DeplacementDebut extends Evenement {
 			this.robot.setPosition(newPosition);
 		}
 	}
-	
-//	@Override
-//	public String toString() {
-//		String res = "Deplacement vers ";
-//		res += this.dir + "d'un robot";
-//		return res;
-//	}
-
 }
