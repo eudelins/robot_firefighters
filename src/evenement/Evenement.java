@@ -4,7 +4,7 @@ public abstract class Evenement {
 	private long date;
 	
 	public Evenement(long date) {
-		// TODO Auto-generated constructor stub
+		this.date = date;
 	}
 
 	public long getDate() {
