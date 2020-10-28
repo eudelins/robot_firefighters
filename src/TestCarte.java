@@ -104,15 +104,18 @@ class CarteGui implements Simulable {
         }
         
         Robot[] robots = donnees.getRobot();
-        for (int i = 0; i < robots.length; i++) {
-        	Case caseRobot = robots[i].getPosition();
-        	int coordX = caseRobot.getLigne() * tailleCase + tailleCase/2;
-        	int coordY = caseRobot.getColonne() * tailleCase + tailleCase/2;
-        	int dimImage = 2 * tailleCase / 3;
-        	String fileName = "images/drone.jpg";
-        	gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK, Color.DARK_GRAY, tailleCase/2));
-//        	gui.addGraphicalElement(new ImageElement(coordX, coordY, fileName, dimImage, dimImage, null));
+        for(Robot robot : robots ) {
+        	robot.draw(gui, tailleCase);
         }
+//        for (int i = 0; i < robots.length; i++) {
+//        	Case caseRobot = robots[i].getPosition();
+//        	int coordX = caseRobot.getLigne() * tailleCase + tailleCase/2;
+//        	int coordY = caseRobot.getColonne() * tailleCase + tailleCase/2;
+//        	int dimImage = 2 * tailleCase / 3;
+//        	String fileName = "images/drone.jpg";
+//        	gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK, Color.DARK_GRAY, tailleCase/2));        	
+////        	gui.addGraphicalElement(new ImageElement(coordX, coordY, fileName, dimImage, dimImage, null));
+//        }
     }
     
 }

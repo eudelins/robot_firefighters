@@ -1,5 +1,10 @@
 package robot;
+import java.awt.Color;
+
 import carte.*;
+import gui.GUISimulator;
+import gui.Oval;
+import gui.Rectangle;
 
 
 public class RobotARoue extends Robot{
@@ -41,5 +46,25 @@ public class RobotARoue extends Robot{
 			this.setStopped(false);
 			// à compléter et vérifier
 		}
+	}
+	
+	@Override
+	public void draw(GUISimulator gui, int tailleCase) {
+		Case caseRobot = this.getPosition();
+		int caseX = caseRobot.getLigne() * tailleCase;
+    	int caseY = caseRobot.getColonne() * tailleCase;
+    	int rectX = caseX + tailleCase/3 + tailleCase/6;
+    	int rectY = caseY + tailleCase/2;
+    	int rectWidth = tailleCase/3;
+    	int rectHeight = tailleCase/2;
+    	
+    	for(int k = 0; k<=1; ++k) {
+    		for(int j = 0; j<= 1; ++j) {
+    			int ovalX = caseX + (1+k)*tailleCase/3;
+    			int ovalY = caseY + (1+2*j)*tailleCase/4;
+    			gui.addGraphicalElement(new Oval(ovalX, ovalY, Color.BLACK, Color.DARK_GRAY, rectWidth/2));
+    		}
+    	}
+    	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectWidth, rectHeight));
 	}
 }

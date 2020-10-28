@@ -26,4 +26,11 @@ public class Incendie {
 	public void setNbLitres(int nbLitres) {
 		this.nbLitres = nbLitres;
 	}
+	
+	public void eteindre(int litre) {
+		if(this.nbLitres <= litre)
+			this.nbLitres = 0;
+		else
+			this.nbLitres = this.nbLitres - litre;
+	}
 }
