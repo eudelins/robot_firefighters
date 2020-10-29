@@ -113,64 +113,15 @@ class SimulateurGui implements Simulable {
         	for (int j = 0; j < carte.getNbColonnes(); j++) {
         		Case case_ij = carte.getCase(i, j);
         		Color couleurCase = colorCase(case_ij);
-        		int coordX = i * tailleCase + (tailleCase>>1);
-        		int coordY = j * tailleCase + (tailleCase>>1);
-        		gui.addGraphicalElement(new Rectangle(coordY, coordX, Color.BLACK, couleurCase, tailleCase));
+        		int coordX = j * tailleCase + (tailleCase>>1);
+        		int coordY = i * tailleCase + (tailleCase>>1);
+        		gui.addGraphicalElement(new Rectangle(coordX, coordY, Color.BLACK, couleurCase, tailleCase));
         	}
         }
         
         Robot[] robots = donnees.getRobot();
         for (int i = 0; i < robots.length; i++) {
-        	drawRobot(robots, i, tailleCase);
+        	robots[i].draw(gui, tailleCase);;
         }
-    }
-    
-    public void drawRobot(Robot[] robots, int i, int tailleCase) {
-    	Case caseRobot = robots[i].getPosition();
-    	int coordX = caseRobot.getLigne() * tailleCase + tailleCase/2;
-    	int coordY = caseRobot.getColonne() * tailleCase + tailleCase/2;
-    	
-    	if (robots[i] instanceof Drone) {
-    		// Cercle du milieu
-    		gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK, Color.DARK_GRAY, tailleCase/8));
-
-    		int diam = tailleCase>>2;  // diametre
-    		// Cercle haut à gauche
-    		coordX -= 3 * tailleCase/22; 
-    		coordY -= 3 * tailleCase/22;
-    		gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK, Color.DARK_GRAY, diam));
-
-    		// Cercle haut à droite
-    		coordY += 2 * 3 * tailleCase/22;
-    		gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK, Color.DARK_GRAY, diam));
-
-    		// Cercle bas à droite
-    		coordX += 2 * 3 * tailleCase/22;
-    		gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK, Color.DARK_GRAY, diam));
-
-    		// Cercle bas à gauche
-    		coordY -= 2 * 3 * tailleCase/22;
-    		gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK, Color.DARK_GRAY, diam));
-    		
-    	} else if (robots[i] instanceof RobotAChenille) {
-    		gui.addGraphicalElement(new Rectangle(coordY, coordX, Color.BLACK,
-    											  Color.DARK_GRAY, tailleCase>>2, tailleCase>>1));
-    	} else if (robots[i] instanceof RobotARoue) {
-    		gui.addGraphicalElement(new Rectangle(coordY, coordX, Color.BLACK,
-					  							  Color.DARK_GRAY, tailleCase>>2, tailleCase>>1));
-    		
-    		// Roue en haut à gauche
-//    		coordX -= (tailleCase >> 3); 
-//    		coordY -= (tailleCase >> 3) + (tailleCase >> 4);
-//    		gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK,
-//    										 Color.DARK_GRAY, tailleCase>>3, tailleCase>>2));
-    		
-    		// Roue en haut à droite
-//    		coordY += 2 * ((tailleCase >> 3) + (tailleCase >> 4));
-//    		gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK,
-//    				Color.DARK_GRAY, tailleCase>>3, tailleCase>>2));
-    	} else {
-    		gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK, Color.DARK_GRAY, tailleCase>>1));
-    	}
     }
 }

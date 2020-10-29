@@ -30,15 +30,17 @@ public class RobotAChenille extends Robot {
 
 	@Override
 	public void remplirReservoir() {
-		// TODO Auto-generated method stub
-
+		if (this.getPosition().getNature() == NatureTerrain.EAU) {
+			this.setStopped(true);
+			this.setQuantiteEau(2000);
+		}
 	}
 	
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {
 		Case caseRobot = this.getPosition();
-		int caseX = caseRobot.getLigne() * tailleCase;
-    	int caseY = caseRobot.getColonne() * tailleCase;
+		int caseX = caseRobot.getColonne() * tailleCase;
+		int caseY = caseRobot.getLigne() * tailleCase;
     	int rectX = caseX + tailleCase/3 + tailleCase/6;
     	int rectY = caseY + tailleCase/2;
     	int rectWidth = tailleCase/3;

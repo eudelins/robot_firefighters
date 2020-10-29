@@ -30,15 +30,14 @@ public class RobotAPattes extends Robot {
 
 	@Override
 	public void remplirReservoir() {
-		// TODO Auto-generated method stub
-
+		return;
 	}
 	
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {
 		Case caseRobot = this.getPosition();
-		int caseX = caseRobot.getLigne() * tailleCase;
-    	int caseY = caseRobot.getColonne() * tailleCase;
+    	int caseX = caseRobot.getColonne() * tailleCase;
+    	int caseY = caseRobot.getLigne() * tailleCase;
     	int rectX = caseX + tailleCase/3 + tailleCase/6;
     	int rectY = caseY + tailleCase/2;
     	int rectWidth = tailleCase/3;

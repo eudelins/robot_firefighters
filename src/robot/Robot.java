@@ -63,6 +63,28 @@ public abstract class Robot {
 		}
 	}
 	
+	/** Indique si le robot est a un voisin qui contient de l'eau */
+	public boolean estVoisinEau(Carte carte) {
+		int lig = this.position.getLigne();
+		int col = this.position.getColonne();
+		
+		// On récupère les voisins
+		Case caseNord = null, caseSud = null, caseOuest = null, caseEst = null;
+		if (lig > 0) caseNord = carte.getCase(lig - 1, col);
+		if (caseNord != null && caseNord.getNature() == NatureTerrain.EAU) return true;
+		
+		if (lig < carte.getNbLignes() - 1) caseSud = carte.getCase(lig + 1, col);
+		if (caseSud != null && caseSud.getNature() == NatureTerrain.EAU) return true;
+		
+		if (col > 0) caseOuest = carte.getCase(lig, col - 1);
+		if (caseOuest != null && caseOuest.getNature() == NatureTerrain.EAU) return true;
+		
+		if (col < carte.getNbColonnes() - 1) caseEst = carte.getCase(lig, col + 1);
+		if (caseEst != null && caseEst.getNature() == NatureTerrain.EAU) return true;
+		
+		return false;
+	}
+	
 	public abstract void remplirReservoir();
 	
 	public abstract void draw(GUISimulator gui, int tailleCase);

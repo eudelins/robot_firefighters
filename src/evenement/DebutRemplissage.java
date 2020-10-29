@@ -1,7 +1,7 @@
-import src.robot.Robot;
-import src.carte.*;
+package evenement;
 
-package src.evenement;
+import robot.*;
+import carte.*;
 
 public class DebutRemplissage extends Evenement {
 	Robot robot;
@@ -10,9 +10,7 @@ public class DebutRemplissage extends Evenement {
 		super(date);
 		this.robot = r;
 		
-		if(this.robot.getPosition().getNature() != NatureTerrain.EAU) {
-			
-		}
+		assert(this.robot.getPosition().getNature() != NatureTerrain.EAU);
 	}
 
 	@Override

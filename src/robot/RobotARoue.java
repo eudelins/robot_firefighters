@@ -33,15 +33,9 @@ public class RobotARoue extends Robot{
 
 	@Override
 	public void remplirReservoir() {
-		boolean voisinAvecEau = true; // Faire une fonction qui vérifie si une case voisin a pour nature EAU
+		boolean voisinAvecEau = true;
 		if (voisinAvecEau) {
 			this.setStopped(true);
-			try {
-				Thread.sleep(10000); // Il me semble que ça met en pause la fonction (pas tout le programme) 
-									 // pour le temps indiqué (j'ai choisi 30 min = 30 sec)
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			this.setQuantiteEau(5000);
 			this.setStopped(false);
 			// à compléter et vérifier
@@ -51,10 +45,10 @@ public class RobotARoue extends Robot{
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {
 		Case caseRobot = this.getPosition();
-		int caseX = caseRobot.getLigne() * tailleCase;
-    	int caseY = caseRobot.getColonne() * tailleCase;
-    	int rectX = caseX + tailleCase/3 + tailleCase/6;
-    	int rectY = caseY + tailleCase/2;
+		int caseX = caseRobot.getColonne() * tailleCase;
+		int caseY = caseRobot.getLigne() * tailleCase;
+		int rectX = caseX + tailleCase/2;
+    	int rectY = caseY + tailleCase/3 + tailleCase/6;
     	int rectWidth = tailleCase/3;
     	int rectHeight = tailleCase/2;
     	
