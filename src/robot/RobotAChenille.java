@@ -9,9 +9,13 @@ import gui.Rectangle;
 
 public class RobotAChenille extends Robot {
 
-	public RobotAChenille(Case position, int quantiteEau, int vitesse) {
-		super(position, quantiteEau, vitesse);
+	public RobotAChenille(Carte carte, Case position, int quantiteEau, int vitesse) {
+		super(carte, position, quantiteEau, vitesse);
 		assert(quantiteEau <= 2000);
+	}
+	
+	public RobotAChenille(Carte carte, Case position, int vitesse) {
+		super(carte, position, 2000, vitesse);
 	}
 
 	@Override
@@ -23,16 +27,11 @@ public class RobotAChenille extends Robot {
 	}
 
 	@Override
-	public void deverserEau(int vol) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void remplirReservoir() {
-		if (this.getPosition().getNature() == NatureTerrain.EAU) {
+		if (this.estVoisinEau()) {
 			this.setStopped(true);
 			this.setQuantiteEau(2000);
+			this.setStopped(false);
 		}
 	}
 	

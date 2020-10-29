@@ -30,12 +30,32 @@ public class TestSimulateur {
 		DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/carteSujet.map"));
 		
 		Simulateur simul = new Simulateur();
-		Robot drone = newDonnes.getRobot()[0];
-		for (int i = 0; i < 4; i++) {
-			DeplacementDebut move = new DeplacementDebut(i, drone, Direction.NORD, newDonnes.getCarte());
-			simul.ajouteEvenement(move);
-		}
-       
+		Robot roue = newDonnes.getRobot()[1];
+		
+		DeplacementDebut move = new DeplacementDebut(0, roue, Direction.NORD, newDonnes.getCarte());
+		simul.ajouteEvenement(move);
+		
+		DeverserDebut deversage = new DeverserDebut(1, roue, roue.getQuantiteEau());
+		simul.ajouteEvenement(deversage);
+		
+		DeplacementDebut move2 = new DeplacementDebut(2, roue, Direction.OUEST, newDonnes.getCarte());
+		simul.ajouteEvenement(move2);
+		
+		DeplacementDebut move3 = new DeplacementDebut(3, roue, Direction.OUEST, newDonnes.getCarte());
+		simul.ajouteEvenement(move3);
+		
+		DebutRemplissage remplissage = new DebutRemplissage(4, roue);
+		simul.ajouteEvenement(remplissage);
+		
+		DeplacementDebut move4 = new DeplacementDebut(5, roue, Direction.EST, newDonnes.getCarte());
+		simul.ajouteEvenement(move4);
+		
+		DeplacementDebut move5 = new DeplacementDebut(6, roue, Direction.EST, newDonnes.getCarte());
+		simul.ajouteEvenement(move5);
+
+		DeverserDebut deversage2 = new DeverserDebut(7, roue, roue.getQuantiteEau());
+		simul.ajouteEvenement(deversage2);
+		
 		SimulateurGui carte = new SimulateurGui(gui, newDonnes, simul);
 	}
 	

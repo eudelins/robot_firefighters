@@ -7,10 +7,12 @@ public abstract class Robot {
 	private Case position;
 	private int quantiteEau;
 	private int vitesse;
+	private Carte carte;
 	private boolean stopped; // Booléen qui permet de savoir si le robot est arrêté 
 							 //(arrếté pour par exemple remplir son réservoir)
 	
-	public Robot(Case position, int quantiteEau, int vitesse) {
+	public Robot(Carte carte, Case position, int quantiteEau, int vitesse) {
+		this.carte = carte;
 		this.position = position;
 		this.quantiteEau  = quantiteEau;
 		this.vitesse = vitesse;
@@ -60,11 +62,12 @@ public abstract class Robot {
 		Incendie feuAEteindre = this.getPosition().getIncendie(); 
 		if(feuAEteindre != null) {
 			feuAEteindre.eteindre(vol);
+			if (feuAEteindre.getNbLitres() == 0) this.getPosition().setIncendie(null);
 		}
 	}
 	
 	/** Indique si le robot est a un voisin qui contient de l'eau */
-	public boolean estVoisinEau(Carte carte) {
+	public boolean estVoisinEau() {
 		int lig = this.position.getLigne();
 		int col = this.position.getColonne();
 		

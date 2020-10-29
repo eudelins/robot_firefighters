@@ -2,6 +2,7 @@ package robot;
 import java.awt.Color;
 
 import carte.Case;
+import carte.Carte;
 import carte.NatureTerrain;
 import gui.GUISimulator;
 import gui.Oval;
@@ -10,9 +11,13 @@ import gui.Text;
 
 public class Drone extends Robot {
 
-	public Drone(Case position, int quantiteEau, int vitesse) {
-		super(position, quantiteEau, vitesse);
+	public Drone(Carte carte, Case position, int quantiteEau, int vitesse) {
+		super(carte, position, quantiteEau, vitesse);
 		assert(quantiteEau <= 10000);
+	}
+	
+	public Drone(Carte carte, Case position, int vitesse) {
+		super(carte, position, 10000, vitesse);
 	}
 
 	@Override

@@ -9,10 +9,15 @@ import gui.Rectangle;
 
 public class RobotARoue extends Robot{
 	
-	public RobotARoue(Case position, int quantiteEau, int vitesse) {
-		super(position, quantiteEau, vitesse);
+	public RobotARoue(Carte carte, Case position, int quantiteEau, int vitesse) {
+		super(carte, position, quantiteEau, vitesse);
 		assert(position.getNature() == NatureTerrain.HABITAT || position.getNature() == NatureTerrain.TERRAIN_LIBRE);
 		assert(quantiteEau <= 5000);
+	}
+	
+	public RobotARoue(Carte carte, Case position, int vitesse) {
+		super(carte, position, 5000, vitesse);
+		assert(position.getNature() == NatureTerrain.HABITAT || position.getNature() == NatureTerrain.TERRAIN_LIBRE);
 	}
 
 	@Override
@@ -21,24 +26,14 @@ public class RobotARoue extends Robot{
 		assert(nature == NatureTerrain.HABITAT || nature == NatureTerrain.TERRAIN_LIBRE);
 		super.setPosition(newPosition);
 	}
-	
-	@Override
-	public void deverserEau(int vol) {
-		int quantiteEauRestante = this.getQuantiteEau();
-		assert(vol <= quantiteEauRestante && vol > 0);
-		this.setQuantiteEau(quantiteEauRestante - vol); 
-		// Il faut trouver un moyen d'accéder à l'objet "Incendie" lié à la case sur le quel se trouve le robot
-		// A compléter
-	}
 
 	@Override
 	public void remplirReservoir() {
-		boolean voisinAvecEau = true;
+		boolean voisinAvecEau = this.estVoisinEau();
 		if (voisinAvecEau) {
 			this.setStopped(true);
 			this.setQuantiteEau(5000);
 			this.setStopped(false);
-			// à compléter et vérifier
 		}
 	}
 	

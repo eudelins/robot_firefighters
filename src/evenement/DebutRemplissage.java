@@ -9,8 +9,6 @@ public class DebutRemplissage extends Evenement {
 	public DebutRemplissage(long date, Robot r) {
 		super(date);
 		this.robot = r;
-		
-		assert(this.robot.getPosition().getNature() != NatureTerrain.EAU);
 	}
 
 	@Override

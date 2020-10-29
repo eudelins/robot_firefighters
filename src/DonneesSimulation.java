@@ -108,18 +108,18 @@ public class DonneesSimulation {
 			}
 			switch (finLigne[1]) {
 			case "DRONE":
-				this.robots[i] = new Drone(matriceCase[lig][col], 0, vitesse);
+				this.robots[i] = new Drone(carte, matriceCase[lig][col], vitesse);
 				break;
 			case "ROUES":
-				this.robots[i] = new RobotARoue(matriceCase[lig][col], 0, vitesse);
+				this.robots[i] = new RobotARoue(carte, matriceCase[lig][col], vitesse);
 				break;
 			case "PATTES":
 				// A modifier
-				this.robots[i] = new RobotAPattes(matriceCase[lig][col], 0, vitesse);
+				this.robots[i] = new RobotAPattes(carte, matriceCase[lig][col], vitesse);
 				break;
 			case "CHENILLES":
 				// A modifier
-				this.robots[i] = new RobotAChenille(matriceCase[lig][col], 0, vitesse);
+				this.robots[i] = new RobotAChenille(carte, matriceCase[lig][col], vitesse);
 				break;
 			}
 		}
