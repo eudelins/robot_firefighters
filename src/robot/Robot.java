@@ -1,5 +1,6 @@
 package robot;
 import carte.*;
+import gui.GUISimulator;
 
 
 public abstract class Robot {
@@ -52,7 +53,17 @@ public abstract class Robot {
 		this.stopped = stop;
 	}
 	
-	public abstract void deverserEau(int vol);
+	public void deverserEau(int vol) {
+		int quantiteEauRestante = this.getQuantiteEau();
+		assert(vol <= quantiteEauRestante && vol > 0);
+		this.setQuantiteEau(quantiteEauRestante - vol);
+		Incendie feuAEteindre = this.getPosition().getIncendie(); 
+		if(feuAEteindre != null) {
+			feuAEteindre.eteindre(vol);
+		}
+	}
 	
 	public abstract void remplirReservoir();
+	
+	public abstract void draw(GUISimulator gui, int tailleCase);
 }

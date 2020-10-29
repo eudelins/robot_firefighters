@@ -21,7 +21,7 @@
 #   -classpath : repertoire dans lequel sont cherches les .class deja compiles
 #   -sourcepath : repertoire dans lequel sont cherches les .java (dependances)
 
-all: testInvader testLecture testCarte
+all: testInvader testLecture testCarte testSimulateur
 
 testInvader:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestInvader.java
@@ -31,6 +31,10 @@ testLecture:
 
 testCarte:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestCarte.java
+
+testSimulateur:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSimulateur.java
+
 
 # Execution:
 # on peut taper directement la ligne de commande :
@@ -45,6 +49,9 @@ exeLecture:
 
 exeCarte: 
 	java -classpath bin:bin/gui.jar TestCarte
+
+exeSimulateur: 
+	java -classpath bin:bin/gui.jar TestSimulateur
 
 
 clean:

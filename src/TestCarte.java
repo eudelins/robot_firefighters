@@ -1,8 +1,5 @@
 import java.awt.Color;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -100,22 +97,25 @@ class CarteGui implements Simulable {
         		Color couleurCase = colorCase(case_ij);
         		int coordX = i * tailleCase + tailleCase/2;
         		int coordY = j * tailleCase + tailleCase/2;
-        		gui.addGraphicalElement(new Rectangle(coordX, coordY, Color.BLACK, couleurCase, tailleCase));
+        		gui.addGraphicalElement(new Rectangle(coordY, coordX, Color.BLACK, couleurCase, tailleCase));
 //        		ImageElement image = new ImageElement(coordX, coordY, fileName, tailleCase, tailleCase, null);
 //        		gui.addGraphicalElement(image);
         	}
         }
         
         Robot[] robots = donnees.getRobot();
-        for (int i = 0; i < robots.length; i++) {
-        	Case caseRobot = robots[i].getPosition();
-        	int coordX = caseRobot.getLigne() * tailleCase + tailleCase/2;
-        	int coordY = caseRobot.getColonne() * tailleCase + tailleCase/2;
-        	int dimImage = 2 * tailleCase / 3;
-        	String fileName = "images/drone.jpg";
-        	gui.addGraphicalElement(new Oval(coordX, coordY, Color.BLACK, Color.DARK_GRAY, tailleCase/2));
-//        	gui.addGraphicalElement(new ImageElement(coordX, coordY, fileName, dimImage, dimImage, null));
+        for(Robot robot : robots ) {
+        	robot.draw(gui, tailleCase);
         }
+//        for (int i = 0; i < robots.length; i++) {
+//        	Case caseRobot = robots[i].getPosition();
+//        	int coordX = caseRobot.getLigne() * tailleCase + tailleCase/2;
+//        	int coordY = caseRobot.getColonne() * tailleCase + tailleCase/2;
+//        	int dimImage = 2 * tailleCase / 3;
+//        	String fileName = "images/drone.jpg";
+//        	gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK, Color.DARK_GRAY, tailleCase/2));        	
+////        	gui.addGraphicalElement(new ImageElement(coordX, coordY, fileName, dimImage, dimImage, null));
+//        }
     }
     
 }
