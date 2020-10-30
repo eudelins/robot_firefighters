@@ -1,10 +1,15 @@
 package robot;
 import java.awt.Color;
 
-import carte.*;
+import carte.Carte;
+import carte.Case;
+import carte.Direction;
+import carte.Incendie;
+import carte.NatureTerrain;
 import evenement.Simulateur;
 import gui.GUISimulator;
 import gui.Rectangle;
+import gui.Text;
 
 
 public abstract class Robot {
@@ -13,8 +18,9 @@ public abstract class Robot {
 	private int vitesse;
 	private Carte carte;
 	private Simulateur simul;
-	private boolean stopped; // Booléen qui permet de savoir si le robot est arrêté 
-							 //(arrếté pour par exemple remplir son réservoir)
+	private boolean remplissage;
+	private boolean deversage;
+	private boolean stopped;
 	
 	public Robot(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
 		this.carte = carte;
@@ -22,6 +28,9 @@ public abstract class Robot {
 		this.simul = simul;
 		this.quantiteEau  = quantiteEau;
 		this.vitesse = vitesse;
+		this.remplissage = false;
+		this.deversage = false;
+		this.stopped = false;
 	}
 	
 	public Robot() {
@@ -71,6 +80,7 @@ public abstract class Robot {
 	
 	
 	public void deverserEau(int vol) {
+		this.deversage = true;
 		int quantiteEauRestante = this.getQuantiteEau();
 		assert(vol <= quantiteEauRestante && vol > 0);
 		this.setQuantiteEau(quantiteEauRestante - vol);
@@ -111,13 +121,26 @@ public abstract class Robot {
 		int barreWidth = tailleCase/3;
 		int barreX = caseX + tailleCase/2;
 		int barreY = caseY + tailleCase/2 + heightRobot/2 + 4 + barreHeight/2;
-		gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, Color.decode("#a5b4b8"), barreWidth, barreHeight));
-		if(this.quantiteEau > 0) {
+		Color couleurFond = Color.decode("#a5b4b8");
+		if(this.quantiteEau == qteEauMax) {
+			couleurFond = Color.decode("#08cdfe");
+		}
+		gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, couleurFond, barreWidth, barreHeight));
+		if(this.quantiteEau > 0 && this.quantiteEau < qteEauMax) {
 			int barreVarieWidth = barreWidth*this.quantiteEau/qteEauMax;
 			int barreVarieX = barreX - (barreWidth - barreVarieWidth);
 			
 			gui.addGraphicalElement(new Rectangle(barreVarieX, barreY, null, Color.decode("#08cdfe"), barreVarieWidth, barreHeight));
 			gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, null, barreWidth, barreHeight));
+		}
+		
+		if(this.deversage || this.remplissage) {
+			int textX = caseX + tailleCase/2;
+			int textY = caseY + (tailleCase - heightRobot)/2 - 10;
+			String etat;
+			if(this.deversage) etat = "Deversement...";
+			else etat = "Remplissage...";
+			gui.addGraphicalElement(new Text(textX, textY, Color.BLACK, etat));
 		}
 	}
 

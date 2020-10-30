@@ -92,7 +92,7 @@ public class RobotAChenille extends Robot {
     	int rectX = caseX + tailleCase/3 + tailleCase/6;
     	int rectY = caseY + tailleCase/2;
     	int rectWidth = tailleCase/3;
-    	int rectHeight = tailleCase/2;
+    	int rectHeight = 4*tailleCase/10;
     	
     	for(int k = 0; k<=1; ++k) {
 			int ovalX = caseX + (1+k)*tailleCase/3;

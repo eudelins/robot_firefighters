@@ -50,12 +50,12 @@ public class RobotARoue extends Robot{
 		int rectX = caseX + tailleCase/2;
     	int rectY = caseY + tailleCase/3 + tailleCase/6;
     	int rectWidth = tailleCase/3;
-    	int rectHeight = tailleCase/2;
+    	int rectHeight = 4*tailleCase/10;
     	
     	for(int k = 0; k<=1; ++k) {
     		for(int j = 0; j<= 1; ++j) {
     			int ovalX = caseX + (1+k)*tailleCase/3;
-    			int ovalY = caseY + (1+2*j)*tailleCase/4;
+    			int ovalY = caseY + (3+4*j)*tailleCase/10;
     			gui.addGraphicalElement(new Oval(ovalX, ovalY, Color.BLACK, Color.DARK_GRAY, rectWidth/2));
     		}
     	}
