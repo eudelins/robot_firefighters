@@ -3,9 +3,11 @@ package evenement;
 public abstract class Evenement {
 	private long date;
 	private Evenement suivant;
+	private Simulateur simul;
 	
-	public Evenement(long date) {
+	public Evenement(long date, Simulateur simul) {
 		this.date = date;
+		this.simul = simul;
 		this.suivant = null;
 	}
 
@@ -15,6 +17,10 @@ public abstract class Evenement {
 	
 	public Evenement getSuivant() {
 		return suivant;
+	}
+
+	public Simulateur getSimul() {
+		return simul;
 	}
 	
 	public void setSuivant(Evenement e) {
