@@ -111,10 +111,12 @@ public abstract class Robot {
 		int barreWidth = tailleCase/3;
 		int barreX = caseX + tailleCase/2;
 		int barreY = caseY + tailleCase/2 + heightRobot/2 + 4 + barreHeight/2;
-		int barreVarieWidth = barreWidth*this.quantiteEau/qteEauMax;
-		int barreVarieX = barreX - (barreWidth - barreVarieWidth);
-		
-		gui.addGraphicalElement(new Rectangle(barreX, barreY, null, Color.cyan, barreWidth, barreHeight));
+		if(this.quantiteEau != 0) {
+			int barreVarieWidth = barreWidth*this.quantiteEau/qteEauMax;
+			int barreVarieX = barreX - (barreWidth - barreVarieWidth);
+			
+			gui.addGraphicalElement(new Rectangle(barreVarieX, barreY, null, Color.cyan, barreVarieWidth, barreHeight));
+		}
 		gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, null, barreWidth, barreHeight));
 	}
 

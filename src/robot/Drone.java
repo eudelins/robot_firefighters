@@ -48,7 +48,7 @@ public class Drone extends Robot {
     			gui.addGraphicalElement(new Rectangle(ovalX, ovalY, Color.BLACK, Color.BLACK, ovalSize, 1));
     		}
     	}
-    	super.drawReservoir(gui, rectSize + rectSize*9/10, tailleCase, 2000);
+    	super.drawReservoir(gui, rectSize + rectSize*9/10, tailleCase, 10000);
 	}
 
 }
