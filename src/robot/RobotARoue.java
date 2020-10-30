@@ -1,7 +1,10 @@
 package robot;
 import java.awt.Color;
 
-import carte.*;
+import carte.Carte;
+import carte.Case;
+import carte.NatureTerrain;
+import evenement.Simulateur;
 import gui.GUISimulator;
 import gui.Oval;
 import gui.Rectangle;
@@ -9,17 +12,19 @@ import gui.Rectangle;
 
 public class RobotARoue extends Robot{
 	
-	public RobotARoue(Carte carte, Case position, int quantiteEau, int vitesse) {
-		super(carte, position, quantiteEau, vitesse);
+	public RobotARoue(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
+		super(carte, position, simul, quantiteEau, vitesse);
 		assert(position.getNature() == NatureTerrain.HABITAT || position.getNature() == NatureTerrain.TERRAIN_LIBRE);
 		assert(quantiteEau <= 5000);
 	}
 	
-	public RobotARoue(Carte carte, Case position, int vitesse) {
-		super(carte, position, 5000, vitesse);
+	public RobotARoue(Carte carte, Case position, Simulateur simul, int vitesse) {
+		super(carte, position, simul, 5000, vitesse);
 		assert(position.getNature() == NatureTerrain.HABITAT || position.getNature() == NatureTerrain.TERRAIN_LIBRE);
 	}
 
+	
+	/** Change la position du robot et adapte sa vitesse au passage */
 	@Override
 	public void setPosition(Case newPosition) {
 		NatureTerrain nature = newPosition.getNature();

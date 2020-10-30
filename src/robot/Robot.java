@@ -1,5 +1,6 @@
 package robot;
 import carte.*;
+import evenement.Simulateur;
 import gui.GUISimulator;
 
 
@@ -8,12 +9,14 @@ public abstract class Robot {
 	private int quantiteEau;
 	private int vitesse;
 	private Carte carte;
+	private Simulateur simul;
 	private boolean stopped; // Booléen qui permet de savoir si le robot est arrêté 
 							 //(arrếté pour par exemple remplir son réservoir)
 	
-	public Robot(Carte carte, Case position, int quantiteEau, int vitesse) {
+	public Robot(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
 		this.carte = carte;
 		this.position = position;
+		this.simul = simul;
 		this.quantiteEau  = quantiteEau;
 		this.vitesse = vitesse;
 	}
@@ -35,6 +38,7 @@ public abstract class Robot {
 		return position;
 	}
 	
+	/** Change la position du robot et adapte sa vitesse au passage */
 	public void setPosition(Case newPosition) {
 		this.position = newPosition;
 	}
@@ -42,7 +46,14 @@ public abstract class Robot {
 	public int getQuantiteEau() {
 		return quantiteEau;
 	}
+	public Carte getCarte() {
+		return carte;
+	}
 
+	public Simulateur getSimul() {
+		return simul;
+	}
+	
 	public void setQuantiteEau(int quantiteEau) {
 		this.quantiteEau = quantiteEau;
 	}
@@ -54,6 +65,7 @@ public abstract class Robot {
 	public void setStopped(boolean stop) {
 		this.stopped = stop;
 	}
+	
 	
 	public void deverserEau(int vol) {
 		int quantiteEauRestante = this.getQuantiteEau();
@@ -86,6 +98,13 @@ public abstract class Robot {
 		if (caseEst != null && caseEst.getNature() == NatureTerrain.EAU) return true;
 		
 		return false;
+	}
+	
+
+	/** Renvoie le temps mis pour accéder à une case voisine */
+	public int tempsAccesVoisin(Direction dir) {
+		int distance = this.carte.getTailleCases();
+		return distance/this.vitesse;
 	}
 	
 	public abstract void remplirReservoir();

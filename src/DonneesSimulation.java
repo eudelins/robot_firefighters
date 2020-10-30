@@ -4,12 +4,14 @@ import java.util.Scanner;
 
 import robot.*;
 import carte.*;
+import evenement.*;
 
 
 public class DonneesSimulation {
 	private Incendie[] incendies;
 	private Carte carte;
 	private Robot[] robots;
+	private Simulateur simul;
 	
 	public Carte getCarte() {
 		return carte;
@@ -21,6 +23,7 @@ public class DonneesSimulation {
 	
 	/* Initialise les données de la simulation à partir du fichier file */
 	public DonneesSimulation(File file) {
+		this.simul = new Simulateur();
 		Scanner scan;
 		try {
 			scan = new Scanner(file);
@@ -108,18 +111,18 @@ public class DonneesSimulation {
 			}
 			switch (finLigne[1]) {
 			case "DRONE":
-				this.robots[i] = new Drone(carte, matriceCase[lig][col], vitesse);
+				this.robots[i] = new Drone(carte, matriceCase[lig][col], simul, vitesse);
 				break;
 			case "ROUES":
-				this.robots[i] = new RobotARoue(carte, matriceCase[lig][col], vitesse);
+				this.robots[i] = new RobotARoue(carte, matriceCase[lig][col], simul, vitesse);
 				break;
 			case "PATTES":
 				// A modifier
-				this.robots[i] = new RobotAPattes(carte, matriceCase[lig][col], vitesse);
+				this.robots[i] = new RobotAPattes(carte, matriceCase[lig][col], simul, vitesse);
 				break;
 			case "CHENILLES":
 				// A modifier
-				this.robots[i] = new RobotAChenille(carte, matriceCase[lig][col], vitesse);
+				this.robots[i] = new RobotAChenille(carte, matriceCase[lig][col], simul, vitesse);
 				break;
 			}
 		}
