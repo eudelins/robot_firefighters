@@ -6,8 +6,8 @@ import carte.*;
 public class DebutRemplissage extends Evenement {
 	Robot robot;
 	
-	public DebutRemplissage(long date, Robot r) {
-		super(date);
+	public DebutRemplissage(long date, Simulateur simul, Robot r) {
+		super(date, simul);
 		this.robot = r;
 	}
 

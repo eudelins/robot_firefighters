@@ -6,8 +6,8 @@ public class DeverserDebut extends Evenement{
 	private Robot robot;
 	private int qteDeverse;
 
-	public DeverserDebut(long date, Robot robot, int qteDeverse) {
-		super(date);
+	public DeverserDebut(long date, Simulateur simul, Robot robot, int qteDeverse) {
+		super(date, simul);
 		this.robot = robot;
 		this.qteDeverse = qteDeverse;
 	}

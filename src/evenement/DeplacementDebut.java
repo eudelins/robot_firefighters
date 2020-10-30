@@ -10,8 +10,8 @@ public class DeplacementDebut extends Evenement {
 	private Direction dir;
 	private Carte carte;
 	
-	public DeplacementDebut(long date, Robot robot, Direction dir, Carte carte) {
-		super(date);
+	public DeplacementDebut(long date, Simulateur simul, Robot robot, Direction dir, Carte carte) {
+		super(date, simul);
 		this.robot = robot;
 		this.dir = dir;
 		this.carte = carte;
