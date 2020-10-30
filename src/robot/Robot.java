@@ -1,6 +1,9 @@
 package robot;
+import java.awt.Color;
+
 import carte.*;
 import gui.GUISimulator;
+import gui.Rectangle;
 
 
 public abstract class Robot {
@@ -86,6 +89,21 @@ public abstract class Robot {
 		if (caseEst != null && caseEst.getNature() == NatureTerrain.EAU) return true;
 		
 		return false;
+	}
+	
+	public void drawReservoir(GUISimulator gui, int heightRobot, int tailleCase, int qteEauMax) {
+		Case caseRobot = this.getPosition();
+		int caseX = caseRobot.getColonne() * tailleCase;
+		int caseY = caseRobot.getLigne() * tailleCase;
+		int barreHeight = 8;
+		int barreWidth = tailleCase/3;
+		int barreX = caseX + tailleCase/2;
+		int barreY = caseY + tailleCase/2 + heightRobot/2 + 4 + barreHeight/2;
+		int barreVarieWidth = barreWidth*this.quantiteEau/qteEauMax;
+		int barreVarieX = barreX - (barreWidth - barreVarieWidth);
+		
+		gui.addGraphicalElement(new Rectangle(barreX, barreY, null, Color.cyan, barreWidth, barreHeight));
+		gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, null, barreWidth, barreHeight));
 	}
 	
 	public abstract void remplirReservoir();

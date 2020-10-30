@@ -39,12 +39,13 @@ public class RobotAPattes extends Robot {
     	
     	for(int k = 0; k<=1; ++k) {
     		for(int j = 0; j<= 1; ++j) {
-    			int ovalX = caseX + (1+k)*tailleCase/3;
-    			int ovalY = caseY + (1+2*j)*tailleCase/4;
-    			gui.addGraphicalElement(new Rectangle(ovalX, ovalY, Color.BLACK, Color.DARK_GRAY, rectWidth/2));
+    			int patteX = caseX + (1+k)*tailleCase/3;
+    			int patteY = caseY + (1+2*j)*tailleCase/4;
+    			gui.addGraphicalElement(new Rectangle(patteX, patteY, Color.BLACK, Color.DARK_GRAY, rectWidth/2));
     		}
     	}
     	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectWidth, rectHeight));
+    	super.drawReservoir(gui, rectHeight + rectWidth/2, tailleCase, 0x7FFFFFFF);
 	}
 
 }
