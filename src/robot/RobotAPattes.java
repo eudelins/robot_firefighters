@@ -31,11 +31,11 @@ public class RobotAPattes extends Robot {
 	@Override
 	/** Renvoie le temps mis pour accéder à une case voisine */
 	public int tempsAccesVoisin(Direction dir) {
-		int semiDistance = this.carte.getTailleCases()/2;
+		Carte carte = this.getCarte();
+		int semiDistance = carte.getTailleCases()/2;
 		int tempsSortieCase = semiDistance/this.getVitesse();
 		
 		int vitesseFutur = this.getVitesse();
-		Carte carte = this.getCarte();
 		int lig = this.getPosition().getLigne();
 		int col = this.getPosition().getColonne();
 		Case nextCase = null;
