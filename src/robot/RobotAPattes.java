@@ -1,18 +1,23 @@
 package robot;
 import java.awt.Color;
 
-import carte.*;
+import carte.Carte;
+import carte.Case;
+import carte.Direction;
+import carte.NatureTerrain;
+import evenement.Simulateur;
 import gui.GUISimulator;
-import gui.Oval;
 import gui.Rectangle;
 
 
 public class RobotAPattes extends Robot {
 
-	public RobotAPattes(Carte carte, Case position, int vitesse) {
-		super(carte, position, 0x7FFFFFFF, vitesse);
+	public RobotAPattes(Carte carte, Case position, Simulateur simul, int vitesse) {
+		super(carte, position, simul, 0x7FFFFFFF, vitesse);
 	}
 
+	
+	/** Change la position du robot et adapte sa vitesse au passage */
 	@Override
 	public void setPosition(Case newPosition) {
 		NatureTerrain nature = newPosition.getNature();
@@ -22,6 +27,44 @@ public class RobotAPattes extends Robot {
 		super.setPosition(newPosition);
 	}
 
+	
+	@Override
+	/** Renvoie le temps mis pour accéder à une case voisine */
+	public int tempsAccesVoisin(Direction dir) {
+		int semiDistance = this.carte.getTailleCases()/2;
+		int tempsSortieCase = semiDistance/this.getVitesse();
+		
+		int vitesseFutur = this.getVitesse();
+		Carte carte = this.getCarte();
+		int lig = this.getPosition().getLigne();
+		int col = this.getPosition().getColonne();
+		Case nextCase = null;
+		switch (dir) {
+		case NORD:
+			assert(lig > 0);
+			nextCase = carte.getCase(lig - 1, col);
+			break;
+		case SUD:
+			assert(lig < carte.getNbLignes() - 1);
+			nextCase = carte.getCase(lig + 1, col);
+			break;
+		case OUEST:
+			assert(col > 0);
+			nextCase = carte.getCase(lig, col - 1);
+			break;
+		case EST:
+			assert(col < carte.getNbColonnes() - 1);
+			nextCase = carte.getCase(lig, col + 1);
+		}
+		
+		if (nextCase.getNature() == NatureTerrain.ROCHE) vitesseFutur = 20;
+		else vitesseFutur = 30;
+		
+		int tempsArriveeNewCase = semiDistance/vitesseFutur;
+		
+		return tempsArriveeNewCase + tempsSortieCase;
+	}
+	
 	@Override
 	public void remplirReservoir() {
 		return;
