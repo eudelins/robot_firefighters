@@ -112,13 +112,13 @@ public abstract class Robot {
 		int barreX = caseX + tailleCase/2;
 		int barreY = caseY + tailleCase/2 + heightRobot/2 + 4 + barreHeight/2;
 		gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, Color.decode("#a5b4b8"), barreWidth, barreHeight));
-		if(this.quantiteEau != 0) {
+		if(this.quantiteEau > 0) {
 			int barreVarieWidth = barreWidth*this.quantiteEau/qteEauMax;
 			int barreVarieX = barreX - (barreWidth - barreVarieWidth);
 			
 			gui.addGraphicalElement(new Rectangle(barreVarieX, barreY, null, Color.decode("#08cdfe"), barreVarieWidth, barreHeight));
+			gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, null, barreWidth, barreHeight));
 		}
-		gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, null, barreWidth, barreHeight));
 	}
 
 	/** Renvoie le temps mis pour accéder à une case voisine */

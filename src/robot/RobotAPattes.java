@@ -13,7 +13,7 @@ import gui.Rectangle;
 public class RobotAPattes extends Robot {
 
 	public RobotAPattes(Carte carte, Case position, Simulateur simul, int vitesse) {
-		super(carte, position, simul, 0x7FFFFFFF, vitesse);
+		super(carte, position, simul, 1073741823 , vitesse);
 	}
 
 	
@@ -88,7 +88,7 @@ public class RobotAPattes extends Robot {
     		}
     	}
     	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectWidth, rectHeight));
-    	super.drawReservoir(gui, rectHeight + rectWidth/2, tailleCase, 0x7FFFFFFF);
+    	super.drawReservoir(gui, rectHeight + rectWidth/2, tailleCase, 1073741823 );
 	}
 
 }
