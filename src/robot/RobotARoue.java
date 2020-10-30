@@ -60,5 +60,6 @@ public class RobotARoue extends Robot{
     		}
     	}
     	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectWidth, rectHeight));
+    	super.drawReservoir(gui, rectHeight + rectHeight*4/3, tailleCase, 2000);
 	}
 }

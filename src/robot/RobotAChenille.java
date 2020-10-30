@@ -101,6 +101,7 @@ public class RobotAChenille extends Robot {
 			gui.addGraphicalElement(new Oval(ovalX, rectY, Color.BLACK, Color.DARK_GRAY, ovalWidth, ovalHeight));
     	}
     	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectWidth, rectHeight));
+    	super.drawReservoir(gui, rectHeight + rectHeight*4/3, tailleCase, 2000);
 	}
 
 }
