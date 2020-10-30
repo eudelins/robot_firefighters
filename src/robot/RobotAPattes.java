@@ -71,6 +71,11 @@ public class RobotAPattes extends Robot {
 	}
 	
 	@Override
+	public void setQuantiteEau(int quantiteEau) {
+		super.setQuantiteEau(1073741823);
+	}
+	
+	@Override
 	public void draw(GUISimulator gui, int tailleCase) {
 		Case caseRobot = this.getPosition();
     	int caseX = caseRobot.getColonne() * tailleCase;
