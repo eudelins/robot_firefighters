@@ -14,6 +14,8 @@ public class RobotAPattes extends Robot {
 
 	public RobotAPattes(Carte carte, Case position, Simulateur simul, int vitesse) {
 		super(carte, position, simul, 1073741823 , vitesse);
+		assert(vitesse == 30 && position.getNature() != NatureTerrain.EAU);
+		if (position.getNature() == NatureTerrain.ROCHE) this.setVitesse(20);
 	}
 
 	
@@ -68,6 +70,16 @@ public class RobotAPattes extends Robot {
 	@Override
 	public void remplirReservoir() {
 		return;
+	}
+	
+	@Override
+	public int dureeRemplissage() {
+		return 0;
+	}
+	
+	@Override
+	public int dureeDeversage(int quantiteNecessaire) {
+		return quantiteNecessaire / 10;
 	}
 	
 	@Override

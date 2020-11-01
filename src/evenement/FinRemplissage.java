@@ -1,19 +1,20 @@
-import src.robot.*;
+package evenement;
 
-package src.evenement;
+import robot.*;
 
 public class FinRemplissage extends Evenement {
-
-	src.robot.Robot robot;
-	public FinRemplissage(long date, Robot r) {
-		super(date);
+	private Robot robot;
+	
+	public FinRemplissage(long date, Simulateur simul, Robot r) {
+		super(date, simul);
 		this.robot = r;
 	}
 	
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
-
+		this.robot.remplirReservoir();
+		this.robot.setStopped(false);
+		this.robot.setRemplissage(false);
 	}
 
 }

@@ -14,6 +14,13 @@ public class DeverserDebut extends Evenement{
 	
 	public void execute() {
 		robot.setStopped(true);
-		robot.deverserEau(this.qteDeverse);
+		robot.setDeversage(true);
+		long dateFinDeverser = dateFinEvenement();
+		DeverserFin finDeverser = new DeverserFin(dateFinDeverser, this.getSimul(), robot, qteDeverse);
+		this.getSimul().ajouteEvenement(finDeverser);
+	}
+	
+	public long dateFinEvenement() {
+		return this.getDate() + robot.dureeDeversage(qteDeverse);
 	}
 }

@@ -43,6 +43,16 @@ public class RobotARoue extends Robot{
 	}
 	
 	@Override
+	public int dureeRemplissage() {
+		return 10 * 60;
+	}
+	
+	@Override
+	public int dureeDeversage(int quantiteNecessaire) {
+		return 5 * (quantiteNecessaire / 100);
+	}
+	
+	@Override
 	public void draw(GUISimulator gui, int tailleCase) {
 		Case caseRobot = this.getPosition();
 		int caseX = caseRobot.getColonne() * tailleCase;

@@ -11,7 +11,7 @@ import gui.Rectangle;
 
 
 public class Drone extends Robot {
-
+	
 	public Drone(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
 		super(carte, position, simul, quantiteEau, vitesse);
 		assert(quantiteEau <= 10000);
@@ -27,6 +27,16 @@ public class Drone extends Robot {
 			this.setStopped(true);
 			this.setQuantiteEau(10000);
 		}
+	}
+	
+	@Override
+	public int dureeRemplissage() {
+		return 30 * 60;
+	}
+	
+	@Override
+	public int dureeDeversage(int quantiteNecessaire) {
+		return 30;
 	}
 	
 	@Override

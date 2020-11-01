@@ -6,6 +6,7 @@ import carte.Case;
 import carte.Direction;
 import carte.Incendie;
 import carte.NatureTerrain;
+import evenement.Evenement;
 import evenement.Simulateur;
 import gui.GUISimulator;
 import gui.Rectangle;
@@ -78,9 +79,32 @@ public abstract class Robot {
 		this.stopped = stop;
 	}
 	
+	public boolean isRemplissage() {
+		return remplissage;
+	}
 	
+	public void setRemplissage(boolean remplissage) {
+		this.remplissage = remplissage;
+	}
+	
+	public boolean isDeversage() {
+		return deversage;
+	}
+	
+	public void setDeversage(boolean deversage) {
+		this.deversage = deversage;
+	}
+	
+	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau */
+	public abstract int dureeDeversage(int quantiteNecessaire);
+	
+	
+	/** Renvoie la durée mis par le robot pour remplir son réservoir */
+	public abstract int dureeRemplissage();
+	
+	
+	/** Deverse une quantité d'eau sur une case */
 	public void deverserEau(int vol) {
-		this.deversage = true;
 		int quantiteEauRestante = this.getQuantiteEau();
 		assert(vol <= quantiteEauRestante && vol > 0);
 		this.setQuantiteEau(quantiteEauRestante - vol);
@@ -153,4 +177,5 @@ public abstract class Robot {
 	public abstract void remplirReservoir();
 	
 	public abstract void draw(GUISimulator gui, int tailleCase);
+
 }

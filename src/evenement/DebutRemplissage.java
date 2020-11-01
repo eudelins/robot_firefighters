@@ -13,7 +13,14 @@ public class DebutRemplissage extends Evenement {
 
 	@Override
 	public void execute() {
-		this.robot.remplirReservoir();
+		robot.setStopped(true);
+		robot.setRemplissage(true);
+		long dateFinRemplissage = dateFinEvenement();
+		FinRemplissage remplissageFin = new FinRemplissage(dateFinRemplissage, this.getSimul(), robot);
+		this.getSimul().ajouteEvenement(remplissageFin);
 	}
 
+	public long dateFinEvenement() {
+		return this.getDate() + robot.dureeRemplissage();
+	}
 }

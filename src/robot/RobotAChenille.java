@@ -17,6 +17,10 @@ public class RobotAChenille extends Robot {
 	
 	public RobotAChenille(Carte carte, Case position, Simulateur simul, int vitesse) {
 		super(carte, position, simul, 2000, vitesse);
+		assert(vitesse <= 80);
+		NatureTerrain nature = position.getNature();
+		assert(nature != NatureTerrain.EAU && nature != NatureTerrain.ROCHE);
+		if (nature == NatureTerrain.FORET) this.setVitesse(vitesse / 2);
 	}
 
 	/** Change la position du robot et adapte sa vitesse au passage */
@@ -75,6 +79,16 @@ public class RobotAChenille extends Robot {
 	}
 	
 
+	@Override
+	public int dureeRemplissage() {
+		return 5 * 60;
+	}
+	
+	@Override
+	public int dureeDeversage(int quantiteNecessaire) {
+		return 8 * (quantiteNecessaire / 100);
+	}
+	
 	@Override
 	public void remplirReservoir() {
 		if (this.estVoisinEau()) {

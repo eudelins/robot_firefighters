@@ -20,7 +20,7 @@ public class DonneesSimulation {
 	public Robot[] getRobot() {
 		return robots;
 	}
-	
+		
 	/* Initialise les données de la simulation à partir du fichier file */
 	public DonneesSimulation(File file) {
 		this.simul = new Simulateur();
@@ -105,24 +105,28 @@ public class DonneesSimulation {
 			String[] finLigne = scan.nextLine().split(" ");
 			int vitesse;
 			if (finLigne.length < 3) {
-				vitesse = 0;
+				vitesse = -1;
 			} else {
 				vitesse = Integer.parseInt(finLigne[2]);
 			}
 			switch (finLigne[1]) {
 			case "DRONE":
-				this.robots[i] = new Drone(carte, matriceCase[lig][col], simul, vitesse);
+				if (vitesse == -1) this.robots[i] = new Drone(carte, matriceCase[lig][col], simul, 100);
+				else this.robots[i] = new Drone(carte, matriceCase[lig][col], simul, vitesse);
 				break;
 			case "ROUES":
-				this.robots[i] = new RobotARoue(carte, matriceCase[lig][col], simul, vitesse);
+				if (vitesse == -1) this.robots[i] = new RobotARoue(carte, matriceCase[lig][col], simul, 80);
+				else this.robots[i] = new RobotARoue(carte, matriceCase[lig][col], simul, vitesse);
 				break;
 			case "PATTES":
 				// A modifier
-				this.robots[i] = new RobotAPattes(carte, matriceCase[lig][col], simul, vitesse);
+				if (vitesse == -1) this.robots[i] = new RobotAPattes(carte, matriceCase[lig][col], simul, 30);
+				else this.robots[i] = new RobotAPattes(carte, matriceCase[lig][col], simul, vitesse);
 				break;
 			case "CHENILLES":
 				// A modifier
-				this.robots[i] = new RobotAChenille(carte, matriceCase[lig][col], simul, vitesse);
+				if (vitesse == -1) this.robots[i] = new RobotAChenille(carte, matriceCase[lig][col], simul, 60);
+				else this.robots[i] = new RobotAChenille(carte, matriceCase[lig][col], simul, vitesse);
 				break;
 			}
 		}
