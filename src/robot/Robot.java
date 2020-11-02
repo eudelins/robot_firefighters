@@ -171,7 +171,10 @@ public abstract class Robot {
 	/** Renvoie le temps mis pour accéder à une case voisine */
 	public int tempsAccesVoisin(Direction dir) {
 		int distance = this.carte.getTailleCases();
-		return distance/this.vitesse;
+		double vitesseMetreParSeconde = this.vitesse / 3.6;
+		double temps = distance / vitesseMetreParSeconde;
+		int tempsEntier = (int)temps;
+		return tempsEntier;
 	}
 	
 	public abstract void remplirReservoir();

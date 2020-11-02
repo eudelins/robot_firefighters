@@ -95,13 +95,13 @@ class SimulateurGui implements Simulable {
     public void next() {
     	if (simul.simulationTerminee()) return;
     	Evenement premierEvenement = simul.getPremierEvent();
-    	while (premierEvenement != null && simul.getDateSimulation() == premierEvenement.getDate()) {
-    		System.out.println(simul.getDateSimulation());
+    	while (premierEvenement != null && simul.getDateSimulation() >= premierEvenement.getDate()) {
+    		System.out.println(premierEvenement.getDate());
     		premierEvenement.execute();
     		premierEvenement = premierEvenement.getSuivant();
     	}
     	simul.setPremierEvent(premierEvenement);
-    	simul.incrementeDate();
+    	for (int i = 0; i < 100; i++) simul.incrementeDate();
         draw();
     }
 

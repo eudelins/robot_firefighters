@@ -44,7 +44,9 @@ public class RobotAChenille extends Robot {
 	public int tempsAccesVoisin(Direction dir) {
 		Carte carte = this.getCarte();
 		int semiDistance = carte.getTailleCases()/2;
-		int tempsSortieCase = semiDistance/this.getVitesse();
+		double vitesseMetreParSeconde = this.getVitesse() / 3.6;
+		double tempsSortieDouble = semiDistance / vitesseMetreParSeconde;
+		int tempsSortieCase = (int)tempsSortieDouble;
 		
 		int vitesseFutur = this.getVitesse();
 		int lig = this.getPosition().getLigne();
@@ -73,7 +75,9 @@ public class RobotAChenille extends Robot {
 		if (nextCase.getNature() != NatureTerrain.FORET && this.getPosition().getNature() == NatureTerrain.FORET)
 			vitesseFutur = this.getVitesse() * 2;
 
-		int tempsArriveeNewCase = semiDistance/vitesseFutur;
+		double vitesseFuturMetreParSeconde = vitesseFutur / 3.6;
+		double tempsArriveeDouble = semiDistance / vitesseFuturMetreParSeconde;
+		int tempsArriveeNewCase = (int)tempsArriveeDouble;
 		
 		return tempsArriveeNewCase + tempsSortieCase;
 	}
