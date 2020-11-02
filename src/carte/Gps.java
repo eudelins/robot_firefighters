@@ -21,7 +21,9 @@ public class Gps {
 		}
 	}
 
+	// On pourrait renvoyer un ArrayList qui contient le chemin trouvé ou null si pas de chemin
 	public void trouverChemin() {
+		// Créer une variable g qui augmente à chaque fois qu'on rajoute une étape au chemin
 		while(!ouvert.isEmpty()){
 			Case current = this.trouver_f_mini(ouvert);
 			ArrayList<Case> voisins = this.robot.carte.getVoisins(current);
@@ -39,6 +41,9 @@ public class Gps {
 		Case case_min = ouverts[0];
 		int valeur_min = case_min.getf();
 		for(Case case: ouverts){
+			// Au lieu de faire un get, on peut calculer f, en rajoutant g en paramètre
+			// Genre f = g + calcul_manhattan(fin, case)
+			// Pour l'initialisation de valeur min, on peut mettre le plus grand int existant
 			if(case.getf() < valeur_min){
 				case_min = case;
 				valeur_min = case_min.getf();
