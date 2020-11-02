@@ -16,6 +16,7 @@ public class RobotAPattes extends Robot {
 		super(carte, position, simul, 1073741823 , vitesse);
 		assert(vitesse == 30 && position.getNature() != NatureTerrain.EAU);
 		if (position.getNature() == NatureTerrain.ROCHE) this.setVitesse(20);
+		super.terrainInterdit.add(NatureTerrain.EAU);
 	}
 
 	

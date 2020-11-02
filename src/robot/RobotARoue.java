@@ -14,13 +14,19 @@ public class RobotARoue extends Robot{
 	
 	public RobotARoue(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
 		super(carte, position, simul, quantiteEau, vitesse);
-		assert(position.getNature() == NatureTerrain.HABITAT || position.getNature() == NatureTerrain.TERRAIN_LIBRE);
+		super.terrainInterdit.add(NatureTerrain.EAU);
+		super.terrainInterdit.add(NatureTerrain.ROCHE);
+		super.terrainInterdit.add(NatureTerrain.FORET);
+		assert(!(super.terrainInterdit.contains(position.getNature())));
 		assert(quantiteEau <= 5000);
 	}
 	
 	public RobotARoue(Carte carte, Case position, Simulateur simul, int vitesse) {
 		super(carte, position, simul, 5000, vitesse);
-		assert(position.getNature() == NatureTerrain.HABITAT || position.getNature() == NatureTerrain.TERRAIN_LIBRE);
+		super.terrainInterdit.add(NatureTerrain.EAU);
+		super.terrainInterdit.add(NatureTerrain.ROCHE);
+		super.terrainInterdit.add(NatureTerrain.FORET);
+		assert(!(super.terrainInterdit.contains(position.getNature())));
 	}
 
 	

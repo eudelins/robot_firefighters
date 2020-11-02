@@ -1,12 +1,12 @@
 package robot;
 import java.awt.Color;
+import java.util.ArrayList;
 
 import carte.Carte;
 import carte.Case;
 import carte.Direction;
 import carte.Incendie;
 import carte.NatureTerrain;
-import evenement.Evenement;
 import evenement.Simulateur;
 import gui.GUISimulator;
 import gui.Rectangle;
@@ -19,6 +19,7 @@ public abstract class Robot {
 	private int vitesse;
 	private Carte carte;
 	private Simulateur simul;
+	protected ArrayList<NatureTerrain> terrainInterdit = new ArrayList<NatureTerrain>();
 	private boolean remplissage;
 	private boolean deversage;
 	private boolean stopped;
@@ -93,6 +94,10 @@ public abstract class Robot {
 	
 	public void setDeversage(boolean deversage) {
 		this.deversage = deversage;
+	}
+	
+	public ArrayList<NatureTerrain> getTerrainInterdit(){
+		return this.terrainInterdit;
 	}
 	
 	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau */

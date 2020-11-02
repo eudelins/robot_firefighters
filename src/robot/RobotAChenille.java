@@ -13,13 +13,17 @@ public class RobotAChenille extends Robot {
 	public RobotAChenille(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
 		super(carte, position, simul, quantiteEau, vitesse);
 		assert(quantiteEau <= 2000);
+		super.terrainInterdit.add(NatureTerrain.EAU);
+		super.terrainInterdit.add(NatureTerrain.ROCHE);
 	}
 	
 	public RobotAChenille(Carte carte, Case position, Simulateur simul, int vitesse) {
 		super(carte, position, simul, 2000, vitesse);
 		assert(vitesse <= 80);
+		super.terrainInterdit.add(NatureTerrain.EAU);
+		super.terrainInterdit.add(NatureTerrain.ROCHE);
 		NatureTerrain nature = position.getNature();
-		assert(nature != NatureTerrain.EAU && nature != NatureTerrain.ROCHE);
+		assert(!(super.terrainInterdit.contains(nature)));
 		if (nature == NatureTerrain.FORET) this.setVitesse(vitesse / 2);
 	}
 
