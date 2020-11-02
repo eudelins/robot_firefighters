@@ -15,13 +15,13 @@ public class Carte {
 		}
 	}
 
-	
+
 	public Carte(Case[][] carte, int tailleCases) {
 		this.tailleCases = tailleCases;
 		this.cases = carte;
 	}
-	
-		
+
+
 
 	public int getTailleCases() {
 		return tailleCases;
@@ -30,23 +30,23 @@ public class Carte {
 	public void setTailleCases(int tailleCases) {
 		this.tailleCases = tailleCases;
 	}
-	
+
 	public int getNbLignes() {
 		return cases.length;
 	}
-	
+
 	public int getNbColonnes() {
 		return cases[0].length;
 	}
-	
+
 	public Case getCase(int lig, int col) {
 		return cases[lig][col];
 	}
-	
+
 	public boolean voisinExiste(Case src, Direction dir) {
 		int ligSrc = src.getLigne();
 		int colSrc = src.getColonne();
-		
+
 		switch(dir) {
 		case OUEST:
 			if (colSrc == 0) return false;
@@ -60,13 +60,13 @@ public class Carte {
 		default:
 			if (ligSrc == this.getNbLignes()) return false;
 			return (getCase(ligSrc + 1, colSrc) != null);
-		}	
+		}
 	}
-	
+
 	public Case getVoisin(Case src, Direction dir) {
 		int ligSrc = src.getLigne();
 		int colSrc = src.getColonne();
-		
+
 		switch(dir) {
 		case OUEST:
 			if (colSrc == 0) return null;
@@ -82,5 +82,14 @@ public class Carte {
 			return getCase(ligSrc + 1, colSrc);
 		}
 	}
-}
 
+	public ArrayList<Case> getVoisins(Case base){
+		ArrayList<Case> voisins;
+
+		if(this.voisinExiste(base, Direction.OUEST)) voisins.getVoisin(base, Direction.OUEST);
+		if(this.voisinExiste(base, Direction.NORD)) voisins.getVoisin(base, Direction.NORD);
+		if(this.voisinExiste(base, DIRECTION.EST)) voisins.getVoisin(base, Direction.EST);
+		if(this.voisinExiste(bases, DIRECTIOn.SUD)) voisins.getVoisin(base, DIRECTIOn.SUD);
+	}
+	return voisins;
+}
