@@ -25,35 +25,38 @@ public class TestSimulateur {
 	public static void main(String[] args) {
 		   // crée la fenêtre graphique dans laquelle dessiner
         GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
-    
+
        // crée la carte, en l'associant à la fenêtre graphique précédente
 		DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/carteSujet.map"));
-		
+
 		Simulateur simul = new Simulateur();
 		Robot roue = newDonnes.getRobot()[1];
-		
+		System.out.println("Bonjour");
+		Gps chemin = new Gps(roue, roue.getPosition(), newDonnes.getIncendie()[0].getPosition());
+		chemin.trouverChemin();
+
 		DeplacementDebut move = new DeplacementDebut(0, simul, roue, Direction.NORD, newDonnes.getCarte());
 		simul.ajouteEvenement(move);
-		
+
 		DeverserDebut deversage = new DeverserDebut(move.dateFinEvenement(), simul, roue,
 													roue.getQuantiteEau());
 		simul.ajouteEvenement(deversage);
-		
+
 		DeplacementDebut move2 = new DeplacementDebut(deversage.dateFinEvenement(), simul, roue,
 													  Direction.OUEST, newDonnes.getCarte());
 		simul.ajouteEvenement(move2);
-		
+
 		DeplacementDebut move3 = new DeplacementDebut(move2.dateFinEvenement(), simul, roue,
 													  Direction.OUEST, newDonnes.getCarte());
 		simul.ajouteEvenement(move3);
-		
+
 		DebutRemplissage remplissage = new DebutRemplissage(move3.dateFinEvenement(), simul, roue);
 		simul.ajouteEvenement(remplissage);
-		
+
 		DeplacementDebut move4 = new DeplacementDebut(remplissage.dateFinEvenement(), simul, roue,
 													  Direction.EST, newDonnes.getCarte());
 		simul.ajouteEvenement(move4);
-		
+
 		DeplacementDebut move5 = new DeplacementDebut(move4.dateFinEvenement(), simul, roue,
 													  Direction.EST, newDonnes.getCarte());
 		simul.ajouteEvenement(move5);
@@ -61,11 +64,11 @@ public class TestSimulateur {
 		DeverserDebut deversage2 = new DeverserDebut(move5.dateFinEvenement(), simul, roue,
 													 roue.getQuantiteEau());
 		simul.ajouteEvenement(deversage2);
-		
+
 		SimulateurGui carte = new SimulateurGui(gui, newDonnes, simul);
 	}
-	
-	
+
+
 
 }
 
@@ -109,7 +112,7 @@ class SimulateurGui implements Simulable {
     public void restart() {
         draw();
     }
-    
+
     public static Color colorCase(Case uneCase) {
     	if (uneCase.getIncendie() != null) return Color.RED;
     	switch (uneCase.getNature()) {
@@ -127,7 +130,7 @@ class SimulateurGui implements Simulable {
     		return Color.BLACK;
     	}
     }
-    
+
     /**
      * Dessine la carte.
      */
@@ -135,7 +138,7 @@ class SimulateurGui implements Simulable {
         gui.reset();	// clear the window
         Carte carte = donnees.getCarte();
         int tailleCase = carte.getTailleCases() / 100;
-        
+
         for (int i = 0; i < carte.getNbLignes(); i++) {
         	for (int j = 0; j < carte.getNbColonnes(); j++) {
         		Case case_ij = carte.getCase(i, j);
@@ -145,7 +148,7 @@ class SimulateurGui implements Simulable {
         		gui.addGraphicalElement(new Rectangle(coordX, coordY, Color.BLACK, couleurCase, tailleCase));
         	}
         }
-        
+
         Robot[] robots = donnees.getRobot();
         for (int i = 0; i < robots.length; i++) {
         	robots[i].draw(gui, tailleCase);;
