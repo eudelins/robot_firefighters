@@ -23,6 +23,7 @@ public abstract class Robot {
 	private boolean remplissage;
 	private boolean deversage;
 	private boolean stopped;
+	private boolean occupe;
 	
 	public Robot(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
 		this.carte = carte;
@@ -33,11 +34,7 @@ public abstract class Robot {
 		this.remplissage = false;
 		this.deversage = false;
 		this.stopped = false;
-	}
-	
-	public Robot() {
-		this.position = new Case(NatureTerrain.EAU, 0, 0, null);
-		this.quantiteEau  = 0;
+		this.occupe = false;
 	}
 	
 	public int getVitesse() {
@@ -94,6 +91,14 @@ public abstract class Robot {
 	
 	public void setDeversage(boolean deversage) {
 		this.deversage = deversage;
+	}
+
+	public boolean isOccupe() {
+		return occupe;
+	}
+	
+	public void setOccupe(boolean occupe) {
+		this.occupe = occupe;
 	}
 	
 	public ArrayList<NatureTerrain> getTerrainInterdit(){
@@ -185,5 +190,4 @@ public abstract class Robot {
 	public abstract void remplirReservoir();
 	
 	public abstract void draw(GUISimulator gui, int tailleCase);
-
 }

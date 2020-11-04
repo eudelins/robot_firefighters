@@ -4,11 +4,13 @@ package carte;
 public class Incendie {
 	private Case position;
 	private int nbLitres;
+	private boolean affecte;
 	
 	public Incendie(Case position, int nbLitres) {
 		super();
 		this.position = position;
 		this.nbLitres = nbLitres;
+		this.affecte = false;
 	}
 
 	public Case getPosition() {
@@ -32,5 +34,13 @@ public class Incendie {
 			this.nbLitres = 0;
 		else
 			this.nbLitres = this.nbLitres - litre;
+	}
+
+	public boolean isAffecte() {
+		return affecte;
+	}
+
+	public void setAffecte(boolean estAffecte) {
+		this.affecte = estAffecte;
 	}
 }
