@@ -11,7 +11,7 @@ public class Case {
 	private int g;
 	private int h;
 	private Case parent;
-	
+
 	public Case(NatureTerrain natureTerrain, int lig, int col, Incendie incendie) {
 		super();
 		this.nature= natureTerrain;
@@ -44,37 +44,52 @@ public class Case {
 	public String toString() {
 		return "Case [nature=" + nature + ", ligne=" + ligne + ", colonne=" + colonne + ", incendie=" + incendie + "]";
 	}
-	
+
 	public void setf() {
 		this.f = this.h + this.g;
 	}
-	
+
 	public void setg(int g) {
 		this.g = g;
 	}
-	
+
 	public void seth(int h) {
 		this.h = h;
 	}
-	
+
 	public void setParent(Case parent) {
 		this.parent = parent;
 	}
-	
+
 	public int getf() {
 		return this.f;
 	}
-	
+
 	public int getg() {
 		return this.g;
 	}
-	
+
 	public int geth() {
 		return this.h;
 	}
-	
+
 	public Case getParent() {
 		return this.parent;
 	}
-}
 
+	public Direction getDirection(Case destination){
+		if(destination.getLigne() - this.ligne == 1){
+			return Direction.SUD;
+		}
+		else if(destination.getLigne() - this.ligne == -1){
+			return Direction.NORD;
+		}
+		else if(destination.getColonne() - this.colonne == 1){
+			return Direction.EST;
+		}
+		else if(destination.getColonne() - this.colonne == -1){
+			return Direction.OUEST;
+		}
+		return null;
+	}
+}

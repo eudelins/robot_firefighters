@@ -33,7 +33,6 @@ public class Gps {
 		while(!ouverts.isEmpty()){
 
 			Case current = this.trouverFMini(ouverts);
-			System.out.println("Case courrante : "+current+", case de fin : "+this.fin);
 			if(current == this.fin){
 				System.out.println("Chemin trouvé !");
 				this.creationEvenementChemin(current);
@@ -43,32 +42,29 @@ public class Gps {
 			this.fermees.add(current);
 			this.ouverts.remove(current);
 			for(Case caseVoisine : voisins){
+
 				caseVoisine.seth(calculManhattan(caseVoisine, this.fin));
-				System.out.println(caseVoisine);
+				//System.out.println(caseVoisine);
 				if(!this.peutMarcher(caseVoisine) || this.fermees.contains(caseVoisine)){
-					System.out.println("Case déja dans fermée");
 					;
 				}
 				else{
 					if(!this.ouverts.contains(caseVoisine)){
-						System.out.println("Case non contenue dans ouvert");
 						caseVoisine.setParent(current);
 						caseVoisine.seth(calculManhattan(caseVoisine, this.fin));
-						caseVoisine.setg(current.getg()+1);
+						caseVoisine.setg(current.getg() + this.robot.tempsAccesVoisin(current.getDirection(caseVoisine)));
 						this.ouverts.add(caseVoisine);
 					}
 					else{
-						if(caseVoisine.getg() > current.getg() + 1){
+						if(caseVoisine.getg() > current.getg() +  this.robot.tempsAccesVoisin(current.getDirection(caseVoisine))){
 							caseVoisine.setParent(current);
-							caseVoisine.setg(current.getg() + 1);
-							System.out.println("Case a valeur de g inférieure");
+							caseVoisine.setg(current.getg() +  this.robot.tempsAccesVoisin(current.getDirection(caseVoisine)));
 						}
 					}
 				}
 			}
 
 		}
-		System.out.println("Liste ouverte vide");
 	}
 
 	private int calculManhattan(Case case1, Case case2){
@@ -96,7 +92,6 @@ public class Gps {
 
 	private void creationEvenementChemin(Case caseChemin){
 			if(caseChemin.getParent() == null){
-				System.out.println("On est au début c'est ici que tout commence");
 				System.out.println(caseChemin);
 			}
 			else{
