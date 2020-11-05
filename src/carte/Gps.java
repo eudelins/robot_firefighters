@@ -7,6 +7,8 @@ import robot.Robot;
 import carte.Carte;
 import carte.NatureTerrain;
 import carte.Case;
+import evenement.*;
+import donnees.DonneesSimulation;
 
 public class Gps {
 
@@ -26,7 +28,7 @@ public class Gps {
 
 
 	// On pourrait renvoyer un ArrayList qui contient le chemin trouvé ou null si pas de chemin
-	public void trouverChemin() {
+	public void trouverChemin(Simulateur simul, DonneesSimulation donnees) {
 		this.ouverts.add(this.debut);
 		// Créer une variable g qui augmente à chaque fois qu'on rajoute une étape au chemin
 
@@ -34,8 +36,7 @@ public class Gps {
 
 			Case current = this.trouverFMini(ouverts);
 			if(current == this.fin){
-				System.out.println("Chemin trouvé !");
-				this.creationEvenementChemin(current);
+				this.creationEvenementChemin(current, simul, donnees);
 				return ;
 			}
 			ArrayList<Case> voisins = this.robot.getCarte().getVoisins(current);
@@ -44,7 +45,6 @@ public class Gps {
 			for(Case caseVoisine : voisins){
 
 				caseVoisine.seth(calculManhattan(caseVoisine, this.fin));
-				//System.out.println(caseVoisine);
 				if(!this.peutMarcher(caseVoisine) || this.fermees.contains(caseVoisine)){
 					;
 				}
@@ -90,13 +90,16 @@ public class Gps {
 		return ouverts.get(indiceMin);
 	}
 
-	private void creationEvenementChemin(Case caseChemin){
+	private long creationEvenementChemin(Case caseChemin, Simulateur simul, DonneesSimulation donnees){
 			if(caseChemin.getParent() == null){
-				System.out.println(caseChemin);
+				return simul.getDateSimulation();
 			}
 			else{
-				creationEvenementChemin(caseChemin.getParent());
-				System.out.println(caseChemin);
+				long ancienneDate = creationEvenementChemin(caseChemin.getParent(), simul, donnees);
+				DeplacementDebut nouvelleEtapeChemin = new DeplacementDebut(ancienneDate, simul, this.robot, caseChemin.getParent().getDirection(caseChemin), donnees.getCarte());
+				simul.ajouteEvenement(nouvelleEtapeChemin);
+				ancienneDate += this.robot.tempsAccesVoisin(caseChemin.getParent().getDirection(caseChemin));
+				return ancienneDate;
 			}
 	}
 

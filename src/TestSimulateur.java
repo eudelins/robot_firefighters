@@ -19,6 +19,7 @@ import gui.Text;
 import robot.*;
 import carte.*;
 import evenement.*;
+import donnees.*;
 
 public class TestSimulateur {
 
@@ -31,10 +32,10 @@ public class TestSimulateur {
 
 		Simulateur simul = new Simulateur();
 		Robot roue = newDonnes.getRobot()[1];
-		System.out.println("Bonjour");
-		Gps chemin = new Gps(roue, roue.getPosition(), newDonnes.getIncendie()[0].getPosition());
-		chemin.trouverChemin();
 
+		Gps chemin = new Gps(roue, roue.getPosition(), newDonnes.getIncendie()[0].getPosition());
+		chemin.trouverChemin(simul, newDonnes);
+		/*
 		DeplacementDebut move = new DeplacementDebut(0, simul, roue, Direction.NORD, newDonnes.getCarte());
 		simul.ajouteEvenement(move);
 
@@ -64,7 +65,7 @@ public class TestSimulateur {
 		DeverserDebut deversage2 = new DeverserDebut(move5.dateFinEvenement(), simul, roue,
 													 roue.getQuantiteEau());
 		simul.ajouteEvenement(deversage2);
-
+		*/
 		SimulateurGui carte = new SimulateurGui(gui, newDonnes, simul);
 	}
 

@@ -18,16 +18,17 @@ import gui.Text;
 
 import robot.*;
 import carte.*;
+import donnees.*;
 
 public class TestCarte {
 
 	public static void main(String[] args) {
         // crée la fenêtre graphique dans laquelle dessiner
          GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
-     
+
         // crée la carte, en l'associant à la fenêtre graphique précédente
 		DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/carteSujet.map"));
-        
+
 		CarteGui carte = new CarteGui(gui, newDonnes);
     }
 }
@@ -36,7 +37,7 @@ public class TestCarte {
 class CarteGui implements Simulable {
 	/** L'interface graphique associée */
     private GUISimulator gui;
-    
+
     private DonneesSimulation donnees;
 
     /**
@@ -55,7 +56,7 @@ class CarteGui implements Simulable {
     }
 
     @Override
-    public void next() {		
+    public void next() {
         draw();
     }
 
@@ -63,7 +64,7 @@ class CarteGui implements Simulable {
     public void restart() {
         draw();
     }
-    
+
     public static Color colorCase(Case uneCase) {
     	if (uneCase.getIncendie() != null) return Color.RED;
     	switch (uneCase.getNature()) {
@@ -81,7 +82,7 @@ class CarteGui implements Simulable {
     		return Color.BLACK;
     	}
     }
-    
+
     /**
      * Dessine la carte.
      */
@@ -89,7 +90,7 @@ class CarteGui implements Simulable {
         gui.reset();	// clear the window
         Carte carte = donnees.getCarte();
         int tailleCase = carte.getTailleCases() / 100;
-        
+
         for (int i = 0; i < carte.getNbLignes(); i++) {
         	for (int j = 0; j < carte.getNbColonnes(); j++) {
         		Case case_ij = carte.getCase(i, j);
@@ -102,7 +103,7 @@ class CarteGui implements Simulable {
 //        		gui.addGraphicalElement(image);
         	}
         }
-        
+
         Robot[] robots = donnees.getRobot();
         for(Robot robot : robots ) {
         	robot.draw(gui, tailleCase);
@@ -113,9 +114,9 @@ class CarteGui implements Simulable {
 //        	int coordY = caseRobot.getColonne() * tailleCase + tailleCase/2;
 //        	int dimImage = 2 * tailleCase / 3;
 //        	String fileName = "images/drone.jpg";
-//        	gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK, Color.DARK_GRAY, tailleCase/2));        	
+//        	gui.addGraphicalElement(new Oval(coordY, coordX, Color.BLACK, Color.DARK_GRAY, tailleCase/2));
 ////        	gui.addGraphicalElement(new ImageElement(coordX, coordY, fileName, dimImage, dimImage, null));
 //        }
     }
-    
+
 }
