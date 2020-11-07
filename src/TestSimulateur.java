@@ -32,9 +32,18 @@ public class TestSimulateur {
 
 		Simulateur simul = new Simulateur();
 		Robot roue = newDonnes.getRobot()[1];
+		Robot drone = newDonnes.getRobot()[0];
+		Robot chenille = newDonnes.getRobot()[2];
 
-		Gps chemin = new Gps(roue, roue.getPosition(), newDonnes.getIncendie()[0].getPosition());
-		chemin.trouverChemin(simul, newDonnes);
+
+		Gps cheminDrone = new Gps(drone, drone.getPosition(), newDonnes.getIncendie()[1].getPosition());
+		cheminDrone.trouverChemin(simul, newDonnes);
+
+		Gps cheminRoue = new Gps(roue, roue.getPosition(), newDonnes.getIncendie()[0].getPosition());
+		cheminRoue.trouverChemin(simul, newDonnes);
+
+		Gps cheminChenille = new Gps(chenille, chenille.getPosition(), newDonnes.getIncendie()[2].getPosition());
+		cheminChenille.trouverChemin(simul, newDonnes);
 		/*
 		DeplacementDebut move = new DeplacementDebut(0, simul, roue, Direction.NORD, newDonnes.getCarte());
 		simul.ajouteEvenement(move);
