@@ -19,7 +19,7 @@ public class RobotAPattes extends Robot {
 		super.terrainInterdit.add(NatureTerrain.EAU);
 	}
 
-	
+
 	/** Change la position du robot et adapte sa vitesse au passage */
 	@Override
 	public void setPosition(Case newPosition) {
@@ -30,18 +30,21 @@ public class RobotAPattes extends Robot {
 		super.setPosition(newPosition);
 	}
 
-	
+
 	@Override
 	/** Renvoie le temps mis pour accéder à une case voisine */
 	public int tempsAccesVoisin(Direction dir) {
 		Carte carte = this.getCarte();
 		int semiDistance = carte.getTailleCases()/2;
 		int tempsSortieCase = semiDistance/this.getVitesse();
-		
+
 		int vitesseFutur = this.getVitesse();
 		int lig = this.getPosition().getLigne();
 		int col = this.getPosition().getColonne();
 		Case nextCase = null;
+
+		System.out.println(carte.getCase(lig, col));
+	//	System.out.println("ligne max : "+carte.getNbLignes()+", colonne max :"+carte.getNbColonnes());
 		switch (dir) {
 		case NORD:
 			assert(lig > 0);
@@ -59,35 +62,35 @@ public class RobotAPattes extends Robot {
 			assert(col < carte.getNbColonnes() - 1);
 			nextCase = carte.getCase(lig, col + 1);
 		}
-		
+
 		if (nextCase.getNature() == NatureTerrain.ROCHE) vitesseFutur = 20;
 		else vitesseFutur = 30;
-		
+
 		int tempsArriveeNewCase = semiDistance/vitesseFutur;
-		
+
 		return tempsArriveeNewCase + tempsSortieCase;
 	}
-	
+
 	@Override
 	public void remplirReservoir() {
 		return;
 	}
-	
+
 	@Override
 	public int dureeRemplissage() {
 		return 0;
 	}
-	
+
 	@Override
 	public int dureeDeversage(int quantiteNecessaire) {
 		return quantiteNecessaire / 10;
 	}
-	
+
 	@Override
 	public void setQuantiteEau(int quantiteEau) {
 		super.setQuantiteEau(1073741823);
 	}
-	
+
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {
 		Case caseRobot = this.getPosition();
@@ -97,7 +100,7 @@ public class RobotAPattes extends Robot {
     	int rectY = caseY + tailleCase/2;
     	int rectWidth = tailleCase/3;
     	int rectHeight = 4*tailleCase/10;
-    	
+
     	for(int k = 0; k<=1; ++k) {
     		for(int j = 0; j<= 1; ++j) {
     			int patteX = caseX + (1+k)*tailleCase/3;
