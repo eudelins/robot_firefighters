@@ -72,7 +72,8 @@ public class Gps {
 
 			Case current = this.trouverFMini(ouverts);
 			if(current == this.fin){
-				this.creationEvenementChemin(current, simul, donnees);
+				//this.creationEvenementChemin(current, simul, donnees);
+				this.creationEvenementChemin(simul, donnees);
 				return ;
 			}
 			ArrayList<Case> voisins = this.robot.getCarte().getVoisins(current);
@@ -137,6 +138,26 @@ public class Gps {
 				simul.ajouteEvenement(nouvelleEtapeChemin);
 				ancienneDate += this.robot.tempsAccesVoisin(this.getParent(caseChemin).getDirection(caseChemin));
 				return ancienneDate;
+			}
+	}
+	
+	private void creationEvenementChemin(Simulateur simul, DonneesSimulation donnees){
+			ArrayList<Case> chemin = new ArrayList<Case>();
+			Case current = this.fin;
+			while(current != null) {
+				chemin.add(current);
+				current = current.getParent();
+			}
+			if(chemin.get(chemin.size()-1) != this.debut) {
+				return ;
+			}
+			long date = simul.getDateSimulation();
+			Case caseChemin;
+			for(int i = chemin.size() - 2 ; i >= 0 ; i--) {
+				caseChemin = chemin.get(i);
+				DeplacementDebut nouvelleEtapeChemin = new DeplacementDebut(date, simul, this.robot, caseChemin.getParent().getDirection(caseChemin), donnees.getCarte());
+				simul.ajouteEvenement(nouvelleEtapeChemin);
+				date += this.robot.tempsAccesVoisin(caseChemin.getParent().getDirection(caseChemin));
 			}
 	}
 
