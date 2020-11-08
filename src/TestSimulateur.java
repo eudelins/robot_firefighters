@@ -42,8 +42,8 @@ public class TestSimulateur {
 		Gps cheminRoue = new Gps(roue, roue.getPosition(), newDonnes.getIncendie()[0].getPosition());
 		cheminRoue.trouverChemin(simul, newDonnes);
 
-		Gps cheminChenille = new Gps(chenille, chenille.getPosition(), newDonnes.getIncendie()[2].getPosition());
-		cheminChenille.trouverChemin(simul, newDonnes);
+//		Gps cheminChenille = new Gps(chenille, chenille.getPosition(), newDonnes.getIncendie()[2].getPosition());
+//		cheminChenille.trouverChemin(simul, newDonnes);
 		/*
 		DeplacementDebut move = new DeplacementDebut(0, simul, roue, Direction.NORD, newDonnes.getCarte());
 		simul.ajouteEvenement(move);
