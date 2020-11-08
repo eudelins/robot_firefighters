@@ -43,8 +43,7 @@ public class RobotAPattes extends Robot {
 		int col = this.getPosition().getColonne();
 		Case nextCase = null;
 
-		System.out.println(carte.getCase(lig, col));
-	//	System.out.println("ligne max : "+carte.getNbLignes()+", colonne max :"+carte.getNbColonnes());
+
 		switch (dir) {
 		case NORD:
 			assert(lig > 0);

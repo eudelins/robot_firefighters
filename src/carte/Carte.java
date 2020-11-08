@@ -49,16 +49,16 @@ public class Carte {
 
 		switch(dir) {
 		case OUEST:
-			if (colSrc == 0) return false;
+			if (colSrc <= 0) return false;
 			return (getCase(ligSrc, colSrc - 1) != null);
 		case EST:
-			if (colSrc == this.getNbColonnes() - 1) return false;
+			if (colSrc >= this.getNbColonnes() - 1) return false;
 			return (getCase(ligSrc, colSrc + 1) != null);
 		case NORD:
-			if (ligSrc == 0) return false;
+			if (ligSrc <= 0) return false;
 			return (getCase(ligSrc - 1, colSrc) != null);
 		default:
-			if (ligSrc == this.getNbLignes()-1) return false;
+			if (ligSrc >= this.getNbLignes()-1) return false;
 			return (getCase(ligSrc + 1, colSrc) != null);
 		}
 	}
@@ -71,16 +71,16 @@ public class Carte {
 
 		switch(dir) {
 		case OUEST:
-			if (colSrc == 0) return null;
+			if (colSrc <= 0) return null;
 			return getCase(ligSrc, colSrc - 1);
 		case EST:
-			if (colSrc == this.getNbColonnes()-1) return null;
+			if (colSrc >= this.getNbColonnes()-1) return null;
 			return getCase(ligSrc, colSrc + 1);
 		case NORD:
-			if (ligSrc == 0) return null;
+			if (ligSrc <= 0) return null;
 			return getCase(ligSrc - 1, colSrc);
 		default:
-			if (ligSrc == this.getNbLignes()-1) return null;
+			if (ligSrc >= this.getNbLignes()-1) return null;
 			return getCase(ligSrc + 1, colSrc);
 		}
 	}
