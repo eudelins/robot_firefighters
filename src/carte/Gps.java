@@ -60,39 +60,33 @@ public class Gps {
 	}
 
 
-
-	// On pourrait renvoyer un ArrayList qui contient le chemin trouvé ou null si pas de chemin
-	public void trouverChemin(Simulateur simul, DonneesSimulation donnees) {
+	/** Calcul le plus court chemin en modifiant les attributs de la classe 
+	 *  La méthode renvoie false si ce chemin n'existe pas, true sinon */
+	public boolean trouverChemin(Simulateur simul, DonneesSimulation donnees) {
 		this.ouverts.add(this.debut);
 		this.setG(this.debut, 0);
 		this.setH(this.debut);
-		// Créer une variable g qui augmente à chaque fois qu'on rajoute une étape au chemin
 
 		while(!ouverts.isEmpty()){
 
 			Case current = this.trouverFMini(ouverts);
 			if(current == this.fin){
-				//this.creationEvenementChemin(current, simul, donnees);
-				this.creationEvenementChemin(simul, donnees);
-				return ;
+//				this.creationEvenementChemin(simul, donnees);
+				return true;
 			}
+			
 			ArrayList<Case> voisins = this.robot.getCarte().getVoisins(current);
 			this.fermees.add(current);
 			this.ouverts.remove(current);
 			for(Case caseVoisine : voisins){
 
-
-				if(!this.peutMarcher(caseVoisine) || this.fermees.contains(caseVoisine)){
-					;
-				}
-				else{
-					if(!this.ouverts.contains(caseVoisine)){
+				if(this.peutMarcher(caseVoisine) && !this.fermees.contains(caseVoisine)){
+					if (!this.ouverts.contains(caseVoisine)) {
 						this.setH(caseVoisine);
 						this.setParent(caseVoisine, current);
 						this.setG(caseVoisine, this.getG(current) + this.robot.tempsAccesVoisin(current, current.getDirection(caseVoisine)));
 						this.ouverts.add(caseVoisine);
-					}
-					else{
+					} else {
 						if(this.getG(caseVoisine) > this.getG(current) +  this.robot.tempsAccesVoisin(current, current.getDirection(caseVoisine))){
 							this.setParent(caseVoisine,current);
 							this.setG(caseVoisine, this.getG(current) +  this.robot.tempsAccesVoisin(current, current.getDirection(caseVoisine)));
@@ -100,9 +94,9 @@ public class Gps {
 					}
 				}
 			}
-
 		}
 		System.out.println("Chemin non trouvé");
+		return false;
 	}
 
 	private int calculManhattan(Case case1, Case case2){
@@ -117,9 +111,6 @@ public class Gps {
 		int indiceMin = 0;
 		int valeurMin = this.getG(ouverts.get(0)) + this.getH(ouverts.get(0));
 		for(int curseur = 1; curseur < ouverts.size(); curseur++){
-			// Au lieu de faire un get, on peut calculer f, en rajoutant g en paramètre
-			// Genre f = g + calcul_manhattan(fin, case)
-			// Pour l'initialisation de valeur min, on peut mettre le plus grand int existant
 			if(this.getG(ouverts.get(curseur)) + this.getH(ouverts.get(curseur)) < valeurMin){
 				indiceMin = curseur;
 				valeurMin = this.getG(ouverts.get(curseur)) + this.getH(ouverts.get(curseur));
@@ -141,22 +132,24 @@ public class Gps {
 			}
 	}
 
-	private void creationEvenementChemin(Simulateur simul, DonneesSimulation donnees){
-			ArrayList<Case> chemin = new ArrayList<Case>();
-			Case current = this.fin;
-			while(this.parents.containsKey(current)) {
-				chemin.add(current);
-				current = this.getParent(current);
-			}
+	/** Crée les évènemenets de déplacements du robot et renvoie la date de fin du déplacement */
+	public long creationEvenementChemin(Simulateur simul, DonneesSimulation donnees){
+		ArrayList<Case> chemin = new ArrayList<Case>();
+		Case current = this.fin;
+		while(this.parents.containsKey(current)) {
+			chemin.add(current);
+			current = this.getParent(current);
+		}
 
-			long date = simul.getDateSimulation();
-			Case caseChemin;
-			for(int i = chemin.size() - 1 ; i >= 0 ; i--) {
-				caseChemin = chemin.get(i);
-				DeplacementDebut nouvelleEtapeChemin = new DeplacementDebut(date, simul, this.robot, this.getParent(caseChemin).getDirection(caseChemin), donnees.getCarte());
-				simul.ajouteEvenement(nouvelleEtapeChemin);
-				date += this.robot.tempsAccesVoisin(this.getParent(caseChemin).getDirection(caseChemin));
-			}
+		long date = simul.getDateSimulation();
+		Case caseChemin;
+		for(int i = chemin.size() - 1 ; i >= 0 ; i--) {
+			caseChemin = chemin.get(i);
+			DeplacementDebut nouvelleEtapeChemin = new DeplacementDebut(date, simul, this.robot, this.getParent(caseChemin).getDirection(caseChemin), donnees.getCarte());
+			simul.ajouteEvenement(nouvelleEtapeChemin);
+			date += this.robot.tempsAccesVoisin(this.getParent(caseChemin).getDirection(caseChemin));
+		}
+		return date;
 	}
 
 }

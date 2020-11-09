@@ -17,6 +17,7 @@ import gui.Simulable;
 import gui.Text;
 
 import robot.*;
+import strategie.ChefPompier;
 import carte.*;
 import evenement.*;
 import donnees.*;
@@ -31,6 +32,11 @@ public class TestSimulateur {
 		DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/carteSujet.map"));
 
 		Simulateur simul = new Simulateur();
+		ChefPompier chef = new ChefPompier(simul, newDonnes);
+		chef.donneOrdre();
+		
+		
+		/*
 		Robot roue = newDonnes.getRobot()[1];
 		Robot drone = newDonnes.getRobot()[0];
 		Robot chenille = newDonnes.getRobot()[2];
@@ -41,40 +47,13 @@ public class TestSimulateur {
 		Gps cheminRoue = new Gps(roue, roue.getPosition(), newDonnes.getIncendie()[0].getPosition());
 
 		cheminDrone.trouverChemin(simul, newDonnes);
+		cheminDrone.creationEvenementChemin(simul, newDonnes);
 
 		cheminRoue.trouverChemin(simul, newDonnes);
+		cheminRoue.creationEvenementChemin(simul, newDonnes);
 
 		cheminChenille.trouverChemin(simul, newDonnes);
-		/*
-		DeplacementDebut move = new DeplacementDebut(0, simul, roue, Direction.NORD, newDonnes.getCarte());
-		simul.ajouteEvenement(move);
-
-		DeverserDebut deversage = new DeverserDebut(move.dateFinEvenement(), simul, roue,
-													roue.getQuantiteEau());
-		simul.ajouteEvenement(deversage);
-
-		DeplacementDebut move2 = new DeplacementDebut(deversage.dateFinEvenement(), simul, roue,
-													  Direction.OUEST, newDonnes.getCarte());
-		simul.ajouteEvenement(move2);
-
-		DeplacementDebut move3 = new DeplacementDebut(move2.dateFinEvenement(), simul, roue,
-													  Direction.OUEST, newDonnes.getCarte());
-		simul.ajouteEvenement(move3);
-
-		DebutRemplissage remplissage = new DebutRemplissage(move3.dateFinEvenement(), simul, roue);
-		simul.ajouteEvenement(remplissage);
-
-		DeplacementDebut move4 = new DeplacementDebut(remplissage.dateFinEvenement(), simul, roue,
-													  Direction.EST, newDonnes.getCarte());
-		simul.ajouteEvenement(move4);
-
-		DeplacementDebut move5 = new DeplacementDebut(move4.dateFinEvenement(), simul, roue,
-													  Direction.EST, newDonnes.getCarte());
-		simul.ajouteEvenement(move5);
-
-		DeverserDebut deversage2 = new DeverserDebut(move5.dateFinEvenement(), simul, roue,
-													 roue.getQuantiteEau());
-		simul.ajouteEvenement(deversage2);
+		cheminChenille.creationEvenementChemin(simul, newDonnes);
 		*/
 		SimulateurGui carte = new SimulateurGui(gui, newDonnes, simul);
 	}

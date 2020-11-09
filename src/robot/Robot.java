@@ -121,7 +121,10 @@ public abstract class Robot {
 		Incendie feuAEteindre = this.getPosition().getIncendie();
 		if(feuAEteindre != null) {
 			feuAEteindre.eteindre(vol);
-			if (feuAEteindre.getNbLitres() == 0) this.getPosition().setIncendie(null);
+			if (feuAEteindre.getNbLitres() == 0) {
+				this.getPosition().setIncendie(null);
+				this.occupe = false;
+			}
 		}
 	}
 
@@ -147,36 +150,6 @@ public abstract class Robot {
 		return false;
 	}
 
-	public void drawReservoir(GUISimulator gui, int heightRobot, int tailleCase, int qteEauMax) {
-		Case caseRobot = this.getPosition();
-		int caseX = caseRobot.getColonne() * tailleCase;
-		int caseY = caseRobot.getLigne() * tailleCase;
-		int barreHeight = 8;
-		int barreWidth = tailleCase/3;
-		int barreX = caseX + tailleCase/2;
-		int barreY = caseY + tailleCase/2 + heightRobot/2 + 4 + barreHeight/2;
-		Color couleurFond = Color.decode("#a5b4b8");
-		if(this.quantiteEau == qteEauMax) {
-			couleurFond = Color.decode("#08cdfe");
-		}
-		gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, couleurFond, barreWidth, barreHeight));
-		if(this.quantiteEau > 0 && this.quantiteEau < qteEauMax) {
-			int barreVarieWidth = barreWidth*this.quantiteEau/qteEauMax;
-			int barreVarieX = barreX - (barreWidth - barreVarieWidth);
-
-			gui.addGraphicalElement(new Rectangle(barreVarieX, barreY, null, Color.decode("#08cdfe"), barreVarieWidth, barreHeight));
-			gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, null, barreWidth, barreHeight));
-		}
-
-		if(this.deversage || this.remplissage) {
-			int textX = caseX + tailleCase/2;
-			int textY = caseY + (tailleCase - heightRobot)/2 - 10;
-			String etat;
-			if(this.deversage) etat = "Deversement...";
-			else etat = "Remplissage...";
-			gui.addGraphicalElement(new Text(textX, textY, Color.BLACK, etat));
-		}
-	}
 
 	/** Renvoie le temps mis pour accéder à une case voisine */
 	public int tempsAccesVoisin(Direction dir) {
@@ -198,4 +171,36 @@ public abstract class Robot {
 	public abstract void remplirReservoir();
 
 	public abstract void draw(GUISimulator gui, int tailleCase);
+
+	
+	public void drawReservoir(GUISimulator gui, int heightRobot, int tailleCase, int qteEauMax) {
+		Case caseRobot = this.getPosition();
+		int caseX = caseRobot.getColonne() * tailleCase;
+		int caseY = caseRobot.getLigne() * tailleCase;
+		int barreHeight = 8;
+		int barreWidth = tailleCase/3;
+		int barreX = caseX + tailleCase/2;
+		int barreY = caseY + tailleCase/2 + heightRobot/2 + 4 + barreHeight/2;
+		Color couleurFond = Color.WHITE;
+		if(this.quantiteEau == qteEauMax) {
+			couleurFond = Color.decode("#3393ff");
+		}
+		gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, couleurFond, barreWidth, barreHeight));
+		if(this.quantiteEau > 0 && this.quantiteEau < qteEauMax) {
+			int barreVarieWidth = barreWidth*this.quantiteEau/qteEauMax;
+			int barreVarieX = barreX - (barreWidth - barreVarieWidth);
+			
+			gui.addGraphicalElement(new Rectangle(barreVarieX, barreY, null, Color.decode("#3393ff"), barreVarieWidth, barreHeight));
+			gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, null, barreWidth, barreHeight));
+		}
+		
+		if(this.deversage || this.remplissage) {
+			int textX = caseX + tailleCase/2;
+			int textY = caseY + (tailleCase - heightRobot)/2 - 10;
+			String etat;
+			if(this.deversage) etat = "Deversement...";
+			else etat = "Remplissage...";
+			gui.addGraphicalElement(new Text(textX, textY, Color.BLACK, etat));
+		}
+	}
 }
