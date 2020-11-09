@@ -128,26 +128,70 @@ public abstract class Robot {
 		}
 	}
 
-	/** Indique si le robot est a un voisin qui contient de l'eau */
-	public boolean estVoisinEau() {
+	/** Indique si le robot a un voisin qui contient de l'eau */
+	public Case estVoisinEau() {
 		int lig = this.position.getLigne();
 		int col = this.position.getColonne();
 
 		// On récupère les voisins
 		Case caseNord = null, caseSud = null, caseOuest = null, caseEst = null;
 		if (lig > 0) caseNord = carte.getCase(lig - 1, col);
-		if (caseNord != null && caseNord.getNature() == NatureTerrain.EAU) return true;
+		if (caseNord != null && caseNord.getNature() == NatureTerrain.EAU) return caseNord;
 
 		if (lig < carte.getNbLignes() - 1) caseSud = carte.getCase(lig + 1, col);
-		if (caseSud != null && caseSud.getNature() == NatureTerrain.EAU) return true;
+		if (caseSud != null && caseSud.getNature() == NatureTerrain.EAU) return caseSud;
 
 		if (col > 0) caseOuest = carte.getCase(lig, col - 1);
-		if (caseOuest != null && caseOuest.getNature() == NatureTerrain.EAU) return true;
+		if (caseOuest != null && caseOuest.getNature() == NatureTerrain.EAU) return caseOuest;
 
 		if (col < carte.getNbColonnes() - 1) caseEst = carte.getCase(lig, col + 1);
-		if (caseEst != null && caseEst.getNature() == NatureTerrain.EAU) return true;
+		if (caseEst != null && caseEst.getNature() == NatureTerrain.EAU) return caseEst;
 
-		return false;
+		return null;
+	}
+	
+	
+	/** Indique si la case a un voisin qui contient de l'eau */
+	public static Case estVoisinEau(Case caseDest) {
+		int lig = caseDest.getLigne();
+		int col = caseDest.getColonne();
+
+		// On récupère les voisins
+		Case caseNord = null, caseSud = null, caseOuest = null, caseEst = null;
+		if (lig > 0) caseNord = carte.getCase(lig - 1, col);
+		if (caseNord != null && caseNord.getNature() == NatureTerrain.EAU) return caseNord;
+
+		if (lig < carte.getNbLignes() - 1) caseSud = carte.getCase(lig + 1, col);
+		if (caseSud != null && caseSud.getNature() == NatureTerrain.EAU) return caseSud;
+
+		if (col > 0) caseOuest = carte.getCase(lig, col - 1);
+		if (caseOuest != null && caseOuest.getNature() == NatureTerrain.EAU) return caseOuest;
+
+		if (col < carte.getNbColonnes() - 1) caseEst = carte.getCase(lig, col + 1);
+		if (caseEst != null && caseEst.getNature() == NatureTerrain.EAU) return caseEst;
+
+		return null;
+	}
+	
+	
+	/** Renvoie le point d'accès à l'eau du robot le plus proche */
+	public Case accesEauPlusProche() {
+		if (this.estVoisinEau() != null) return this.position;
+
+		int ligCourante = this.position.getLigne(), colCourante = this.position.getColonne();
+		int maxDist = Math.max(carte.getNbColonnes(), carte.getNbLignes());
+		for (int dist = 1; dist < maxDist; dist++) {
+			for (int lig = ligCourante - dist; lig <= ligCourante + dist; lig++) {
+				int ecartLig = dist - Math.abs(ligCourante - lig);
+				for (int col = colCourante - ecartLig; col <= colCourante + ecartLig; col++) {
+					if (lig < 0 || lig >= carte.getNbLignes()) continue;
+					if (col < 0 || col >= carte.getNbColonnes()) continue;
+					Case voisin = carte.getCase(lig, col);
+					if (estVoisinEau(voisin) != null) return voisin;
+				}
+			}
+		}
+		return null;
 	}
 
 
