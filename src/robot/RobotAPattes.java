@@ -8,6 +8,7 @@ import carte.NatureTerrain;
 import evenement.Simulateur;
 import gui.GUISimulator;
 import gui.Rectangle;
+import gui.ImageElement;
 
 
 public class RobotAPattes extends Robot {
@@ -117,6 +118,8 @@ public class RobotAPattes extends Robot {
     		}
     	}
     	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectWidth, rectHeight));
+    	
+//    	gui.addGraphicalElement(new ImageElement(caseX, caseY, "images/RobotChenille.png", tailleCase, tailleCase, null));
     	super.drawReservoir(gui, rectHeight + rectWidth/2, tailleCase, 1073741823);
 	}
 

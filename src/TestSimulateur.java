@@ -123,6 +123,26 @@ class SimulateurGui implements Simulable {
     	}
     }
 
+    
+    public static ImageElement imageCase(Case uneCase, int tailleCase) {
+    	int coordX = uneCase.getColonne() * tailleCase;
+		int coordY = uneCase.getLigne() * tailleCase;
+    	switch (uneCase.getNature()) {
+    	case EAU:
+    		return new ImageElement(coordX, coordY, "images/eau.png", tailleCase, tailleCase, null);
+    	case FORET:
+    		return new ImageElement(coordX, coordY, "images/foret.png", tailleCase, tailleCase, null);
+    	case ROCHE:
+    		return new ImageElement(coordX, coordY, "images/rock.png", tailleCase, tailleCase, null);
+    	case TERRAIN_LIBRE:
+    		return new ImageElement(coordX, coordY, "images/terrainlibre.png", tailleCase, tailleCase, null);
+    	case HABITAT:
+    		return new ImageElement(coordX, coordY, "images/habitat.png", tailleCase, tailleCase, null);
+    	default:
+    		return null;
+    	}
+    }
+
     /**
      * Dessine la carte.
      */
@@ -135,9 +155,10 @@ class SimulateurGui implements Simulable {
         	for (int j = 0; j < carte.getNbColonnes(); j++) {
         		Case case_ij = carte.getCase(i, j);
         		Color couleurCase = colorCase(case_ij);
-        		int coordX = j * tailleCase + (tailleCase>>1);
-        		int coordY = i * tailleCase + (tailleCase>>1);
-        		gui.addGraphicalElement(new Rectangle(coordX, coordY, Color.BLACK, couleurCase, tailleCase));
+//        		int coordX = j * tailleCase + (tailleCase>>1);
+//        		int coordY = i * tailleCase + (tailleCase>>1);
+        		gui.addGraphicalElement(imageCase(case_ij, tailleCase));
+//        		gui.addGraphicalElement(new Rectangle(coordX, coordY, Color.BLACK, couleurCase, tailleCase));
         	}
         }
 
