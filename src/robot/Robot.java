@@ -113,6 +113,10 @@ public abstract class Robot {
 	public abstract int dureeRemplissage();
 
 
+	/** Renvoie la capcité maximale du reservoir du robot  */
+	public abstract int capaciteReservoire();
+	
+
 	/** Deverse une quantité d'eau sur une case */
 	public void deverserEau(int vol) {
 		int quantiteEauRestante = this.getQuantiteEau();
@@ -152,7 +156,7 @@ public abstract class Robot {
 	
 	
 	/** Indique si la case a un voisin qui contient de l'eau */
-	public static Case estVoisinEau(Case caseDest) {
+	public Case estVoisinEau(Case caseDest) {
 		int lig = caseDest.getLigne();
 		int col = caseDest.getColonne();
 
@@ -187,7 +191,7 @@ public abstract class Robot {
 					if (lig < 0 || lig >= carte.getNbLignes()) continue;
 					if (col < 0 || col >= carte.getNbColonnes()) continue;
 					Case voisin = carte.getCase(lig, col);
-					if (estVoisinEau(voisin) != null) return voisin;
+					if (this.estVoisinEau(voisin) != null) return voisin;
 				}
 			}
 		}

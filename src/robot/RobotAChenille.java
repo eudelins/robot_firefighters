@@ -134,6 +134,13 @@ public class RobotAChenille extends Robot {
 	public int dureeRemplissage() {
 		return 5 * 60;
 	}
+	
+	
+	/** Renvoie la capcité maximale du reservoir du robot  */
+	@Override
+	public int capaciteReservoire() {
+		return 2000;
+	}
 
 	@Override
 	public int dureeDeversage(int quantiteNecessaire) {

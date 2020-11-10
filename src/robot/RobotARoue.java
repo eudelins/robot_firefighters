@@ -57,6 +57,14 @@ public class RobotARoue extends Robot{
 		return 5 * (quantiteNecessaire / 100);
 	}
 	
+	
+	/** Renvoie la capcité maximale du reservoir du robot  */
+	@Override
+	public int capaciteReservoire() {
+		return 5000;
+	}
+	
+	
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {
 		Case caseRobot = this.getPosition();

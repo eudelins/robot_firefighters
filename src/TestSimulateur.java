@@ -33,7 +33,6 @@ public class TestSimulateur {
 
 		Simulateur simul = new Simulateur();
 		ChefPompier chef = new ChefPompier(simul, newDonnes);
-		chef.donneOrdre();
 		
 		
 		/*
@@ -55,7 +54,7 @@ public class TestSimulateur {
 		cheminChenille.trouverChemin(simul, newDonnes);
 		cheminChenille.creationEvenementChemin(simul, newDonnes);
 		*/
-		SimulateurGui carte = new SimulateurGui(gui, newDonnes, simul);
+		SimulateurGui carte = new SimulateurGui(gui, newDonnes, simul, chef);
 	}
 
 
@@ -68,6 +67,7 @@ class SimulateurGui implements Simulable {
     private GUISimulator gui;
     private Simulateur simul;
     private DonneesSimulation donnees;
+    private ChefPompier chef;
 
     /**
      * Crée une carte et la dessine.
@@ -76,16 +76,18 @@ class SimulateurGui implements Simulable {
      * Simulable.
      * @param color la couleur des cases de la carte
      */
-    public SimulateurGui(GUISimulator gui, DonneesSimulation donnees, Simulateur simul) {
+    public SimulateurGui(GUISimulator gui, DonneesSimulation donnees, Simulateur simul, ChefPompier chef) {
         this.gui = gui;
         gui.setSimulable(this);				// association a la gui!
         this.donnees = donnees;
         this.simul = simul;
+        this.chef = chef;
         draw();
     }
 
     @Override
     public void next() {
+    	chef.donneOrdre();
     	if (simul.simulationTerminee()) return;
     	Evenement premierEvenement = simul.getPremierEvent();
     	while (premierEvenement != null && simul.getDateSimulation() >= premierEvenement.getDate()) {

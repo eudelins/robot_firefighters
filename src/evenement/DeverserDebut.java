@@ -29,7 +29,7 @@ public class DeverserDebut extends Evenement{
 		long dateFinDeverser = dateFinEvenement();
 		System.out.println("Quantite deverser: " + qteDeverse);
 		System.out.println("Date Fin Deverser:" + dateFinDeverser);
-		DeverserFin finDeverser = new DeverserFin(dateFinDeverser, this.getSimul(), robot, qteDeverse);
+		DeverserFin finDeverser = new DeverserFin(dateFinDeverser, this.getSimul(), robot, qteDeverse, caseDeversage);
 		this.getSimul().ajouteEvenement(finDeverser);
 	}
 	

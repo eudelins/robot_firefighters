@@ -39,6 +39,38 @@ public class Drone extends Robot {
 		return 30;
 	}
 	
+	
+	/** Renvoie la capcité maximale du reservoir du robot  */
+	@Override
+	public int capaciteReservoire() {
+		return 10000;
+	}
+	
+	
+	@Override
+	/** Renvoie le point d'accès à l'eau du robot le plus proche */
+	public Case accesEauPlusProche() {
+		Case position = this.getPosition();
+		if (position.getNature() == NatureTerrain.EAU) return position;
+
+		Carte carteRob = this.getCarte();
+		int ligCourante = position.getLigne(), colCourante = position.getColonne();
+		int maxDist = Math.max(carteRob.getNbColonnes(), carteRob.getNbLignes());
+		for (int dist = 1; dist < maxDist; dist++) {
+			for (int lig = ligCourante - dist; lig <= ligCourante + dist; lig++) {
+				int ecartLig = dist - Math.abs(ligCourante - lig);
+				for (int col = colCourante - ecartLig; col <= colCourante + ecartLig; col++) {
+					if (lig < 0 || lig >= carteRob.getNbLignes()) continue;
+					if (col < 0 || col >= carteRob.getNbColonnes()) continue;
+					Case voisin = carteRob.getCase(lig, col);
+					if (voisin.getNature() == NatureTerrain.EAU) return voisin;
+				}
+			}
+		}
+		return null;
+	}
+	
+	
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {
 		Case caseRobot = this.getPosition();

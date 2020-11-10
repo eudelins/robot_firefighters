@@ -27,21 +27,24 @@ public class ChefPompier {
 			for (int j = 0; j < robots.length; j++) {
 				if (robots[j].isOccupe()) continue;
 				rob = robots[j];
+				rob.setOccupe(true);
 				
-				if (rob.getQuantiteEau() == 0) {
-					// Fonction qui trouve la case avec de l'eau la plus proche
-					// Calcul du chemin vers cette case
-					// Evenement de Remplissage
-				}
-				
-				Gps chemin = new Gps(rob, rob.getPosition(), fire.getPosition());
-				if (chemin.trouverChemin(simul, donnees)) {
-					rob.setOccupe(true);
-					fire.setAffecte(true);
-					long dateArrivee = chemin.creationEvenementChemin(simul, donnees);
-					DeverserDebut deversage = new DeverserDebut(dateArrivee, simul, rob, fire.getPosition());
-					simul.ajouteEvenement(deversage);
-					break;
+				if (rob.getQuantiteEau() < fire.getNbLitres() && rob.getQuantiteEau() < rob.capaciteReservoire()) {
+					Case pointEau = rob.accesEauPlusProche();
+					Gps cheminEau = new Gps(rob, rob.getPosition(), pointEau);
+					cheminEau.trouverChemin(simul, donnees);
+					long dateArriveeEau = cheminEau.creationEvenementChemin(simul, donnees);
+					DebutRemplissage remplissage = new DebutRemplissage(dateArriveeEau, simul, rob);
+					simul.ajouteEvenement(remplissage);
+				} else {
+					Gps chemin = new Gps(rob, rob.getPosition(), fire.getPosition());
+					if (chemin.trouverChemin(simul, donnees)) {
+						fire.setAffecte(true);
+						long dateArrivee = chemin.creationEvenementChemin(simul, donnees);
+						DeverserDebut deversage = new DeverserDebut(dateArrivee, simul, rob, fire.getPosition());
+						simul.ajouteEvenement(deversage);
+						break;
+					}
 				}
 			}
 			

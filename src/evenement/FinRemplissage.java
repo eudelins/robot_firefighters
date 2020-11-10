@@ -14,6 +14,7 @@ public class FinRemplissage extends Evenement {
 	public void execute() {
 		this.robot.remplirReservoir();
 		this.robot.setStopped(false);
+		this.robot.setOccupe(false);
 		this.robot.setRemplissage(false);
 	}
 

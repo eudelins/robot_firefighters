@@ -11,9 +11,10 @@ import gui.Rectangle;
 
 
 public class RobotAPattes extends Robot {
+	public final int CAPACITE_RESERVOIR = 1073741823;
 
 	public RobotAPattes(Carte carte, Case position, Simulateur simul, int vitesse) {
-		super(carte, position, simul, 1073741823 , vitesse);
+		super(carte, position, simul, 1073741823, vitesse);
 		assert(vitesse == 30 && position.getNature() != NatureTerrain.EAU);
 		if (position.getNature() == NatureTerrain.ROCHE) this.setVitesse(20);
 		super.terrainInterdit.add(NatureTerrain.EAU);
@@ -90,6 +91,14 @@ public class RobotAPattes extends Robot {
 		super.setQuantiteEau(1073741823);
 	}
 
+	
+	/** Renvoie la capcité maximale du reservoir du robot  */
+	@Override
+	public int capaciteReservoire() {
+		return 1073741823;
+	}
+	
+	
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {
 		Case caseRobot = this.getPosition();
