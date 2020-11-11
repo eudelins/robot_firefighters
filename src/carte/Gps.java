@@ -63,6 +63,7 @@ public class Gps {
 	/** Calcul le plus court chemin en modifiant les attributs de la classe 
 	 *  La méthode renvoie false si ce chemin n'existe pas, true sinon */
 	public boolean trouverChemin(Simulateur simul, DonneesSimulation donnees) {
+		if (this.debut == null) return false;
 		this.ouverts.add(this.debut);
 		this.setG(this.debut, 0);
 		this.setH(this.debut);
@@ -151,5 +152,26 @@ public class Gps {
 		}
 		return date;
 	}
-
+	
+	
+	/** Renvoie la date de fin du déplacement */
+	public long dateArrivee(Simulateur simul){
+		ArrayList<Case> chemin = new ArrayList<Case>();
+		Case current = this.fin;
+		while(this.parents.containsKey(current)) {
+			chemin.add(current);
+			current = this.getParent(current);
+		}
+		
+		long date = simul.getDateSimulation();
+		Case caseChemin;
+		for(int i = chemin.size() - 1 ; i >= 0 ; i--) {
+			caseChemin = chemin.get(i);
+			date += this.robot.tempsAccesVoisin(this.getParent(caseChemin).getDirection(caseChemin));
+		}
+		return date;
+	}
+	
+	
+	
 }

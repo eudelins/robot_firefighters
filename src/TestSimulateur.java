@@ -29,31 +29,12 @@ public class TestSimulateur {
         GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
 
        // crée la carte, en l'associant à la fenêtre graphique précédente
+//		DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/mushroomOfHell-20x20.map"));
+//		DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/desertOfDeath-20x20.map"));
 		DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/carteSujet.map"));
 
 		Simulateur simul = new Simulateur();
 		ChefPompier chef = new ChefPompier(simul, newDonnes);
-		
-		
-		/*
-		Robot roue = newDonnes.getRobot()[1];
-		Robot drone = newDonnes.getRobot()[0];
-		Robot chenille = newDonnes.getRobot()[2];
-
-
-		Gps cheminDrone = new Gps(drone, drone.getPosition(), newDonnes.getIncendie()[1].getPosition());
-		Gps cheminChenille = new Gps(chenille, chenille.getPosition(), newDonnes.getIncendie()[2].getPosition());
-		Gps cheminRoue = new Gps(roue, roue.getPosition(), newDonnes.getIncendie()[0].getPosition());
-
-		cheminDrone.trouverChemin(simul, newDonnes);
-		cheminDrone.creationEvenementChemin(simul, newDonnes);
-
-		cheminRoue.trouverChemin(simul, newDonnes);
-		cheminRoue.creationEvenementChemin(simul, newDonnes);
-
-		cheminChenille.trouverChemin(simul, newDonnes);
-		cheminChenille.creationEvenementChemin(simul, newDonnes);
-		*/
 		SimulateurGui carte = new SimulateurGui(gui, newDonnes, simul, chef);
 	}
 
@@ -96,7 +77,9 @@ class SimulateurGui implements Simulable {
     		premierEvenement = premierEvenement.getSuivant();
     	}
     	simul.setPremierEvent(premierEvenement);
-    	for (int i = 0; i < 100; i++) simul.incrementeDate();
+    	if (donnees.getCarte().getTailleCases() != 10000) simul.incrementeDate();
+    	else for (int i = 0; i < 100; i++) simul.incrementeDate();
+//    	for (int i = 0; i < 100; i++) simul.incrementeDate();
         draw();
     }
 
@@ -124,22 +107,31 @@ class SimulateurGui implements Simulable {
     }
 
     
-    public static ImageElement imageCase(Case uneCase, int tailleCase) {
+    public void dessineCase(Case uneCase, int tailleCase) {
     	int coordX = uneCase.getColonne() * tailleCase;
 		int coordY = uneCase.getLigne() * tailleCase;
+		if (uneCase.getIncendie() != null) {
+			gui.addGraphicalElement(new Rectangle(coordX + tailleCase/2, coordY + tailleCase/2, Color.RED, Color.RED, tailleCase));
+			return;
+		}
     	switch (uneCase.getNature()) {
     	case EAU:
-    		return new ImageElement(coordX, coordY, "images/eau.png", tailleCase, tailleCase, null);
+    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/eau.png", tailleCase, tailleCase, null));
+    		break;
     	case FORET:
-    		return new ImageElement(coordX, coordY, "images/foret.png", tailleCase, tailleCase, null);
+    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/foret.png", tailleCase, tailleCase, null));
+    		break;
     	case ROCHE:
-    		return new ImageElement(coordX, coordY, "images/rock.png", tailleCase, tailleCase, null);
+    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/rock.png", tailleCase, tailleCase, null));
+    		break;
     	case TERRAIN_LIBRE:
-    		return new ImageElement(coordX, coordY, "images/terrainlibre.png", tailleCase, tailleCase, null);
+    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/terrainlibre.png", tailleCase, tailleCase, null));
+    		break;
     	case HABITAT:
-    		return new ImageElement(coordX, coordY, "images/habitat.png", tailleCase, tailleCase, null);
+    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/habitat.png", tailleCase, tailleCase, null));
+    		break;
     	default:
-    		return null;
+    		return;
     	}
     }
 
@@ -149,7 +141,9 @@ class SimulateurGui implements Simulable {
     private void draw() {
         gui.reset();	// clear the window
         Carte carte = donnees.getCarte();
-        int tailleCase = carte.getTailleCases() / 100;
+        int tailleCase = 0;
+        if (carte.getTailleCases() >= 10000) tailleCase = carte.getTailleCases() / 100;
+        else tailleCase = 45;
 
         for (int i = 0; i < carte.getNbLignes(); i++) {
         	for (int j = 0; j < carte.getNbColonnes(); j++) {
@@ -157,7 +151,7 @@ class SimulateurGui implements Simulable {
         		Color couleurCase = colorCase(case_ij);
 //        		int coordX = j * tailleCase + (tailleCase>>1);
 //        		int coordY = i * tailleCase + (tailleCase>>1);
-        		gui.addGraphicalElement(imageCase(case_ij, tailleCase));
+        		this.dessineCase(case_ij, tailleCase);
 //        		gui.addGraphicalElement(new Rectangle(coordX, coordY, Color.BLACK, couleurCase, tailleCase));
         	}
         }

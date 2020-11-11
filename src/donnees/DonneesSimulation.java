@@ -42,33 +42,27 @@ public class DonneesSimulation {
 
 			// On saute les lignes vides
 			newLine = scan.nextLine();
-			sauteLigneVide(scan, newLine);
+			while (scan.hasNext() && "".equals(newLine)) newLine = scan.nextLine();
 
 			// On récupère les cases de la carte
 			Case[][] matriceCase = new Case[nbLignes][nbColonnes];
 			recupCarte(scan, matriceCase, tailleCase);
 
-			sauteLigneVide(scan, newLine);
-
+			newLine = scan.nextLine();
+			while (scan.hasNext() && "".equals(newLine)) newLine = scan.nextLine();
+			
 			// On récupère les incendies
 			recupIncendies(scan, matriceCase);
 
-			sauteLigneVide(scan, newLine);
-			newLine = scan.nextLine();  // On se débarasse du commentaire
+			// saute les lignes vides
+			newLine = scan.nextLine();
+			while (scan.hasNext() && ("".equals(newLine) || "\t".equals(newLine))) newLine = scan.nextLine();
 
 			// On récupère les robots
 			recupRobots(scan, matriceCase);
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}
-	}
-
-
-	/* Fonction qui saute les lignes vides du fichier */
-	public static void sauteLigneVide(Scanner scan, String newLine) {
-		while (scan.hasNext() && "".equals(newLine)) {
-			newLine = scan.nextLine();
 		}
 	}
 

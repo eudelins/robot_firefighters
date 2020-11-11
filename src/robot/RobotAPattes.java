@@ -12,7 +12,6 @@ import gui.ImageElement;
 
 
 public class RobotAPattes extends Robot {
-	public final int CAPACITE_RESERVOIR = 1073741823;
 
 	public RobotAPattes(Carte carte, Case position, Simulateur simul, int vitesse) {
 		super(carte, position, simul, 1073741823, vitesse);
@@ -93,7 +92,7 @@ public class RobotAPattes extends Robot {
 	}
 
 	
-	/** Renvoie la capcité maximale du reservoir du robot  */
+	/** Renvoie la capacité maximale du reservoir du robot  */
 	@Override
 	public int capaciteReservoire() {
 		return 1073741823;
