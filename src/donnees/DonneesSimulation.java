@@ -30,6 +30,10 @@ public class DonneesSimulation {
 	/* Initialise les données de la simulation à partir du fichier file */
 	public DonneesSimulation(File file) {
 		this.simul = new Simulateur();
+		this.setDonnees(file);
+	}
+	
+	public void setDonnees(File file) {
 		Scanner scan;
 		try {
 			scan = new Scanner(file);
@@ -65,7 +69,6 @@ public class DonneesSimulation {
 			e.printStackTrace();
 		}
 	}
-
 
 	/* Récupère les données de la carte dans un fichier pour initialiser l'attribut carte */
 	public void recupCarte(Scanner scan, Case[][] matriceCase, int tailleCase) {

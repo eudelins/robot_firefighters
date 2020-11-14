@@ -14,6 +14,10 @@ public class ChefPompier {
 		this.donnees = donnees;
 	}
 	
+	public void setDonnees(DonneesSimulation donnees) {
+		this.donnees = donnees;
+	}
+	
 	/** Mène la stratégie naïve */
 	public void donneOrdreNaif() {
 		Incendie[] incendies = donnees.getIncendie();

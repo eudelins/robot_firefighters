@@ -29,13 +29,14 @@ public class TestSimulateur {
         GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
 
        // crée la carte, en l'associant à la fenêtre graphique précédente
-//		DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/mushroomOfHell-20x20.map"));
-//		DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/desertOfDeath-20x20.map"));
-		DonneesSimulation newDonnes = new DonneesSimulation(new File("cartes/carteSujet.map"));
+//      String cartePath = "cartes/mushroomOfHell-20x20.map";
+//      String cartePath = "cartes/desertOfDeath-20x20.map";
+        String cartePath = "cartes/carteSujet.map";
+		DonneesSimulation newDonnes = new DonneesSimulation(new File(cartePath));
 
 		Simulateur simul = new Simulateur();
 		ChefPompier chef = new ChefPompier(simul, newDonnes);
-		SimulateurGui carte = new SimulateurGui(gui, newDonnes, simul, chef);
+		SimulateurGui carte = new SimulateurGui(gui, newDonnes, simul, chef, cartePath);
 	}
 
 
@@ -49,6 +50,7 @@ class SimulateurGui implements Simulable {
     private Simulateur simul;
     private DonneesSimulation donnees;
     private ChefPompier chef;
+    private String cartePath;
 
     /**
      * Crée une carte et la dessine.
@@ -57,12 +59,13 @@ class SimulateurGui implements Simulable {
      * Simulable.
      * @param color la couleur des cases de la carte
      */
-    public SimulateurGui(GUISimulator gui, DonneesSimulation donnees, Simulateur simul, ChefPompier chef) {
+    public SimulateurGui(GUISimulator gui, DonneesSimulation donnees, Simulateur simul, ChefPompier chef, String cartePath) {
         this.gui = gui;
         gui.setSimulable(this);				// association a la gui!
         this.donnees = donnees;
         this.simul = simul;
         this.chef = chef;
+        this.cartePath = cartePath;
         draw();
     }
 
@@ -85,6 +88,8 @@ class SimulateurGui implements Simulable {
 
     @Override
     public void restart() {
+    	this.donnees.setDonnees(new File(this.cartePath));
+    	this.chef.setDonnees(this.donnees);
         draw();
     }
 
@@ -110,10 +115,6 @@ class SimulateurGui implements Simulable {
     public void dessineCase(Case uneCase, int tailleCase) {
     	int coordX = uneCase.getColonne() * tailleCase;
 		int coordY = uneCase.getLigne() * tailleCase;
-		if (uneCase.getIncendie() != null) {
-			gui.addGraphicalElement(new Rectangle(coordX + tailleCase/2, coordY + tailleCase/2, Color.RED, Color.RED, tailleCase));
-			return;
-		}
     	switch (uneCase.getNature()) {
     	case EAU:
     		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/eau.png", tailleCase, tailleCase, null));
@@ -133,6 +134,10 @@ class SimulateurGui implements Simulable {
     	default:
     		return;
     	}
+    	if (uneCase.getIncendie() != null) {
+			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/feu.png", tailleCase, tailleCase, null));
+			return;
+		}
     }
 
     /**
