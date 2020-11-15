@@ -21,6 +21,7 @@ public abstract class Evenement {
 
 	/**
 	 * Récupère la date de début de l'évènement
+	 * @return Renvoie la date de début de l'évènement
 	 */
 	public long getDate() {
 		return date;
@@ -28,6 +29,7 @@ public abstract class Evenement {
 	
 	/**
 	 * Récupère le prochain évènement, qui est programmé après celui-ci
+	 * @return Renvoie le prochain évènement
 	 */
 	public Evenement getSuivant() {
 		return suivant;
@@ -35,6 +37,7 @@ public abstract class Evenement {
 
 	/** 
 	 * Récupère le simulateur associé à l'évènement
+	 * @return Renvoie le simulateur associé à l'évènement
 	 */
 	public Simulateur getSimul() {
 		return simul;
