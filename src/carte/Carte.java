@@ -1,6 +1,11 @@
 package carte;
 
 import java.util.ArrayList;
+
+/**
+* Classe représentant la carte sur laquelle on travaille
+* Elle contient simplement la taille des cases et une matrice contenant toutes les cases
+*/
 public class Carte {
 	private Case[][] cases;
 	private int tailleCases;
@@ -22,27 +27,45 @@ public class Carte {
 	}
 
 
-
+	/**
+	*	obtenir la taille d'une case
+	*/
 	public int getTailleCases() {
 		return tailleCases;
 	}
-
+	/**
+	*	changer la taille d'une case
+	*/
 	public void setTailleCases(int tailleCases) {
 		this.tailleCases = tailleCases;
 	}
 
+	/**
+	*	obtenir le nombre de lignes total
+	*/
 	public int getNbLignes() {
 		return cases.length;
 	}
 
+	/**
+	*	obtenir le nombre de colonnes au total
+	*/
 	public int getNbColonnes() {
 		return cases[0].length;
 	}
 
+	/**
+	* @return la case associé à la ligne lig et la colonne col
+	*/
 	public Case getCase(int lig, int col) {
 		return cases[lig][col];
 	}
 
+	/**
+	*	renvoie un booléen si il existe une case dans la direction donnée
+	*	@param src case de laquelle on veut regarder les voisins
+	* @param dir direction dans laquelle on veut regarder
+	*/
 	public boolean voisinExiste(Case src, Direction dir) {
 		int ligSrc = src.getLigne();
 		int colSrc = src.getColonne();
@@ -62,6 +85,12 @@ public class Carte {
 			return (getCase(ligSrc + 1, colSrc) != null);
 		}
 	}
+
+	/**
+	*	Renvoie la case voisine dans la direction donnée
+	* @param src case de laquelle on veut regarder les voisins
+	* @param dir direction dans laquelle on regarde
+	*/
 
 	public Case getVoisin(Case src, Direction dir) {
 		int ligSrc = src.getLigne();
@@ -84,6 +113,10 @@ public class Carte {
 			return getCase(ligSrc + 1, colSrc);
 		}
 	}
+
+	/**
+	*	Permet d'obtenir la liste des voisins d'une case
+	*/
 
 	public ArrayList<Case> getVoisins(Case base){
 		ArrayList<Case> voisins = new ArrayList<Case>();
