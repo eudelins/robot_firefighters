@@ -28,8 +28,8 @@ public class DonneesSimulation {
 	}
 
 	/* Initialise les données de la simulation à partir du fichier file */
-	public DonneesSimulation(File file) {
-		this.simul = new Simulateur();
+	public DonneesSimulation(File file, Simulateur simul) {
+		this.simul = simul;
 		this.setDonnees(file);
 	}
 	

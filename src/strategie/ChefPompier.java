@@ -7,19 +7,18 @@ import donnees.*;
 
 public class ChefPompier {
 	private Simulateur simul;
-	private DonneesSimulation donnees;
 	
-	public ChefPompier(Simulateur simul, DonneesSimulation donnees) {
+	public ChefPompier(Simulateur simul) {
 		this.simul = simul;
-		this.donnees = donnees;
 	}
 	
-	public void setDonnees(DonneesSimulation donnees) {
-		this.donnees = donnees;
-	}
+//	public void setDonnees(DonneesSimulation donnees) {
+//		this.donnees = donnees;
+//	}
 	
 	/** Mène la stratégie naïve */
 	public void donneOrdreNaif() {
+		DonneesSimulation donnees = this.simul.getDonnees();
 		Incendie[] incendies = donnees.getIncendie();
 		Robot[] robots = donnees.getRobot();
 		Incendie fire = null;
@@ -59,6 +58,7 @@ public class ChefPompier {
 	
 	/** Mène la stratégie naïve */
 	public void donneOrdre() {
+		DonneesSimulation donnees = this.simul.getDonnees();
 		Incendie[] incendies = donnees.getIncendie();
 		Robot[] robots = donnees.getRobot();
 		Incendie fire = null;
