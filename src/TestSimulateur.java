@@ -29,8 +29,8 @@ public class TestSimulateur {
         GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
 
        // crée la carte, en l'associant à la fenêtre graphique précédente
-//      String cartePath = "cartes/mushroomOfHell-20x20.map";
-//      String cartePath = "cartes/desertOfDeath-20x20.map";
+//        String cartePath = "cartes/mushroomOfHell-20x20.map";
+//        String cartePath = "cartes/desertOfDeath-20x20.map";
         String cartePath = "cartes/carteSujet.map";
 		DonneesSimulation newDonnes = new DonneesSimulation(new File(cartePath));
 

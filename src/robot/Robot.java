@@ -225,7 +225,7 @@ public abstract class Robot {
 		Case caseRobot = this.getPosition();
 		int caseX = caseRobot.getColonne() * tailleCase;
 		int caseY = caseRobot.getLigne() * tailleCase;
-		int barreHeight = 8;
+		int barreHeight = tailleCase*8/100;
 		int barreWidth = tailleCase/3;
 		int barreX = caseX + tailleCase/2;
 		int barreY = caseY + tailleCase/2 + heightRobot/2 + 4 + barreHeight/2;

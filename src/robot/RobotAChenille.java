@@ -4,6 +4,7 @@ import java.awt.Color;
 import carte.*;
 import evenement.Simulateur;
 import gui.GUISimulator;
+import gui.ImageElement;
 import gui.Oval;
 import gui.Rectangle;
 
@@ -166,14 +167,15 @@ public class RobotAChenille extends Robot {
     	int rectWidth = tailleCase/3;
     	int rectHeight = 4*tailleCase/10;
 
-    	for(int k = 0; k<=1; ++k) {
-			int ovalX = caseX + (1+k)*tailleCase/3;
-			int ovalWidth = rectWidth/2;
-			int ovalHeight = rectHeight*4/3;
-			gui.addGraphicalElement(new Oval(ovalX, rectY, Color.BLACK, Color.DARK_GRAY, ovalWidth, ovalHeight));
-    	}
-    	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectWidth, rectHeight));
-    	super.drawReservoir(gui, rectHeight + rectHeight*4/3, tailleCase, 2000);
+//    	for(int k = 0; k<=1; ++k) {
+//			int ovalX = caseX + (1+k)*tailleCase/3;
+//			int ovalWidth = rectWidth/2;
+//			int ovalHeight = rectHeight*4/3;
+//			gui.addGraphicalElement(new Oval(ovalX, rectY, Color.BLACK, Color.DARK_GRAY, ovalWidth, ovalHeight));
+//    	}
+//    	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectWidth, rectHeight));
+    	gui.addGraphicalElement(new ImageElement(caseX, caseY, "images/robotAChenille.png", tailleCase, tailleCase, null));
+    	super.drawReservoir(gui, rectHeight + rectWidth*2/3, tailleCase, 2000);
 	}
 
 }
