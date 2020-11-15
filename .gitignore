@@ -11,3 +11,9 @@ lib/
 #Ignore le fichier lib
 lib/*
 
+#Ignore le dossier doc
+doc/
+
+#Ignore le dossier doc
+doc/*
+

@@ -5,11 +5,22 @@ import carte.Case;
 import carte.Direction;
 import robot.Robot;
 
+/**
+ * Evenement qui correspond à la fin du déplacement d'un robot
+ */
 public class DeplacementFin extends Evenement {
 	private Robot robot;
 	private Direction dir;
 	private Carte carte;
 
+	/**
+	 * Crée l'évènement qui correspond à la fin du déplacement d'un robot
+	 * @param date la date de début du déplacement
+	 * @param simul le simulateur associé à l'évènement
+	 * @param robot le robot concerné par le déplacement
+	 * @param dir la direction dans laquelle se déplace le robot
+	 * @param carte la carte associée au robot
+	 */
 	public DeplacementFin(long date, Simulateur simul, Robot robot, Direction dir, Carte carte) {
 		super(date, simul);
 		this.robot = robot;
@@ -17,11 +28,15 @@ public class DeplacementFin extends Evenement {
 		this.carte = carte;
 	}
 
+	/**
+	 * Exécute l'évènement
+	 */
 	@Override
 	public void execute() {
 		Case caseActuelle = this.robot.getPosition();
 		int lig = caseActuelle.getLigne();
 		int col = caseActuelle.getColonne();
+		
 		switch (dir) {
 		case NORD:
 			lig--;

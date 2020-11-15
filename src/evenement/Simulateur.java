@@ -16,13 +16,11 @@ import carte.*;
 import donnees.*;
 
 /**
- * Classe implémentant un simulateur qui possède la date actuelle, le prochain
- * évènement planifié ainsi que le nombre total d'évènements planifiés
+ * Classe implémentant un simulateur qui représente la situation et gère les évènements
  */
 public class Simulateur implements Simulable {
 	private long dateSimulation;
 	private Evenement premierEvent;
-	private int nbEvents;
 	private GUISimulator gui;
 	private DonneesSimulation donnees;
     private ChefPompier chef;
@@ -31,14 +29,12 @@ public class Simulateur implements Simulable {
 	/**
 	 * Crée un simulateur en initialisant la date à 0 et le nombre d'évènements à 0
 	 * @param gui Interface graphique associée au simulateur
-	 * @param donnees Donnees de la simulation
-	 * @param chef Chef pompier en charge de la stratégie des robots
 	 * @param cartePath Chemin vers le fichier contenant les données de la carte
 	 */
 	public Simulateur(GUISimulator gui, String cartePath) {
 		this.dateSimulation = 0;
 		this.premierEvent = null;
-		this.nbEvents = 0;
+//		this.nbEvents = 0;
         this.gui = gui;
         gui.setSimulable(this);				// association a la gui!
         this.cartePath = cartePath;
@@ -74,6 +70,57 @@ public class Simulateur implements Simulable {
 		}
 	}
 	
+	/**
+	 * Augmente la date de un
+	 */
+	public void incrementeDate() {
+		dateSimulation++;
+	}
+	
+	/**
+	 * Indique si il reste des évènements à effectuer ou non
+	 * @return true si il reste des évènements à effectuer, false sinon
+	 */
+	public boolean simulationTerminee() {
+		return (premierEvent == null);
+	}
+	
+	
+	/**
+	 * Renvoie la date actuelle
+	 * @return Renvoie la date actuelle
+	 */
+	public long getDateSimulation() {
+		return dateSimulation;
+	}
+	
+	/**
+	 * Renvoie le prochain évènement
+	 * @return Renvoie le prochain évènement
+	 */
+	public Evenement getPremierEvent() {
+		return premierEvent;
+	}
+	
+	/**
+	 * Modifie la tête de la liste chaînée d'évènements
+	 * @param premierEvent Nouvelle tête de liste
+	 */
+	public void setPremierEvent(Evenement premierEvent) {
+		this.premierEvent = premierEvent;
+	}
+	
+	/**
+	 * Récupère les données de la simulation
+	 * @return Renvoie les données de la simulation
+	 */
+	public DonneesSimulation getDonnees() {
+		return this.donnees;
+	}
+	
+	/**
+	 * Augmente la date, actualise la stratégie et la carte
+	 */
 	@Override
     public void next() {
     	chef.donneOrdre();
@@ -90,21 +137,30 @@ public class Simulateur implements Simulable {
         draw();
     }
 
+	/**
+	 * Recharge les données initiales
+	 */
     @Override
     public void restart() {
     	this.dateSimulation = 0;
 		this.premierEvent = null;
-		this.nbEvents = 0;
         this.cartePath = cartePath;
         this.chef = new ChefPompier(this);
     	this.donnees.setDonnees(new File(this.cartePath));
         draw();
     }
     
+    /**
+     * Dessine une case de la carte
+     * @param uneCase La case à dessiner
+     * @param tailleCase La taille du côté de la case
+     */
     public void dessineCase(Case uneCase, int tailleCase) {
     	int coordX = uneCase.getColonne() * tailleCase;
 		int coordY = uneCase.getLigne() * tailleCase;
-    	switch (uneCase.getNature()) {
+		
+		// On choisit l'image en fonction de la nature de la case
+		switch (uneCase.getNature()) {
     	case EAU:
     		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/eau.png", tailleCase, tailleCase, null));
     		break;
@@ -123,6 +179,8 @@ public class Simulateur implements Simulable {
     	default:
     		return;
     	}
+		
+		// On rajoute des flammes si un incendie est présent sur la case
     	if (uneCase.getIncendie() != null) {
 			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/feu.png", tailleCase, tailleCase, null));
 			return;
@@ -130,7 +188,7 @@ public class Simulateur implements Simulable {
     }
 
     /**
-     * Dessine la carte.
+     * Dessine la simulation
      */
     private void draw() {
         gui.reset();	// clear the window
@@ -151,32 +209,4 @@ public class Simulateur implements Simulable {
         	robots[i].draw(gui, tailleCase);;
         }
     }
-	
-	public void incrementeDate() {
-		dateSimulation++;
-	}
-	
-	public boolean simulationTerminee() {
-		return (premierEvent == null);
-	}
-
-	public long getDateSimulation() {
-		return dateSimulation;
-	}
-
-	public Evenement getPremierEvent() {
-		return premierEvent;
-	}
-
-	public int getNbEvents() {
-		return nbEvents;
-	}
-
-	public void setPremierEvent(Evenement premierEvent) {
-		this.premierEvent = premierEvent;
-	}
-	
-	public DonneesSimulation getDonnees() {
-		return this.donnees;
-	}
 }
