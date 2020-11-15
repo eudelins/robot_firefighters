@@ -1,42 +1,25 @@
+package test;
+
+
 import java.awt.Color;
-import java.awt.image.ImageObserver;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.imageio.ImageIO;
-
-import java.io.File;
-import java.io.IOException;
 
 import gui.GUISimulator;
-import gui.Rectangle;
-import gui.Oval;
-import gui.ImageElement;
-import gui.Simulable;
-import gui.Text;
 
-import robot.*;
-import strategie.ChefPompier;
-import carte.*;
 import evenement.*;
-import donnees.*;
 
 public class TestSimulateur {
 
 	public static void main(String[] args) {
-		   // crée la fenêtre graphique dans laquelle dessiner
-        GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
+		// crée la fenêtre graphique dans laquelle dessiner
+		GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
 
-       // crée la carte, en l'associant à la fenêtre graphique précédente
-//        String cartePath = "cartes/mushroomOfHell-20x20.map";
+        String cartePath = "cartes/mushroomOfHell-20x20.map";
+//        String cartePath = "cartes/spiralOfMadness-50x50.map";
 //        String cartePath = "cartes/desertOfDeath-20x20.map";
-        String cartePath = "cartes/carteSujet.map";
+//        String cartePath = "cartes/carteSujet.map";
+        
 		Simulateur simul = new Simulateur(gui, cartePath);
 	}
-
-
-
 }
 
 
