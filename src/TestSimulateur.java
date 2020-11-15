@@ -81,7 +81,7 @@ class SimulateurGui implements Simulable {
     	}
     	simul.setPremierEvent(premierEvenement);
     	if (donnees.getCarte().getTailleCases() != 10000) simul.incrementeDate();
-    	else for (int i = 0; i < 100; i++) simul.incrementeDate();
+    	else for (int i = 0; i < 1; i++) simul.incrementeDate();
 //    	for (int i = 0; i < 100; i++) simul.incrementeDate();
         draw();
     }

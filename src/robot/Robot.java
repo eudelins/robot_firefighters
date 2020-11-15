@@ -236,7 +236,7 @@ public abstract class Robot {
 		gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, couleurFond, barreWidth, barreHeight));
 		if(this.quantiteEau > 0 && this.quantiteEau < qteEauMax) {
 			int barreVarieWidth = barreWidth*this.quantiteEau/qteEauMax;
-			int barreVarieX = barreX - (barreWidth - barreVarieWidth);
+			int barreVarieX = barreX - (barreWidth - barreVarieWidth)/2;
 			
 			gui.addGraphicalElement(new Rectangle(barreVarieX, barreY, null, Color.decode("#3393ff"), barreVarieWidth, barreHeight));
 			gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, null, barreWidth, barreHeight));
