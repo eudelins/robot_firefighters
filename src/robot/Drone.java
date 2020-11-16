@@ -12,16 +12,19 @@ import gui.Rectangle;
 
 
 public class Drone extends Robot {
-	
+
+	/** Créer un Drone en indiquant la quatite d'eau initiale dans le réservoir */
 	public Drone(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
 		super(carte, position, simul, quantiteEau, vitesse);
 		assert(quantiteEau <= 10000);
 	}
 	
+	/** Créer un Robot à chenille avec la quantite d'eau maximale dans son réservoir */
 	public Drone(Carte carte, Case position, Simulateur simul, int vitesse) {
 		super(carte, position, simul, 10000, vitesse);
 	}
 
+	/** Chaque robot remplit son réservoir d'une manière différente */
 	@Override
 	public void remplirReservoir() {
 		if (this.getPosition().getNature() == NatureTerrain.EAU) {
@@ -30,11 +33,13 @@ public class Drone extends Robot {
 		}
 	}
 	
+	/** Renvoie la durée mis par le robot pour remplir son réservoir */
 	@Override
 	public int dureeRemplissage() {
 		return 30 * 60;
 	}
 	
+	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau */
 	@Override
 	public int dureeDeversage(int quantiteNecessaire) {
 		return 30;
@@ -71,7 +76,11 @@ public class Drone extends Robot {
 		return null;
 	}
 	
-	
+	/**
+     * Dessine le robot
+     * @param gui l'interface graphique associée à l'exécution, dans laquelle se fera le
+     * dessin.
+    */
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {
 		Case caseRobot = this.getPosition();
@@ -80,6 +89,8 @@ public class Drone extends Robot {
     	int rectX = caseX + tailleCase/3 + tailleCase/6;
     	int rectY = caseY + tailleCase/3 + tailleCase/6;
     	int rectSize = tailleCase/3;
+    	
+    	// Dessin du drone avec des figures
 //    	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectSize));
 //    	for(int k = 0; k<=1; ++k) {
 //    		for(int j = 0; j<= 1; ++j) {
@@ -91,6 +102,8 @@ public class Drone extends Robot {
 //    			gui.addGraphicalElement(new Rectangle(ovalX, ovalY, Color.BLACK, Color.BLACK, ovalSize, 1));
 //    		}
 //    	}
+    	
+    	// Dessin du drone avec une image
     	gui.addGraphicalElement(new ImageElement(caseX, caseY, "images/drone.png", tailleCase, tailleCase, null));
     	super.drawReservoir(gui, rectSize + rectSize*9/10, tailleCase, 10000);
 	}
