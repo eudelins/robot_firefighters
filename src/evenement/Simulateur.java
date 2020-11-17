@@ -135,6 +135,9 @@ public class Simulateur implements Simulable {
     	if (donnees.getCarte().getTailleCases() != 10000) incrementeDate();
     	else for (int i = 0; i < 1; i++) incrementeDate();
         draw();
+//        if(this.simulationTerminee()) {
+//        	System.out.println("Simulation terminée");
+//        }
     }
 
 	/**
@@ -159,27 +162,31 @@ public class Simulateur implements Simulable {
     	int coordX = uneCase.getColonne() * tailleCase;
 		int coordY = uneCase.getLigne() * tailleCase;
 		
-		// On choisit l'image en fonction de la nature de la case
-		switch (uneCase.getNature()) {
-    	case EAU:
-    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/eau.png", tailleCase, tailleCase, null));
-    		break;
-    	case FORET:
-    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/foret.png", tailleCase, tailleCase, null));
-    		break;
-    	case ROCHE:
-    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/rock.png", tailleCase, tailleCase, null));
-    		break;
-    	case TERRAIN_LIBRE:
-    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/terrainlibre.png", tailleCase, tailleCase, null));
-    		break;
-    	case HABITAT:
-    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/habitat.png", tailleCase, tailleCase, null));
-    		break;
-    	default:
-    		return;
-    	}
-		
+		if(uneCase.isBrulee()) {
+			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/feuEteint.png", tailleCase, tailleCase, null));
+			return;
+		} else {
+			// On choisit l'image en fonction de la nature de la case
+			switch (uneCase.getNature()) {
+	    	case EAU:
+	    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/eau.png", tailleCase, tailleCase, null));
+	    		break;
+	    	case FORET:
+	    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/foret.png", tailleCase, tailleCase, null));
+	    		break;
+	    	case ROCHE:
+	    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/rock.png", tailleCase, tailleCase, null));
+	    		break;
+	    	case TERRAIN_LIBRE:
+	    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/terrainlibre.png", tailleCase, tailleCase, null));
+	    		break;
+	    	case HABITAT:
+	    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/habitat.png", tailleCase, tailleCase, null));
+	    		break;
+	    	default:
+	    		return;
+	    	}
+		}
 		// On rajoute des flammes si un incendie est présent sur la case
     	if (uneCase.getIncendie() != null) {
 			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/feu.png", tailleCase, tailleCase, null));
@@ -208,6 +215,11 @@ public class Simulateur implements Simulable {
         Robot[] robots = donnees.getRobot();
         for (int i = 0; i < robots.length; i++) {
         	robots[i].draw(gui, tailleCase);;
+        }
+        if(this.simulationTerminee() && this.dateSimulation != 0) {
+        	int titreX = (tailleCase*carte.getNbColonnes() - 500)/2;
+        	int titreY = (tailleCase*carte.getNbLignes() - 280)/2;
+        	gui.addGraphicalElement(new ImageElement(titreX, titreY, "images/titreFin.png", 500, 280, null));
         }
     }
 }

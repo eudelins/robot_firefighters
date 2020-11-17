@@ -178,6 +178,7 @@ public abstract class Robot {
 			feuAEteindre.eteindre(vol);
 			if (feuAEteindre.getNbLitres() == 0) {
 				this.getPosition().setIncendie(null);
+				this.getPosition().setEstBrulee(true);
 				this.occupe = false;
 			}
 		}

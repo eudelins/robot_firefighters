@@ -8,6 +8,7 @@ public class Case {
 	private int ligne;
 	private int colonne;
 	private Incendie incendie;
+	private boolean estBrulee;
 
 
 	public Case(NatureTerrain natureTerrain, int lig, int col, Incendie incendie) {
@@ -16,6 +17,7 @@ public class Case {
 		this.ligne = lig;
 		this.colonne = col;
 		this.incendie = incendie;
+		this.estBrulee = false;
 	}
 	/**
 	*	Permet d'obtenir la nature du terrain de la case
@@ -72,5 +74,20 @@ public class Case {
 			return Direction.OUEST;
 		}
 		return null;
+	}
+	
+	/**
+	 * Change l'etat brulé de la case 
+	 * @param brulee	booléen indiquant si la case est actuellement brulée ou non
+	 */
+	public void setEstBrulee(boolean brulee) {
+		this.estBrulee = brulee;
+	}
+	
+	/**
+	 * Indique si la case a été brulée par un incendie
+	 */
+	public boolean isBrulee() {
+		return this.estBrulee;
 	}
 }
