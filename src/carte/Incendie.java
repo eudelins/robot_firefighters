@@ -15,18 +15,32 @@ public class Incendie {
 		this.nbLitres = nbLitres;
 		this.affecte = false;
 	}
-
+	/**
+	* Renvoie la case sur laquelle est l'incendie
+	*/
 	public Case getPosition() {
 		return position;
 	}
+	/**
+	* Met l'incendie sur une case
+	* @param position case sur laquelle on veut mettre l'incendie
+	*/
 
 	public void setPosition(Case position) {
 		this.position = position;
 	}
 
+	/**
+	*	Nombre de litre nécessaire pour éteindre l'incendie
+	*/
+
 	public int getNbLitres() {
 		return nbLitres;
 	}
+
+	/**
+	*	Change la valeur du nombre de litre nécessaire pour éteindre l'incendie
+	*/
 
 	public void setNbLitres(int nbLitres) {
 		this.nbLitres = nbLitres;
@@ -41,12 +55,15 @@ public class Incendie {
 			this.nbLitres = this.nbLitres - litre;
 	}
 	/**
-	*	Permet de voir si un robot s'occupe déjà de l'incendie en question 
+	*	Permet de voir si un robot s'occupe déjà de l'incendie en question
 	*/
 	public boolean isAffecte() {
 		return affecte;
 	}
 
+	/**
+	* Change la valeur de l'incendie si il est déjà affecté
+	*/
 	public void setAffecte(boolean estAffecte) {
 		this.affecte = estAffecte;
 	}

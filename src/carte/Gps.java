@@ -173,7 +173,7 @@ public class Gps {
 
 	/**
 	*Permet de créer les différents événements permetttant au robot de suivre le chemin
-	* @param caseChemin case que l'on veut atteindre 
+	* @param caseChemin case que l'on veut atteindre
 	*/
 
 	private long creationEvenementChemin(Case caseChemin, Simulateur simul, DonneesSimulation donnees){
