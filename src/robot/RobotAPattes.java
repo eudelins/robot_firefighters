@@ -12,7 +12,8 @@ import gui.ImageElement;
 
 
 public class RobotAPattes extends Robot {
-
+	
+	/** Créer un Robot à pattes avec la quantite d'eau infinie dans son réservoir */
 	public RobotAPattes(Carte carte, Case position, Simulateur simul, int vitesse) {
 		super(carte, position, simul, 1073741823, vitesse);
 		assert(vitesse == 30 && position.getNature() != NatureTerrain.EAU);
@@ -70,22 +71,26 @@ public class RobotAPattes extends Robot {
 
 		return tempsArriveeNewCase + tempsSortieCase;
 	}
-
+	
+	/** Chaque robot remplit son réservoir d'une manière différente */
 	@Override
 	public void remplirReservoir() {
 		return;
 	}
-
+	
+	/** Renvoie la durée mis par le robot pour remplir son réservoir */
 	@Override
 	public int dureeRemplissage() {
 		return 0;
 	}
-
+	
+	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau */
 	@Override
 	public int dureeDeversage(int quantiteNecessaire) {
 		return quantiteNecessaire / 10;
 	}
-
+	
+	/** Modifie la quantité d'eau dans le réservoir du robot */
 	@Override
 	public void setQuantiteEau(int quantiteEau) {
 		super.setQuantiteEau(1073741823);
@@ -98,7 +103,11 @@ public class RobotAPattes extends Robot {
 		return 1073741823;
 	}
 	
-	
+	/**
+     * Dessine le robot
+     * @param gui l'interface graphique associée à l'exécution, dans laquelle se fera le
+     * dessin.
+    */
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {
 		Case caseRobot = this.getPosition();
@@ -109,6 +118,7 @@ public class RobotAPattes extends Robot {
     	int rectWidth = tailleCase/3;
     	int rectHeight = 4*tailleCase/10;
 
+    	// Dessin du robot avec des figures
 //    	for(int k = 0; k<=1; ++k) {
 //    		for(int j = 0; j<= 1; ++j) {
 //    			int patteX = caseX + (1+k)*tailleCase/3;
@@ -118,6 +128,7 @@ public class RobotAPattes extends Robot {
 //    	}
 //    	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectWidth, rectHeight));
     	
+    	// Dessin du robot avec une image
     	gui.addGraphicalElement(new ImageElement(caseX, caseY, "images/robotAPatte.png", tailleCase, tailleCase, null));
     	super.drawReservoir(gui, rectHeight + rectWidth*2/3, tailleCase, 1073741823);
 	}

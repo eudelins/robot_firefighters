@@ -24,7 +24,8 @@ public abstract class Robot {
 	private boolean deversage;
 	private boolean stopped;
 	private boolean occupe;
-
+	
+	/**	Créer un robot quelconque avec les attributs généraux à tous les robots */ 
 	public Robot(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
 		this.carte = carte;
 		this.position = position;
@@ -37,70 +38,87 @@ public abstract class Robot {
 		this.occupe = false;
 	}
 
+	/** Donne la vitesse actuelle du robot */
 	public int getVitesse() {
 		return vitesse;
 	}
-
+	
+	/** Modifie la vitesse de déplacement du robot */
 	public void setVitesse(int vitesse) {
 		this.vitesse = vitesse;
 	}
-
+	
+	/** Donne case à laquelle se situe le robot */
 	public Case getPosition() {
 		return position;
 	}
 
-	/** Change la position du robot et adapte sa vitesse au passage */
+	/** Change la position du robot */
 	public void setPosition(Case newPosition) {
 		this.position = newPosition;
 	}
-
+	
+	/** Donne la quantité d'eau présente dans le réservoir du robot */
 	public int getQuantiteEau() {
 		return quantiteEau;
 	}
+	
+	/** Renvoie la carte de l'éxecution */
 	public Carte getCarte() {
 		return carte;
 	}
-
+	
+	/** Renvoie le simulateur de l'éxecution */
 	public Simulateur getSimul() {
 		return simul;
 	}
-
+	
+	/** Modifie la quantité d'eau dans le réservoir du robot */
 	public void setQuantiteEau(int quantiteEau) {
 		this.quantiteEau = quantiteEau;
 	}
 
+	/** Indique si le robot est occupé à se remplir ou déverser */
 	public boolean isStopped() {
 		return this.stopped;
 	}
-
+	
+	/** Change le booléen indiquant si le robot est arrêté pour déverser de l'eau ou remplir*/
 	public void setStopped(boolean stop) {
 		this.stopped = stop;
 	}
 
+	/** Indique si le robot est entrain de se remplir */
 	public boolean isRemplissage() {
 		return remplissage;
 	}
-
+	
+	/** Change la booléen indiquant si le robot est entrain de se remplir*/
 	public void setRemplissage(boolean remplissage) {
 		this.remplissage = remplissage;
 	}
-
+	
+	/** Indique si le robot est entrain de déverser de l'eau */
 	public boolean isDeversage() {
 		return deversage;
 	}
-
+	
+	/** Change la booléen indiquant si le robot est entrain de déverser de l'eau */
 	public void setDeversage(boolean deversage) {
 		this.deversage = deversage;
 	}
-
+	
+	/** Indique si le robot est occupé à se remplir, se déplacer ou déverser */
 	public boolean isOccupe() {
 		return occupe;
 	}
-
+	
+	/** Change le booléen indiquant statut d'un robot */ 
 	public void setOccupe(boolean occupe) {
 		this.occupe = occupe;
 	}
 
+	/** Renvoie la liste des terrains sur lesquels le robot ne peut se déplacer */
 	public ArrayList<NatureTerrain> getTerrainInterdit(){
 		return this.terrainInterdit;
 	}
@@ -199,7 +217,9 @@ public abstract class Robot {
 	}
 
 
-	/** Renvoie le temps mis pour accéder à une case voisine */
+	/** Calcul et renvoie le temps mis pour accéder à une case voisine à partir de la 
+	 * 	case où se situe le robot 
+	 */
 	public int tempsAccesVoisin(Direction dir) {
 		int distance = this.carte.getTailleCases();
 		double vitesseMetreParSeconde = this.vitesse / 3.6;
@@ -208,6 +228,7 @@ public abstract class Robot {
 		return tempsEntier;
 	}
 
+	/** Calcul et renvoie le temps mis pour accéder à une case voisine à partir d'une case quelconque */
 	public int tempsAccesVoisin(Case caseDepart, Direction dir){
 		int distance = this.carte.getTailleCases();
 		double vitesseMetreParSeconde = this.vitesse / 3.6;
@@ -215,12 +236,26 @@ public abstract class Robot {
 		int tempsEntier = (int)temps;
 		return tempsEntier;
 	}
-
+	
+	/** Chaque robot remplit son réservoir d'une manière différente */
 	public abstract void remplirReservoir();
 
+	/**
+     * Dessine le robot
+     * @param gui l'interface graphique associée à l'exécution, dans laquelle se fera le
+     * dessin.
+    */
 	public abstract void draw(GUISimulator gui, int tailleCase);
 
 	
+	/**
+     * Dessine une barre indiquant l'eau restante dans le réservoir du robot 
+     * et un texte indiquant si le robot est entrain de déverser de l'eay ou de se remplir
+     * @param gui l'interface graphique associée à l'exécution, dans laquelle se fera le
+     * dessin.
+     * @param heightRobot longueur du dessin du robot
+     * @param qteEauMax quantité d'eau maximale que le robot peut avoir dans son réservoir
+    */
 	public void drawReservoir(GUISimulator gui, int heightRobot, int tailleCase, int qteEauMax) {
 		Case caseRobot = this.getPosition();
 		int caseX = caseRobot.getColonne() * tailleCase;

@@ -14,25 +14,32 @@ public class DonneesSimulation {
 	private Carte carte;
 	private Robot[] robots;
 	private Simulateur simul;
-
+	
+	/** Renvoie la carte de l'éxecution */
 	public Carte getCarte() {
 		return carte;
 	}
-
+	
+	/** Renvoie la liste des robots de la simulation */
 	public Robot[] getRobot() {
 		return robots;
 	}
-
+	
+	/** Renvoie la liste des incendies de la simulation */
 	public Incendie[] getIncendie(){
 		return incendies;
 	}
 
-	/* Initialise les données de la simulation à partir du fichier file */
+	/** Initialise les données de la simulation à partir du fichier file */
 	public DonneesSimulation(File file, Simulateur simul) {
 		this.simul = simul;
 		this.setDonnees(file);
 	}
 	
+	/** 
+	 *	Récupère les données de la simulation en initialisant la carte, les robots et les incendies 
+	 *	@param file fichier à partie du quel les données sont récupérée
+	 */
 	public void setDonnees(File file) {
 		Scanner scan;
 		try {
@@ -70,7 +77,7 @@ public class DonneesSimulation {
 		}
 	}
 
-	/* Récupère les données de la carte dans un fichier pour initialiser l'attribut carte */
+	/** Récupère les données de la carte dans un fichier pour initialiser l'attribut carte */
 	public void recupCarte(Scanner scan, Case[][] matriceCase, int tailleCase) {
 		String newLine;
 		for(int i = 0; i < matriceCase.length; i++) {
@@ -84,7 +91,7 @@ public class DonneesSimulation {
 	}
 
 
-	/* Récupère les données des incendies pour initialiser l'attribut incendies */
+	/** Récupère les données des incendies pour initialiser l'attribut incendies */
 	public void recupIncendies(Scanner scan, Case[][] matriceCase) {
 		int nbIncendies = scan.nextInt();
 		this.incendies = new Incendie[nbIncendies];
@@ -98,7 +105,7 @@ public class DonneesSimulation {
 	}
 
 
-	/* Récupère les données des robots pour initialiser l'attribut robots */
+	/** Récupère les données des robots pour initialiser l'attribut robots */
 	public void recupRobots(Scanner scan, Case[][] matriceCase) {
 		int nbRobots = scan.nextInt();
 		this.robots = new Robot[nbRobots];

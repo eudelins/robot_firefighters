@@ -127,7 +127,7 @@ public class Simulateur implements Simulable {
     	if (simulationTerminee()) return;
     	Evenement premierEvenement = getPremierEvent();
     	while (premierEvenement != null && getDateSimulation() >= premierEvenement.getDate()) {
-    		System.out.println(premierEvenement.getDate());
+//    		System.out.println(premierEvenement.getDate());
     		premierEvenement.execute();
     		premierEvenement = premierEvenement.getSuivant();
     	}
@@ -194,8 +194,9 @@ public class Simulateur implements Simulable {
         gui.reset();	// clear the window
         Carte carte = donnees.getCarte();
         int tailleCase = 0;
-        if (carte.getTailleCases() >= 10000) tailleCase = carte.getTailleCases() / 100;
-        else tailleCase = 45;
+        if (carte.getNbColonnes() == 8) tailleCase = carte.getTailleCases() / 100;
+        else if (carte.getNbColonnes() == 20) tailleCase = 45;
+        else tailleCase = 20;
 
         for (int i = 0; i < carte.getNbLignes(); i++) {
         	for (int j = 0; j < carte.getNbColonnes(); j++) {

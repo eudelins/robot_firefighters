@@ -10,7 +10,8 @@ import gui.Rectangle;
 
 
 public class RobotAChenille extends Robot {
-
+	
+	/** Créer un Robot à chenille en indiquant la quatite d'eau initiale dans le réservoir */
 	public RobotAChenille(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
 		super(carte, position, simul, quantiteEau, vitesse);
 		assert(quantiteEau <= 2000);
@@ -18,6 +19,7 @@ public class RobotAChenille extends Robot {
 		super.terrainInterdit.add(NatureTerrain.ROCHE);
 	}
 
+	/** Créer un Robot à chenille avec la quantite d'eau maximale dans son réservoir */
 	public RobotAChenille(Carte carte, Case position, Simulateur simul, int vitesse) {
 		super(carte, position, simul, 2000, vitesse);
 		assert(vitesse <= 80);
@@ -86,7 +88,8 @@ public class RobotAChenille extends Robot {
 
 		return tempsArriveeNewCase + tempsSortieCase;
 	}
-
+	
+	/** Calcul et renvoie le temps mis pour accéder à une case voisine à partir d'une case quelconque */
 	@Override
 	public int tempsAccesVoisin(Case caseDepart, Direction dir) {
 		Carte carte = this.getCarte();
@@ -130,7 +133,7 @@ public class RobotAChenille extends Robot {
 	}
 
 
-
+	/** Renvoie la durée mis par le robot pour remplir son réservoir */
 	@Override
 	public int dureeRemplissage() {
 		return 5 * 60;
@@ -142,12 +145,14 @@ public class RobotAChenille extends Robot {
 	public int capaciteReservoire() {
 		return 2000;
 	}
-
+	
+	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau */
 	@Override
 	public int dureeDeversage(int quantiteNecessaire) {
 		return 8 * (quantiteNecessaire / 100);
 	}
 
+	/** Chaque robot remplit son réservoir d'une manière différente */
 	@Override
 	public void remplirReservoir() {
 		if (this.estVoisinEau() != null) {
@@ -157,6 +162,11 @@ public class RobotAChenille extends Robot {
 		}
 	}
 
+	/**
+     * Dessine le robot
+     * @param gui l'interface graphique associée à l'exécution, dans laquelle se fera le
+     * dessin.
+    */
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {
 		Case caseRobot = this.getPosition();
@@ -167,6 +177,7 @@ public class RobotAChenille extends Robot {
     	int rectWidth = tailleCase/3;
     	int rectHeight = 4*tailleCase/10;
 
+    	// Dessin du robot avec des figures
 //    	for(int k = 0; k<=1; ++k) {
 //			int ovalX = caseX + (1+k)*tailleCase/3;
 //			int ovalWidth = rectWidth/2;
@@ -174,6 +185,8 @@ public class RobotAChenille extends Robot {
 //			gui.addGraphicalElement(new Oval(ovalX, rectY, Color.BLACK, Color.DARK_GRAY, ovalWidth, ovalHeight));
 //    	}
 //    	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectWidth, rectHeight));
+    	
+    	// Dessin du robot avec une image
     	gui.addGraphicalElement(new ImageElement(caseX, caseY, "images/robotAChenille.png", tailleCase, tailleCase, null));
     	super.drawReservoir(gui, rectHeight + rectWidth*2/3, tailleCase, 2000);
 	}
