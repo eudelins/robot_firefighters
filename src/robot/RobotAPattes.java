@@ -13,16 +13,23 @@ import gui.ImageElement;
 
 public class RobotAPattes extends Robot {
 	
-	/** Créer un Robot à pattes avec la quantite d'eau infinie dans son réservoir */
+	/** Créer un Robot à pattes avec la quantite d'eau infinie dans son réservoir   
+	 * 	@param carte	 	carte sur lequel le robot se déplace
+	 * 	@param position		postion initiale du robot
+	 * 	@param simul		simulateur de l'éxécution
+	 * 	@param vitesse		vitesse initiale du robot
+	 */ 
 	public RobotAPattes(Carte carte, Case position, Simulateur simul, int vitesse) {
 		super(carte, position, simul, 1073741823, vitesse);
 		assert(vitesse == 30 && position.getNature() != NatureTerrain.EAU);
 		if (position.getNature() == NatureTerrain.ROCHE) this.setVitesse(20);
-		super.terrainInterdit.add(NatureTerrain.EAU);
+		super.addTerrainInterdit(NatureTerrain.EAU);
 	}
 
 
-	/** Change la position du robot et adapte sa vitesse au passage */
+	/** Change la position du robot et adapte sa vitesse au passage   
+	 * 	@param newPosition	case à laquelle le repond doit se repositionner
+	 */
 	@Override
 	public void setPosition(Case newPosition) {
 		NatureTerrain nature = newPosition.getNature();
@@ -34,7 +41,9 @@ public class RobotAPattes extends Robot {
 
 
 	@Override
-	/** Renvoie le temps mis pour accéder à une case voisine */
+	/** Renvoie le temps mis pour accéder à une case voisine  
+	 * 	@param dir	direction vers laquelle se diriger 
+	 */
 	public int tempsAccesVoisin(Direction dir) {
 		Carte carte = this.getCarte();
 		int semiDistance = carte.getTailleCases()/2;
@@ -84,13 +93,17 @@ public class RobotAPattes extends Robot {
 		return 0;
 	}
 	
-	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau */
+	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau    
+	 * 	@param quatiteNecessaire	quantite d'eau qu'il faut déverser
+	 */
 	@Override
 	public int dureeDeversage(int quantiteNecessaire) {
 		return quantiteNecessaire / 10;
 	}
 	
-	/** Modifie la quantité d'eau dans le réservoir du robot */
+	/** Modifie la quantité d'eau dans le réservoir du robot     
+	 * 	@param quatiteEau	ce paramètre ne sert à rien pour ce robot
+	 */
 	@Override
 	public void setQuantiteEau(int quantiteEau) {
 		super.setQuantiteEau(1073741823);
@@ -105,8 +118,9 @@ public class RobotAPattes extends Robot {
 	
 	/**
      * Dessine le robot
-     * @param gui l'interface graphique associée à l'exécution, dans laquelle se fera le
-     * dessin.
+     * @param gui 			l'interface graphique associée à l'exécution, dans laquelle se fera le
+     * 						dessin.
+     * @param tailleCase	taille des cases de la simulation courante
     */
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {

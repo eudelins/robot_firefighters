@@ -30,7 +30,10 @@ public class DonneesSimulation {
 		return incendies;
 	}
 
-	/** Initialise les données de la simulation à partir du fichier file */
+	/**	Initialise les données de la simulation à partir du fichier file 
+	 *	@param file		fichier à partie du quel les données sont récupérée
+	 *	@param simul	simulateur de l'éxecution
+	 */
 	public DonneesSimulation(File file, Simulateur simul) {
 		this.simul = simul;
 		this.setDonnees(file);
@@ -77,7 +80,11 @@ public class DonneesSimulation {
 		}
 	}
 
-	/** Récupère les données de la carte dans un fichier pour initialiser l'attribut carte */
+	/** Récupère les données de la carte dans un fichier pour initialiser l'attribut carte 
+	 * @param scan 			objet contenant le texte du fichier contenant les données
+	 * @param matriceCase	matrice de case permettant de créer la carte
+	 * @param tailleCase	la taille (en mètre) des cases 
+	 */
 	public void recupCarte(Scanner scan, Case[][] matriceCase, int tailleCase) {
 		String newLine;
 		for(int i = 0; i < matriceCase.length; i++) {
@@ -91,7 +98,10 @@ public class DonneesSimulation {
 	}
 
 
-	/** Récupère les données des incendies pour initialiser l'attribut incendies */
+	/** Récupère les données des incendies pour initialiser l'attribut incendies  
+	 * @param matriceCase	matrice de case permettant de créer la carte
+	 * @param tailleCase	la taille (en mètre) des cases 
+	 */
 	public void recupIncendies(Scanner scan, Case[][] matriceCase) {
 		int nbIncendies = scan.nextInt();
 		this.incendies = new Incendie[nbIncendies];
@@ -105,7 +115,10 @@ public class DonneesSimulation {
 	}
 
 
-	/** Récupère les données des robots pour initialiser l'attribut robots */
+	/** Récupère les données des robots pour initialiser l'attribut robots   
+	 * @param matriceCase	matrice de case permettant de créer la carte
+	 * @param tailleCase	la taille (en mètre) des cases 
+	 */
 	public void recupRobots(Scanner scan, Case[][] matriceCase) {
 		int nbRobots = scan.nextInt();
 		this.robots = new Robot[nbRobots];

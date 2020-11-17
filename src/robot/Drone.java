@@ -13,13 +13,24 @@ import gui.Rectangle;
 
 public class Drone extends Robot {
 
-	/** Créer un Drone en indiquant la quatite d'eau initiale dans le réservoir */
+	/** Créer un Drone en indiquant la quatite d'eau initiale dans le réservoir 
+	 * 	@param carte	 	carte sur lequel le robot se déplace
+	 * 	@param position		postion initiale du robot
+	 * 	@param simul		simulateur de l'éxécution
+	 * 	@param quantiteEau	quantite d'eau initiale dans le réservoir du robot
+	 * 	@param vitesse		vitesse initiale du robot
+	 */ 
 	public Drone(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
 		super(carte, position, simul, quantiteEau, vitesse);
 		assert(quantiteEau <= 10000);
 	}
 	
-	/** Créer un Robot à chenille avec la quantite d'eau maximale dans son réservoir */
+	/** Créer un Robot à chenille avec la quantite d'eau maximale dans son réservoir  
+	 * 	@param carte	 	carte sur lequel le robot se déplace
+	 * 	@param position		postion initiale du robot
+	 * 	@param simul		simulateur de l'éxécution
+	 * 	@param vitesse		vitesse initiale du robot
+	 */ 
 	public Drone(Carte carte, Case position, Simulateur simul, int vitesse) {
 		super(carte, position, simul, 10000, vitesse);
 	}
@@ -39,7 +50,9 @@ public class Drone extends Robot {
 		return 30 * 60;
 	}
 	
-	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau */
+	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau  
+	 * 	@param quatiteNecessaire	quantite d'eau qu'il faut déverser
+	 */
 	@Override
 	public int dureeDeversage(int quantiteNecessaire) {
 		return 30;
@@ -78,8 +91,9 @@ public class Drone extends Robot {
 	
 	/**
      * Dessine le robot
-     * @param gui l'interface graphique associée à l'exécution, dans laquelle se fera le
-     * dessin.
+     * @param gui 			l'interface graphique associée à l'exécution, dans laquelle se fera le
+     * 						dessin.
+     * @param tailleCase	taille des cases de la simulation courante
     */
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {

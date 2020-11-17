@@ -11,26 +11,39 @@ import gui.Rectangle;
 
 public class RobotAChenille extends Robot {
 	
-	/** Créer un Robot à chenille en indiquant la quatite d'eau initiale dans le réservoir */
+	/** Créer un Robot à chenille en indiquant la quatite d'eau initiale dans le réservoir  
+	 * 	@param carte	 	carte sur lequel le robot se déplace
+	 * 	@param position		postion initiale du robot
+	 * 	@param simul		simulateur de l'éxécution
+	 * 	@param quantiteEau	quantite d'eau initiale dans le réservoir du robot
+	 * 	@param vitesse		vitesse initiale du robot
+	 */ 
 	public RobotAChenille(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
 		super(carte, position, simul, quantiteEau, vitesse);
 		assert(quantiteEau <= 2000);
-		super.terrainInterdit.add(NatureTerrain.EAU);
-		super.terrainInterdit.add(NatureTerrain.ROCHE);
+		super.addTerrainInterdit(NatureTerrain.EAU);
+		super.addTerrainInterdit(NatureTerrain.ROCHE);
 	}
 
-	/** Créer un Robot à chenille avec la quantite d'eau maximale dans son réservoir */
+	/** Créer un Robot à chenille avec la quantite d'eau maximale dans son réservoir  
+	 * 	@param carte	 	carte sur lequel le robot se déplace
+	 * 	@param position		postion initiale du robot
+	 * 	@param simul		simulateur de l'éxécution
+	 * 	@param vitesse		vitesse initiale du robot
+	 */ 
 	public RobotAChenille(Carte carte, Case position, Simulateur simul, int vitesse) {
 		super(carte, position, simul, 2000, vitesse);
 		assert(vitesse <= 80);
-		super.terrainInterdit.add(NatureTerrain.EAU);
-		super.terrainInterdit.add(NatureTerrain.ROCHE);
+		super.addTerrainInterdit(NatureTerrain.EAU);
+		super.addTerrainInterdit(NatureTerrain.ROCHE);
 		NatureTerrain nature = position.getNature();
-		assert(!(super.terrainInterdit.contains(nature)));
+		assert(!(super.getTerrainInterdit().contains(nature)));
 		if (nature == NatureTerrain.FORET) this.setVitesse(vitesse / 2);
 	}
 
-	/** Change la position du robot et adapte sa vitesse au passage */
+	/** Change la position du robot et adapte sa vitesse au passage  
+	 * 	@param newPosition	case à laquelle le repond doit se repositionner
+	 */
 	@Override
 	public void setPosition(Case newPosition) {
 		NatureTerrain nature = newPosition.getNature();
@@ -47,7 +60,9 @@ public class RobotAChenille extends Robot {
 
 
 	@Override
-	/** Renvoie le temps mis pour accéder à une case voisine */
+	/** Renvoie le temps mis pour accéder à une case voisine 
+	 * 	@param dir	direction vers laquelle se diriger 
+	 */
 	public int tempsAccesVoisin(Direction dir) {
 		Carte carte = this.getCarte();
 		int semiDistance = carte.getTailleCases()/2;
@@ -89,7 +104,10 @@ public class RobotAChenille extends Robot {
 		return tempsArriveeNewCase + tempsSortieCase;
 	}
 	
-	/** Calcul et renvoie le temps mis pour accéder à une case voisine à partir d'une case quelconque */
+	/** Calcul et renvoie le temps mis pour accéder à une case voisine à partir d'une case quelconque 
+	 * 	@param caseDepart	case à partir de laquelle le calcul est fait
+	 * 	@param dir			direction vers laquelle se diriger
+	 */
 	@Override
 	public int tempsAccesVoisin(Case caseDepart, Direction dir) {
 		Carte carte = this.getCarte();
@@ -146,7 +164,9 @@ public class RobotAChenille extends Robot {
 		return 2000;
 	}
 	
-	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau */
+	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau   
+	 * 	@param quatiteNecessaire	quantite d'eau qu'il faut déverser
+	 */
 	@Override
 	public int dureeDeversage(int quantiteNecessaire) {
 		return 8 * (quantiteNecessaire / 100);
@@ -164,8 +184,9 @@ public class RobotAChenille extends Robot {
 
 	/**
      * Dessine le robot
-     * @param gui l'interface graphique associée à l'exécution, dans laquelle se fera le
-     * dessin.
+     * @param gui 			l'interface graphique associée à l'exécution, dans laquelle se fera le
+     * 						dessin.
+     * @param tailleCase	taille des cases de la simulation courante
     */
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {

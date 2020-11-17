@@ -9,6 +9,7 @@ import carte.Incendie;
 import carte.NatureTerrain;
 import evenement.Simulateur;
 import gui.GUISimulator;
+import gui.ImageElement;
 import gui.Rectangle;
 import gui.Text;
 
@@ -19,13 +20,19 @@ public abstract class Robot {
 	private int vitesse;
 	private Carte carte;
 	private Simulateur simul;
-	protected ArrayList<NatureTerrain> terrainInterdit = new ArrayList<NatureTerrain>();
+	private ArrayList<NatureTerrain> terrainInterdit = new ArrayList<NatureTerrain>();
 	private boolean remplissage;
 	private boolean deversage;
 	private boolean stopped;
 	private boolean occupe;
 	
-	/**	Créer un robot quelconque avec les attributs généraux à tous les robots */ 
+	/**	Créer un robot quelconque avec les attributs généraux à tous les robots 
+	 * 	@param carte	 	carte sur lequel le robot se déplace
+	 * 	@param position		postion initiale du robot
+	 * 	@param simul		simulateur de l'éxécution
+	 * 	@param quantiteEau	quantite d'eau initiale dans le réservoir du robot
+	 * 	@param vitesse		vitesse initiale du robot
+	 */ 
 	public Robot(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
 		this.carte = carte;
 		this.position = position;
@@ -43,7 +50,9 @@ public abstract class Robot {
 		return vitesse;
 	}
 	
-	/** Modifie la vitesse de déplacement du robot */
+	/**	Modifie la vitesse de déplacement du robot 
+	 * 	@param vitesse	nouvelle vitesse du robot
+	 */
 	public void setVitesse(int vitesse) {
 		this.vitesse = vitesse;
 	}
@@ -53,9 +62,12 @@ public abstract class Robot {
 		return position;
 	}
 
-	/** Change la position du robot */
+	/** Change la position du robot 
+	 * 	@param newPosition	case à laquelle le repond doit se repositionner
+	 */
 	public void setPosition(Case newPosition) {
 		this.position = newPosition;
+		
 	}
 	
 	/** Donne la quantité d'eau présente dans le réservoir du robot */
@@ -73,7 +85,9 @@ public abstract class Robot {
 		return simul;
 	}
 	
-	/** Modifie la quantité d'eau dans le réservoir du robot */
+	/** Modifie la quantité d'eau dans le réservoir du robot 
+	 * 	@param quantiteEau	nouvelle quantite d'eau présente dans le réservoir du robot
+	 */
 	public void setQuantiteEau(int quantiteEau) {
 		this.quantiteEau = quantiteEau;
 	}
@@ -83,7 +97,9 @@ public abstract class Robot {
 		return this.stopped;
 	}
 	
-	/** Change le booléen indiquant si le robot est arrêté pour déverser de l'eau ou remplir*/
+	/** Change le booléen indiquant si le robot est arrêté pour déverser de l'eau ou remplir
+	 * 	@param stop	statut actuel du robot (stoppé ou non)
+	 */
 	public void setStopped(boolean stop) {
 		this.stopped = stop;
 	}
@@ -93,7 +109,9 @@ public abstract class Robot {
 		return remplissage;
 	}
 	
-	/** Change la booléen indiquant si le robot est entrain de se remplir*/
+	/** Change la booléen indiquant si le robot est entrain de se remplir
+	 * 	@param remplissage	statut actuel du robot (entrain de se remplir ou non)
+	 */
 	public void setRemplissage(boolean remplissage) {
 		this.remplissage = remplissage;
 	}
@@ -103,27 +121,40 @@ public abstract class Robot {
 		return deversage;
 	}
 	
-	/** Change la booléen indiquant si le robot est entrain de déverser de l'eau */
+	/** Change la booléen indiquant si le robot est entrain de déverser de l'eau 
+	 * 	@param deversage	statut actuel du robot (entrain de déverser ou non)
+	 */
 	public void setDeversage(boolean deversage) {
 		this.deversage = deversage;
 	}
 	
-	/** Indique si le robot est occupé à se remplir, se déplacer ou déverser */
+	/** 
+	 * Indique si le robot est occupé à se remplir, se déplacer ou déverser 
+	 */
 	public boolean isOccupe() {
 		return occupe;
 	}
 	
-	/** Change le booléen indiquant statut d'un robot */ 
+	/** Change le booléen indiquant statut d'un robot 
+	 * 	@param occupe	statut actuel du robot (occupé ou non)
+	 */ 
 	public void setOccupe(boolean occupe) {
 		this.occupe = occupe;
 	}
-
+	
+	public void addTerrainInterdit(NatureTerrain terrain) {
+		this.terrainInterdit.add(terrain);
+	}
+	
 	/** Renvoie la liste des terrains sur lesquels le robot ne peut se déplacer */
 	public ArrayList<NatureTerrain> getTerrainInterdit(){
 		return this.terrainInterdit;
 	}
+	
 
-	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau */
+	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau 
+	 * 	@param quatiteNecessaire	quantite d'eau qu'il faut déverser
+	 */
 	public abstract int dureeDeversage(int quantiteNecessaire);
 
 
@@ -135,7 +166,9 @@ public abstract class Robot {
 	public abstract int capaciteReservoire();
 	
 
-	/** Deverse une quantité d'eau sur une case */
+	/** Deverse une quantité d'eau sur une case 
+	 * 	@param vol	volume d'eau qu'il faut déverser
+	 */
 	public void deverserEau(int vol) {
 		int quantiteEauRestante = this.getQuantiteEau();
 		assert(vol <= quantiteEauRestante && vol > 0);
@@ -173,7 +206,9 @@ public abstract class Robot {
 	}
 	
 	
-	/** Indique si la case a un voisin qui contient de l'eau */
+	/** Retourne, pour une case donée, la case voisin ayant de l'eau sinon null  
+	 * 	@param caseDest	case pour laquelle on veut le voisin 
+	 */
 	public Case estVoisinEau(Case caseDest) {
 		int lig = caseDest.getLigne();
 		int col = caseDest.getColonne();
@@ -218,7 +253,8 @@ public abstract class Robot {
 
 
 	/** Calcul et renvoie le temps mis pour accéder à une case voisine à partir de la 
-	 * 	case où se situe le robot 
+	 * 	case où se situe le robot
+	 * 	@param dir	direction vers laquelle se diriger 
 	 */
 	public int tempsAccesVoisin(Direction dir) {
 		int distance = this.carte.getTailleCases();
@@ -228,7 +264,10 @@ public abstract class Robot {
 		return tempsEntier;
 	}
 
-	/** Calcul et renvoie le temps mis pour accéder à une case voisine à partir d'une case quelconque */
+	/** Calcul et renvoie le temps mis pour accéder à une case voisine à partir d'une case quelconque
+	 * 	@param caseDepart	case à partir de laquelle le calcul est fait
+	 * 	@param dir			direction vers laquelle se diriger
+	 */
 	public int tempsAccesVoisin(Case caseDepart, Direction dir){
 		int distance = this.carte.getTailleCases();
 		double vitesseMetreParSeconde = this.vitesse / 3.6;
@@ -242,8 +281,9 @@ public abstract class Robot {
 
 	/**
      * Dessine le robot
-     * @param gui l'interface graphique associée à l'exécution, dans laquelle se fera le
-     * dessin.
+     * @param gui 			l'interface graphique associée à l'exécution, dans laquelle se fera le
+     * 						dessin.
+     * @param tailleCase	taille des cases de la simulation courante
     */
 	public abstract void draw(GUISimulator gui, int tailleCase);
 
@@ -254,6 +294,7 @@ public abstract class Robot {
      * @param gui l'interface graphique associée à l'exécution, dans laquelle se fera le
      * dessin.
      * @param heightRobot longueur du dessin du robot
+     * @param tailleCase	taille des cases de la simulation courante
      * @param qteEauMax quantité d'eau maximale que le robot peut avoir dans son réservoir
     */
 	public void drawReservoir(GUISimulator gui, int heightRobot, int tailleCase, int qteEauMax) {
@@ -268,13 +309,16 @@ public abstract class Robot {
 		if(this.quantiteEau == qteEauMax) {
 			couleurFond = Color.decode("#3393ff");
 		}
-		gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, couleurFond, barreWidth, barreHeight));
+		Rectangle reservEntier = new Rectangle(barreX, barreY, Color.BLACK, couleurFond, barreWidth, barreHeight); 
+		gui.addGraphicalElement(reservEntier);
 		if(this.quantiteEau > 0 && this.quantiteEau < qteEauMax) {
 			int barreVarieWidth = barreWidth*this.quantiteEau/qteEauMax;
 			int barreVarieX = barreX - (barreWidth - barreVarieWidth)/2;
 			
-			gui.addGraphicalElement(new Rectangle(barreVarieX, barreY, null, Color.decode("#3393ff"), barreVarieWidth, barreHeight));
-			gui.addGraphicalElement(new Rectangle(barreX, barreY, Color.BLACK, null, barreWidth, barreHeight));
+			Rectangle reservVarie = new Rectangle(barreVarieX, barreY, null, Color.decode("#3393ff"), barreVarieWidth, barreHeight);
+			gui.addGraphicalElement(reservVarie);
+			Rectangle contourReserv = new Rectangle(barreX, barreY, Color.BLACK, null, barreWidth, barreHeight); 
+			gui.addGraphicalElement(contourReserv);
 		}
 		
 		if(this.deversage || this.remplissage) {

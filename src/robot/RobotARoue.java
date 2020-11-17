@@ -13,27 +13,40 @@ import gui.Rectangle;
 
 public class RobotARoue extends Robot{
 	
-	/** Créer un Robot à roue en indiquant la quatite d'eau initiale dans le réservoir */
+	/** Créer un Robot à roue en indiquant la quatite d'eau initiale dans le réservoir   
+	 * 	@param carte	 	carte sur lequel le robot se déplace
+	 * 	@param position		postion initiale du robot
+	 * 	@param simul		simulateur de l'éxécution
+	 * 	@param quantiteEau	quantite d'eau initiale dans le réservoir du robot
+	 * 	@param vitesse		vitesse initiale du robot
+	 */ 
 	public RobotARoue(Carte carte, Case position, Simulateur simul, int quantiteEau, int vitesse) {
 		super(carte, position, simul, quantiteEau, vitesse);
-		super.terrainInterdit.add(NatureTerrain.EAU);
-		super.terrainInterdit.add(NatureTerrain.ROCHE);
-		super.terrainInterdit.add(NatureTerrain.FORET);
-		assert(!(super.terrainInterdit.contains(position.getNature())));
+		super.addTerrainInterdit(NatureTerrain.EAU);
+		super.addTerrainInterdit(NatureTerrain.ROCHE);
+		super.addTerrainInterdit(NatureTerrain.FORET);
+		assert(!(super.getTerrainInterdit().contains(position.getNature())));
 		assert(quantiteEau <= 5000);
 	}
 	
-	/** Créer un Robot à chenille avec la quantite d'eau maximale dans son réservoir */
+	/** Créer un Robot à chenille avec la quantite d'eau maximale dans son réservoir   
+	 * 	@param carte	 	carte sur lequel le robot se déplace
+	 * 	@param position		postion initiale du robot
+	 * 	@param simul		simulateur de l'éxécution
+	 * 	@param vitesse		vitesse initiale du robot
+	 */ 
 	public RobotARoue(Carte carte, Case position, Simulateur simul, int vitesse) {
 		super(carte, position, simul, 5000, vitesse);
-		super.terrainInterdit.add(NatureTerrain.EAU);
-		super.terrainInterdit.add(NatureTerrain.ROCHE);
-		super.terrainInterdit.add(NatureTerrain.FORET);
-		assert(!(super.terrainInterdit.contains(position.getNature())));
+		super.addTerrainInterdit(NatureTerrain.EAU);
+		super.addTerrainInterdit(NatureTerrain.ROCHE);
+		super.addTerrainInterdit(NatureTerrain.FORET);
+		assert(!(super.getTerrainInterdit().contains(position.getNature())));
 	}
 
 	
-	/** Change la position du robot et adapte sa vitesse au passage */
+	/** Change la position du robot et adapte sa vitesse au passage   
+	 * 	@param newPosition	case à laquelle le repond doit se repositionner
+	 */
 	@Override
 	public void setPosition(Case newPosition) {
 		NatureTerrain nature = newPosition.getNature();
@@ -57,7 +70,9 @@ public class RobotARoue extends Robot{
 		return 10 * 60;
 	}
 	
-	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau */
+	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau    
+	 * 	@param quatiteNecessaire	quantite d'eau qu'il faut déverser
+	 */
 	@Override
 	public int dureeDeversage(int quantiteNecessaire) {
 		return 5 * (quantiteNecessaire / 100);
@@ -73,8 +88,9 @@ public class RobotARoue extends Robot{
 	
 	/**
      * Dessine le robot
-     * @param gui l'interface graphique associée à l'exécution, dans laquelle se fera le
-     * dessin.
+     * @param gui 			l'interface graphique associée à l'exécution, dans laquelle se fera le
+     * 						dessin.
+     * @param tailleCase	taille des cases de la simulation courante
     */
 	@Override
 	public void draw(GUISimulator gui, int tailleCase) {
