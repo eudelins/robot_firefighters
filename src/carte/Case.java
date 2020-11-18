@@ -1,4 +1,8 @@
 package carte;
+
+import gui.GUISimulator;
+import gui.ImageElement;
+
 /**
 * Classe représentant une case avec sa nature, sa ligne, sa colonne et l'incendie présent si il y en a un
 */
@@ -90,4 +94,56 @@ public class Case {
 	public boolean isBrulee() {
 		return this.estBrulee;
 	}
+	
+    /**
+     * Dessine une case de la carte
+     * @param uneCase La case à dessiner
+     * @param tailleCase La taille du côté de la case
+     */
+    public void dessineCase(GUISimulator gui, int tailleCase) {
+    	int coordX = this.getColonne() * tailleCase;
+		int coordY = this.getLigne() * tailleCase;
+		
+		
+		// On choisit l'image en fonction de la nature de la case
+		switch (this.getNature()) {
+    	case EAU:
+    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/eau.png", tailleCase, tailleCase, null));
+    		break;
+    	case FORET:
+    		if(this.isBrulee()) {
+    			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/foretBrulee.png", tailleCase, tailleCase, null));
+    			return;
+    		} else {
+    			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/foret.png", tailleCase, tailleCase, null));
+    		}
+    		break;
+    	case ROCHE:
+    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/rock.png", tailleCase, tailleCase, null));
+    		break;
+    	case TERRAIN_LIBRE:
+    		if(this.isBrulee()) {
+    			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/terrainlibreBrulee.png", tailleCase, tailleCase, null));
+    			return;
+    		} else {
+    			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/terrainlibre.png", tailleCase, tailleCase, null));
+    		}
+    		break;
+    	case HABITAT:
+    		if(this.isBrulee()) {
+    			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/habitatBrulee.png", tailleCase, tailleCase, null));
+    			return;
+    		} else {
+    			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/habitat.png", tailleCase, tailleCase, null));
+    		}
+    		break;
+    	default:
+    		return;
+    	}
+		// On rajoute des flammes si un incendie est présent sur la case
+    	if (this.getIncendie() != null) {
+			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/feu.png", tailleCase, tailleCase, null));
+			return;
+		}
+    }
 }

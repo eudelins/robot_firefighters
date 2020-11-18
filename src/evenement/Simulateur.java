@@ -153,57 +153,7 @@ public class Simulateur implements Simulable {
         draw();
     }
     
-    /**
-     * Dessine une case de la carte
-     * @param uneCase La case à dessiner
-     * @param tailleCase La taille du côté de la case
-     */
-    public void dessineCase(Case uneCase, int tailleCase) {
-    	int coordX = uneCase.getColonne() * tailleCase;
-		int coordY = uneCase.getLigne() * tailleCase;
-		
-		
-		// On choisit l'image en fonction de la nature de la case
-		switch (uneCase.getNature()) {
-    	case EAU:
-    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/eau.png", tailleCase, tailleCase, null));
-    		break;
-    	case FORET:
-    		if(uneCase.isBrulee()) {
-    			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/foretBrulee.png", tailleCase, tailleCase, null));
-    			return;
-    		} else {
-    			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/foret.png", tailleCase, tailleCase, null));
-    		}
-    		break;
-    	case ROCHE:
-    		gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/rock.png", tailleCase, tailleCase, null));
-    		break;
-    	case TERRAIN_LIBRE:
-    		if(uneCase.isBrulee()) {
-    			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/terrainlibreBrulee.png", tailleCase, tailleCase, null));
-    			return;
-    		} else {
-    			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/terrainlibre.png", tailleCase, tailleCase, null));
-    		}
-    		break;
-    	case HABITAT:
-    		if(uneCase.isBrulee()) {
-    			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/habitatBrulee.png", tailleCase, tailleCase, null));
-    			return;
-    		} else {
-    			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/habitat.png", tailleCase, tailleCase, null));
-    		}
-    		break;
-    	default:
-    		return;
-    	}
-		// On rajoute des flammes si un incendie est présent sur la case
-    	if (uneCase.getIncendie() != null) {
-			gui.addGraphicalElement(new ImageElement(coordX, coordY, "images/feu.png", tailleCase, tailleCase, null));
-			return;
-		}
-    }
+
 
     /**
      * Dessine la simulation
@@ -219,7 +169,7 @@ public class Simulateur implements Simulable {
         for (int i = 0; i < carte.getNbLignes(); i++) {
         	for (int j = 0; j < carte.getNbColonnes(); j++) {
         		Case case_ij = carte.getCase(i, j);
-        		this.dessineCase(case_ij, tailleCase);
+        		case_ij.dessineCase(gui, tailleCase);
         	}
         }
 
