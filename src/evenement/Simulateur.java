@@ -148,7 +148,6 @@ public class Simulateur implements Simulable {
     public void restart() {
     	this.dateSimulation = 0;
 		this.premierEvent = null;
-        this.cartePath = cartePath;
         this.chef = new ChefPompier(this);
     	this.donnees.setDonnees(new File(this.cartePath));
         draw();
@@ -162,11 +161,14 @@ public class Simulateur implements Simulable {
     private void draw() {
         gui.reset();	// clear the window
         Carte carte = donnees.getCarte();
+        
+        // On choisit la taille des cases en pixels en fonction du nombre de cases de la carte
         int tailleCase = 0;
         if (carte.getNbColonnes() == 8) tailleCase = carte.getTailleCases() / 100;
         else if (carte.getNbColonnes() == 20) tailleCase = 45;
         else tailleCase = 20;
 
+        // On dessine les cases
         for (int i = 0; i < carte.getNbLignes(); i++) {
         	for (int j = 0; j < carte.getNbColonnes(); j++) {
         		Case case_ij = carte.getCase(i, j);
@@ -174,10 +176,13 @@ public class Simulateur implements Simulable {
         	}
         }
 
+        // On dessine les robots
         Robot[] robots = donnees.getRobot();
         for (int i = 0; i < robots.length; i++) {
         	robots[i].draw(gui, tailleCase);;
         }
+        
+        // On affiche l'écran de fin si la simulation est terminée
         if(this.simulationTerminee() && this.dateSimulation != 0) {
         	int titreX = (tailleCase*carte.getNbColonnes() - 500)/2;
         	int titreY = (tailleCase*carte.getNbLignes() - 280)/2;

@@ -202,20 +202,9 @@ public class RobotAChenille extends Robot {
 		Case caseRobot = this.getPosition();
 		int caseX = caseRobot.getColonne() * tailleCase;
 		int caseY = caseRobot.getLigne() * tailleCase;
-    	int rectX = caseX + tailleCase/3 + tailleCase/6;
-    	int rectY = caseY + tailleCase/2;
     	int rectWidth = tailleCase/3;
     	int rectHeight = 4*tailleCase/10;
 
-    	// Dessin du robot avec des figures
-//    	for(int k = 0; k<=1; ++k) {
-//			int ovalX = caseX + (1+k)*tailleCase/3;
-//			int ovalWidth = rectWidth/2;
-//			int ovalHeight = rectHeight*4/3;
-//			gui.addGraphicalElement(new Oval(ovalX, rectY, Color.BLACK, Color.DARK_GRAY, ovalWidth, ovalHeight));
-//    	}
-//    	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectWidth, rectHeight));
-    	
     	// Dessin du robot avec une image
     	gui.addGraphicalElement(new ImageElement(caseX, caseY, "images/robotAChenille.png", tailleCase, tailleCase, null));
     	super.drawReservoir(gui, rectHeight + rectWidth*2/3, tailleCase, 2000);

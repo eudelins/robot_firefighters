@@ -15,6 +15,15 @@ public class DonneesSimulation {
 	private Robot[] robots;
 	private Simulateur simul;
 	
+	/**	Initialise les données de la simulation à partir du fichier file 
+	 *	@param file		fichier à partie du quel les données sont récupérée
+	 *	@param simul	simulateur de l'éxecution
+	 */
+	public DonneesSimulation(File file, Simulateur simul) {
+		this.simul = simul;
+		this.setDonnees(file);
+	}
+
 	/** 
 	 * 	Renvoie la carte de l'éxecution 
 	 * 	@return la carte de la simulation
@@ -39,15 +48,6 @@ public class DonneesSimulation {
 		return incendies;
 	}
 
-	/**	Initialise les données de la simulation à partir du fichier file 
-	 *	@param file		fichier à partie du quel les données sont récupérée
-	 *	@param simul	simulateur de l'éxecution
-	 */
-	public DonneesSimulation(File file, Simulateur simul) {
-		this.simul = simul;
-		this.setDonnees(file);
-	}
-	
 	/** 
 	 *	Récupère les données de la simulation en initialisant la carte, les robots et les incendies 
 	 *	@param file fichier à partie du quel les données sont récupérée
@@ -151,12 +151,10 @@ public class DonneesSimulation {
 				else this.robots[i] = new RobotARoue(carte, matriceCase[lig][col], simul, vitesse);
 				break;
 			case "PATTES":
-				// A modifier
 				if (vitesse == -1) this.robots[i] = new RobotAPattes(carte, matriceCase[lig][col], simul, 30);
 				else this.robots[i] = new RobotAPattes(carte, matriceCase[lig][col], simul, vitesse);
 				break;
 			case "CHENILLES":
-				// A modifier
 				if (vitesse == -1) this.robots[i] = new RobotAChenille(carte, matriceCase[lig][col], simul, 60);
 				else this.robots[i] = new RobotAChenille(carte, matriceCase[lig][col], simul, vitesse);
 				break;

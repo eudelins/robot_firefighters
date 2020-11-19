@@ -103,21 +103,9 @@ public class RobotARoue extends Robot{
 		Case caseRobot = this.getPosition();
 		int caseX = caseRobot.getColonne() * tailleCase;
 		int caseY = caseRobot.getLigne() * tailleCase;
-//		int rectX = caseX + tailleCase/2;
-//    	int rectY = caseY + tailleCase/3 + tailleCase/6;
     	int rectWidth = tailleCase/3;
     	int rectHeight = 4*tailleCase/10;
 
-    	// Dessin du robot avec des figures
-//    	for(int k = 0; k<=1; ++k) {
-//    		for(int j = 0; j<= 1; ++j) {
-//    			int ovalX = caseX + (1+k)*tailleCase/3;
-//    			int ovalY = caseY + (3+4*j)*tailleCase/10;
-//    			gui.addGraphicalElement(new Oval(ovalX, ovalY, Color.BLACK, Color.DARK_GRAY, rectWidth/2));
-//    		}
-//    	}
-//    	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectWidth, rectHeight));
-    	
     	// Dessin du robot avec une image
 		gui.addGraphicalElement(new ImageElement(caseX, caseY, "images/robotARoue.png", tailleCase, tailleCase, null));
     	super.drawReservoir(gui, rectHeight + rectWidth*2/3, tailleCase, 5000);

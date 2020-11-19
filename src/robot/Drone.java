@@ -110,22 +110,7 @@ public class Drone extends Robot {
 		Case caseRobot = this.getPosition();
 		int caseX = caseRobot.getColonne() * tailleCase;
 		int caseY = caseRobot.getLigne() * tailleCase;
-    	int rectX = caseX + tailleCase/3 + tailleCase/6;
-    	int rectY = caseY + tailleCase/3 + tailleCase/6;
     	int rectSize = tailleCase/3;
-    	
-    	// Dessin du drone avec des figures 
-//    	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectSize));
-//    	for(int k = 0; k<=1; ++k) {
-//    		for(int j = 0; j<= 1; ++j) {
-//    			int ovalX = caseX + (1+j)*tailleCase/3;
-//    			int ovalY = caseY + (1+k)*tailleCase/3;
-//    			int ovalSize = rectSize*9/10;
-//    			gui.addGraphicalElement(new Oval(ovalX, ovalY, Color.BLACK, null, ovalSize));
-//    			gui.addGraphicalElement(new Rectangle(ovalX, ovalY, Color.BLACK, Color.BLACK, 1, ovalSize));
-//    			gui.addGraphicalElement(new Rectangle(ovalX, ovalY, Color.BLACK, Color.BLACK, ovalSize, 1));
-//    		}
-//    	}
     	
     	// Dessin du drone avec une image
     	gui.addGraphicalElement(new ImageElement(caseX, caseY, "images/drone.png", tailleCase, tailleCase, null));
