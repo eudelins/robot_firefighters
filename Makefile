@@ -44,9 +44,17 @@ exeInvader:
 exeLecture: 
 	java -classpath bin TestLecteurDonnees cartes/carteSujet.map
 
-exeSimulateur: 
-	java -classpath bin:bin/gui.jar test/TestSimulateur
+exeSimulateur1:
+	java -classpath bin:bin/gui.jar test/TestSimulateur cartes/carteSujet.map
 
+exeSimulateur2:
+	java -classpath bin:bin/gui.jar test/TestSimulateur cartes/desertOfDeath-20x20.map
+
+exeSimulateur3:
+	java -classpath bin:bin/gui.jar test/TestSimulateur cartes/mushroomOfHell-20x20.map
+
+exeSimulateur4:
+	java -classpath bin:bin/gui.jar test/TestSimulateur cartes/spiralOfMadness-50x50.map
 
 clean:
 	rm -rf bin/*.class

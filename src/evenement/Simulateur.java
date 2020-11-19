@@ -132,8 +132,13 @@ public class Simulateur implements Simulable {
     		premierEvenement = premierEvenement.getSuivant();
     	}
     	setPremierEvent(premierEvenement);
-    	if (donnees.getCarte().getTailleCases() != 10000) incrementeDate();
-    	else for (int i = 0; i < 1; i++) incrementeDate();
+    	
+    	// Echelle de temps différentes selon les cartes
+    	if (donnees.getCarte().getTailleCases() != 10000) {
+    		for (int i = 0; i < 5; i++) incrementeDate();
+    	} else {
+    		for (int i = 0; i < 80; i++) incrementeDate();
+    	}
     }
 
 	/**
