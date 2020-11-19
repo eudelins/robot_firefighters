@@ -8,7 +8,11 @@ public class Incendie {
 	private Case position;
 	private int nbLitres;
 	private boolean affecte;
-
+	/**
+	* Création de l'incendie
+	* @param position position de l'incendie
+	* @param nbLitres nombres de litres nécessaires à éteindre l'incendie
+	*/
 	public Incendie(Case position, int nbLitres) {
 		super();
 		this.position = position;
