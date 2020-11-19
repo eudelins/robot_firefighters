@@ -13,7 +13,10 @@ import gui.ImageElement;
 import gui.Rectangle;
 import gui.Text;
 
-
+/**
+ * @author equipe 66
+ * Classe abstraite représentant les robots
+ */
 public abstract class Robot {
 	private Case position;
 	private int quantiteEau;

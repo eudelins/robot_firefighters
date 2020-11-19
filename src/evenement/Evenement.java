@@ -1,6 +1,7 @@
 package evenement;
 
 /**
+ * @author equipe 66
  * Classe abstraite décrivant la structure d'un évènement
  */
 public abstract class Evenement {

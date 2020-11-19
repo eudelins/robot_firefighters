@@ -10,7 +10,10 @@ import gui.GUISimulator;
 import gui.Rectangle;
 import gui.ImageElement;
 
-
+/**
+ * @author equipe 66
+ * Classe représentant les robots possédant des pattes
+ */
 public class RobotAPattes extends Robot {
 	
 	/** Créer un Robot à pattes avec la quantite d'eau infinie dans son réservoir   

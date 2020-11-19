@@ -3,6 +3,7 @@ package evenement;
 import robot.*;
 
 /**
+ * @author equipe 66
  * Evenement qui correspond à la fin du remplissage du réservoir d'un robot
  */
 public class FinRemplissage extends Evenement {

@@ -12,6 +12,7 @@ import evenement.*;
 import donnees.DonneesSimulation;
 
 /**
+ * @author equipe 66
  * Permet de déterminer le plus court chemin pour un robot donné entre deux cases.
  * Pour ce faire, on utilise l'algorithme A*, plus rapide que Dijkstra.
  * En plus de déterminer le plus court chemin entre deux cases, cette classe

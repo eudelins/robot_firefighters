@@ -6,6 +6,7 @@ import evenement.*;
 import donnees.*;
 
 /**
+ * @author equipe 66
  * Classe du chef pompier qui gère la stratégie
  */
 public class ChefPompier {

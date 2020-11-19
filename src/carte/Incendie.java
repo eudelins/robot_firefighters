@@ -1,6 +1,7 @@
 package carte;
 
 /**
+ * @author equipe 66
  * Classe représentant les incendies, contenant la position, le nombre de litres nécéssaires, et son occupation
  */
 

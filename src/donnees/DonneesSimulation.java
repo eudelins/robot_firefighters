@@ -8,7 +8,10 @@ import robot.*;
 import carte.*;
 import evenement.*;
 
-
+/**
+ * @author equipe 66
+ * Classe contenant les données de la simulation (carte, robots, incendies)
+ */
 public class DonneesSimulation {
 	private Incendie[] incendies;
 	private Carte carte;

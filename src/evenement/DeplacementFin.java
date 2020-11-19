@@ -6,6 +6,7 @@ import carte.Direction;
 import robot.Robot;
 
 /**
+ * @author equipe 66
  * Evenement qui correspond à la fin du déplacement d'un robot
  */
 public class DeplacementFin extends Evenement {

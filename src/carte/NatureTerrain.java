@@ -1,6 +1,7 @@
 package carte;
 
 /**
+ * @author equipe 66
  * Classe qui décrit les différents types de terrain qui existent
  */
 public enum NatureTerrain {

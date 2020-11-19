@@ -10,7 +10,10 @@ import gui.ImageElement;
 import gui.Oval;
 import gui.Rectangle;
 
-
+/**
+ * @author equipe 66
+ * Classe représentant les robots de type drone
+ */
 public class Drone extends Robot {
 
 	/** Créer un Drone en indiquant la quatite d'eau initiale dans le réservoir 

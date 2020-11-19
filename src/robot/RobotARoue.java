@@ -11,6 +11,10 @@ import gui.Oval;
 import gui.Rectangle;
 
 
+/**
+ * @author equipe 66
+ * Classe représentant les robots possédant des roues
+ */
 public class RobotARoue extends Robot{
 	
 	/** Créer un Robot à roue en indiquant la quatite d'eau initiale dans le réservoir   
