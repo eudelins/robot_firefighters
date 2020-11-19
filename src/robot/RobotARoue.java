@@ -64,14 +64,19 @@ public class RobotARoue extends Robot{
 		}
 	}
 	
-	/** Renvoie la durée mis par le robot pour remplir son réservoir */
+	/** 
+	 * 	Renvoie la durée mis par le robot pour remplir son réservoir 
+	 * 	@return la durée de remplissage
+	 */
 	@Override
 	public int dureeRemplissage() {
 		return 10 * 60;
 	}
 	
-	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau    
+	/** 
+	 * 	Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau    
 	 * 	@param quatiteNecessaire	quantite d'eau qu'il faut déverser
+	 * 	@return la durée de deversement
 	 */
 	@Override
 	public int dureeDeversage(int quantiteNecessaire) {
@@ -79,7 +84,10 @@ public class RobotARoue extends Robot{
 	}
 	
 	
-	/** Renvoie la capcité maximale du reservoir du robot  */
+	/** 
+	 * 	Renvoie la capcité maximale du reservoir du robot  
+	 * 	@return la capacité maximale du réservoir 
+	 */
 	@Override
 	public int capaciteReservoire() {
 		return 5000;

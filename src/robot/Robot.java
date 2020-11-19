@@ -45,7 +45,9 @@ public abstract class Robot {
 		this.occupe = false;
 	}
 
-	/** Donne la vitesse actuelle du robot */
+	/** Donne la vitesse actuelle du robot 
+	 *	@return la vitesse actuelle du robot  
+	 */
 	public int getVitesse() {
 		return vitesse;
 	}
@@ -57,7 +59,9 @@ public abstract class Robot {
 		this.vitesse = vitesse;
 	}
 	
-	/** Donne case à laquelle se situe le robot */
+	/** Donne case à laquelle se situe le robot 
+	 * 	@return la position du robot
+	 */
 	public Case getPosition() {
 		return position;
 	}
@@ -70,17 +74,23 @@ public abstract class Robot {
 		
 	}
 	
-	/** Donne la quantité d'eau présente dans le réservoir du robot */
+	/** Donne la quantité d'eau présente dans le réservoir du robot 
+	 * 	@return la quatité d'eau du réservoir du robot 
+	 */
 	public int getQuantiteEau() {
 		return quantiteEau;
 	}
 	
-	/** Renvoie la carte de l'éxecution */
+	/** Renvoie la carte de l'éxecution 
+	 * 	@return la carte 
+	 */
 	public Carte getCarte() {
 		return carte;
 	}
 	
-	/** Renvoie le simulateur de l'éxecution */
+	/** Renvoie le simulateur de l'éxecution 
+	 * 	@return le simulateur
+	 */
 	public Simulateur getSimul() {
 		return simul;
 	}
@@ -92,7 +102,9 @@ public abstract class Robot {
 		this.quantiteEau = quantiteEau;
 	}
 
-	/** Indique si le robot est occupé à se remplir ou déverser */
+	/** Indique si le robot est occupé à se remplir ou déverser 
+	 * 	@return le booléen stopped
+	 */
 	public boolean isStopped() {
 		return this.stopped;
 	}
@@ -104,7 +116,9 @@ public abstract class Robot {
 		this.stopped = stop;
 	}
 
-	/** Indique si le robot est entrain de se remplir */
+	/** Indique si le robot est entrain de se remplir 
+	 * 	@return  le booléen remplissage
+	 */
 	public boolean isRemplissage() {
 		return remplissage;
 	}
@@ -116,7 +130,9 @@ public abstract class Robot {
 		this.remplissage = remplissage;
 	}
 	
-	/** Indique si le robot est entrain de déverser de l'eau */
+	/** Indique si le robot est entrain de déverser de l'eau 
+	 * 	@return  le booléen remplissage
+	 */
 	public boolean isDeversage() {
 		return deversage;
 	}
@@ -129,13 +145,15 @@ public abstract class Robot {
 	}
 	
 	/** 
-	 * Indique si le robot est occupé à se remplir, se déplacer ou déverser 
+	 * 	Indique si le robot est occupé à se remplir, se déplacer ou déverser
+	 * 	@return le booléen occupe 
 	 */
 	public boolean isOccupe() {
 		return occupe;
 	}
 	
-	/** Change le booléen indiquant statut d'un robot 
+	/** 
+	 * 	Change le booléen indiquant statut d'un robot 
 	 * 	@param occupe	statut actuel du robot (occupé ou non)
 	 */ 
 	public void setOccupe(boolean occupe) {
@@ -146,27 +164,38 @@ public abstract class Robot {
 		this.terrainInterdit.add(terrain);
 	}
 	
-	/** Renvoie la liste des terrains sur lesquels le robot ne peut se déplacer */
+	/** 
+	 * 	Renvoie la liste des terrains sur lesquels le robot ne peut se déplacer 
+	 *	@return la liste des terrains interdits 
+	 */
 	public ArrayList<NatureTerrain> getTerrainInterdit(){
 		return this.terrainInterdit;
 	}
 	
 
-	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau 
+	/** 
+	 * 	Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau 
 	 * 	@param quatiteNecessaire	quantite d'eau qu'il faut déverser
 	 */
 	public abstract int dureeDeversage(int quantiteNecessaire);
 
 
-	/** Renvoie la durée mis par le robot pour remplir son réservoir */
+	/** 
+	 * 	Renvoie la durée mis par le robot pour remplir son réservoir 
+	 * 	@return la durée de remplissage 
+	 */
 	public abstract int dureeRemplissage();
 
 
-	/** Renvoie la capcité maximale du reservoir du robot  */
+	/** 
+	 * 	Renvoie la capcité maximale du reservoir du robot  
+	 * 	@return la capacité maximale du réservoir
+	 */
 	public abstract int capaciteReservoire();
 	
 
-	/** Deverse une quantité d'eau sur une case 
+	/** 
+	 * 	Deverse une quantité d'eau sur une case 
 	 * 	@param vol	volume d'eau qu'il faut déverser
 	 */
 	public void deverserEau(int vol) {
@@ -184,7 +213,10 @@ public abstract class Robot {
 		}
 	}
 
-	/** Indique si le robot a un voisin qui contient de l'eau */
+	/** 
+	 * 	Indique si le robot a un voisin qui contient de l'eau 
+	 *	@return la case voisine de nature eau ou null s'il y en a pas 
+	 */
 	public Case estVoisinEau() {
 		int lig = this.position.getLigne();
 		int col = this.position.getColonne();
@@ -207,8 +239,10 @@ public abstract class Robot {
 	}
 	
 	
-	/** Retourne, pour une case donée, la case voisin ayant de l'eau sinon null  
-	 * 	@param caseDest	case pour laquelle on veut le voisin 
+	/** 
+	 * 	Retourne, pour une case donée, la case voisin ayant de l'eau sinon null  
+	 * 	@param caseDest	case pour laquelle on veut le voisin
+	 * 	@return la case voisine de nature eau ou null s'il y en a pas
 	 */
 	public Case estVoisinEau(Case caseDest) {
 		int lig = caseDest.getLigne();
@@ -232,7 +266,10 @@ public abstract class Robot {
 	}
 	
 	
-	/** Renvoie le point d'accès à l'eau du robot le plus proche */
+	/** 
+	 * 	Renvoie le point d'accès à l'eau du robot le plus proche 
+	 * 	@return la case d'eau la plus proche ou null s'il y en a pas
+	 */
 	public Case accesEauPlusProche() {
 		if (this.estVoisinEau() != null) return this.position;
 
@@ -255,7 +292,8 @@ public abstract class Robot {
 
 	/** Calcul et renvoie le temps mis pour accéder à une case voisine à partir de la 
 	 * 	case où se situe le robot
-	 * 	@param dir	direction vers laquelle se diriger 
+	 * 	@param dir	direction vers laquelle se diriger
+	 * 	@return temps d'accès au voisin
 	 */
 	public int tempsAccesVoisin(Direction dir) {
 		int distance = this.carte.getTailleCases();
@@ -268,6 +306,7 @@ public abstract class Robot {
 	/** Calcul et renvoie le temps mis pour accéder à une case voisine à partir d'une case quelconque
 	 * 	@param caseDepart	case à partir de laquelle le calcul est fait
 	 * 	@param dir			direction vers laquelle se diriger
+	 * 	@return temps d'accès au voisin
 	 */
 	public int tempsAccesVoisin(Case caseDepart, Direction dir){
 		int distance = this.carte.getTailleCases();

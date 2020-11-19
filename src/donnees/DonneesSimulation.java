@@ -15,17 +15,26 @@ public class DonneesSimulation {
 	private Robot[] robots;
 	private Simulateur simul;
 	
-	/** Renvoie la carte de l'éxecution */
+	/** 
+	 * 	Renvoie la carte de l'éxecution 
+	 * 	@return la carte de la simulation
+	 */
 	public Carte getCarte() {
 		return carte;
 	}
 	
-	/** Renvoie la liste des robots de la simulation */
+	/** 
+	 * 	Renvoie les robots de la simulation 
+	 * 	@return la liste des robots de la simulation 
+	 */
 	public Robot[] getRobot() {
 		return robots;
 	}
 	
-	/** Renvoie la liste des incendies de la simulation */
+	/** 
+	 * 	Renvoie les incendies de la simulation 
+	 * 	@return la liste des incendies de la simulation
+	 */
 	public Incendie[] getIncendie(){
 		return incendies;
 	}

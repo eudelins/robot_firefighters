@@ -61,7 +61,8 @@ public class RobotAChenille extends Robot {
 
 	@Override
 	/** Renvoie le temps mis pour accéder à une case voisine 
-	 * 	@param dir	direction vers laquelle se diriger 
+	 * 	@param dir	direction vers laquelle se diriger
+	 * 	@return temps d'accès au voisin
 	 */
 	public int tempsAccesVoisin(Direction dir) {
 		Carte carte = this.getCarte();
@@ -107,6 +108,7 @@ public class RobotAChenille extends Robot {
 	/** Calcul et renvoie le temps mis pour accéder à une case voisine à partir d'une case quelconque 
 	 * 	@param caseDepart	case à partir de laquelle le calcul est fait
 	 * 	@param dir			direction vers laquelle se diriger
+	 * 	@return temps d'accès au voisin
 	 */
 	@Override
 	public int tempsAccesVoisin(Case caseDepart, Direction dir) {
@@ -151,14 +153,20 @@ public class RobotAChenille extends Robot {
 	}
 
 
-	/** Renvoie la durée mis par le robot pour remplir son réservoir */
+	/** 
+	 * 	Renvoie la durée mis par le robot pour remplir son réservoir 
+	 * 	@return la durée remplissage
+	 */
 	@Override
 	public int dureeRemplissage() {
 		return 5 * 60;
 	}
 	
 	
-	/** Renvoie la capcité maximale du reservoir du robot  */
+	/** 
+	 * Renvoie la capcité maximale du reservoir du robot  
+	 * @return la capacité du réservoir
+	 */
 	@Override
 	public int capaciteReservoire() {
 		return 2000;
@@ -166,13 +174,16 @@ public class RobotAChenille extends Robot {
 	
 	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau   
 	 * 	@param quatiteNecessaire	quantite d'eau qu'il faut déverser
+	 * 	@return la durée de déversement
 	 */
 	@Override
 	public int dureeDeversage(int quantiteNecessaire) {
 		return 8 * (quantiteNecessaire / 100);
 	}
 
-	/** Chaque robot remplit son réservoir d'une manière différente */
+	/** 
+	 * 	Chaque robot remplit son réservoir d'une manière différente 
+	 */
 	@Override
 	public void remplirReservoir() {
 		if (this.estVoisinEau() != null) {

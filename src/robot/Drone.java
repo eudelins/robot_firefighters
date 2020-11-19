@@ -44,14 +44,19 @@ public class Drone extends Robot {
 		}
 	}
 	
-	/** Renvoie la durée mis par le robot pour remplir son réservoir */
+	/** 
+	 * 	Renvoie la durée mis par le robot pour remplir son réservoir 
+	 * 	@return la durée remplissage
+	 */
 	@Override
 	public int dureeRemplissage() {
 		return 30 * 60;
 	}
 	
-	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau  
-	 * 	@param quatiteNecessaire	quantite d'eau qu'il faut déverser
+	/** 
+	 * 	Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau  
+	 * 	@param quatiteNecessaire quantite d'eau qu'il faut déverser
+	 * 	@return la durée de déversement
 	 */
 	@Override
 	public int dureeDeversage(int quantiteNecessaire) {
@@ -59,7 +64,10 @@ public class Drone extends Robot {
 	}
 	
 	
-	/** Renvoie la capcité maximale du reservoir du robot  */
+	/** 
+	 * 	Renvoie la capcité maximale du reservoir du robot  
+	 * 	@return la  capcité maximale du reservoir
+	 */
 	@Override
 	public int capaciteReservoire() {
 		return 10000;
@@ -67,7 +75,10 @@ public class Drone extends Robot {
 	
 	
 	@Override
-	/** Renvoie le point d'accès à l'eau du robot le plus proche */
+	/** 
+	 * 	Renvoie le point d'accès à l'eau du robot le plus proche 
+	 * 	@return la case d'eau la plus proche ou null s'il y en a pas
+	 */
 	public Case accesEauPlusProche() {
 		Case position = this.getPosition();
 		if (position.getNature() == NatureTerrain.EAU) return position;

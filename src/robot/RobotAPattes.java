@@ -42,7 +42,8 @@ public class RobotAPattes extends Robot {
 
 	@Override
 	/** Renvoie le temps mis pour accéder à une case voisine  
-	 * 	@param dir	direction vers laquelle se diriger 
+	 * 	@param dir	direction vers laquelle se diriger
+	 * 	@return temps d'accès au voisin 
 	 */
 	public int tempsAccesVoisin(Direction dir) {
 		Carte carte = this.getCarte();
@@ -87,7 +88,10 @@ public class RobotAPattes extends Robot {
 		return;
 	}
 	
-	/** Renvoie la durée mis par le robot pour remplir son réservoir */
+	/** 
+	 * 	Renvoie la durée mis par le robot pour remplir son réservoir 
+	 * 	@return la durée de remplissage
+	 */
 	@Override
 	public int dureeRemplissage() {
 		return 0;
@@ -95,6 +99,7 @@ public class RobotAPattes extends Robot {
 	
 	/** Renvoie la durée mis par le robot pour vider son réservoir d'une quantite d'eau    
 	 * 	@param quatiteNecessaire	quantite d'eau qu'il faut déverser
+	 * 	@return la durée de déversement
 	 */
 	@Override
 	public int dureeDeversage(int quantiteNecessaire) {
@@ -110,7 +115,10 @@ public class RobotAPattes extends Robot {
 	}
 
 	
-	/** Renvoie la capacité maximale du reservoir du robot  */
+	/** 
+	 * 	Renvoie la capacité maximale du reservoir du robot  
+	 * 	@return la capcité maximale du réservoir
+	 */
 	@Override
 	public int capaciteReservoire() {
 		return 1073741823;
