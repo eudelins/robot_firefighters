@@ -124,20 +124,16 @@ public class Simulateur implements Simulable {
 	@Override
     public void next() {
     	chef.donneOrdre();
+    	draw();
     	if (simulationTerminee()) return;
     	Evenement premierEvenement = getPremierEvent();
     	while (premierEvenement != null && getDateSimulation() >= premierEvenement.getDate()) {
-//    		System.out.println(premierEvenement.getDate());
     		premierEvenement.execute();
     		premierEvenement = premierEvenement.getSuivant();
     	}
     	setPremierEvent(premierEvenement);
     	if (donnees.getCarte().getTailleCases() != 10000) incrementeDate();
     	else for (int i = 0; i < 1; i++) incrementeDate();
-        draw();
-//        if(this.simulationTerminee()) {
-//        	System.out.println("Simulation terminée");
-//        }
     }
 
 	/**
