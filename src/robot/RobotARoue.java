@@ -58,9 +58,7 @@ public class RobotARoue extends Robot{
 	@Override
 	public void remplirReservoir() {
 		if (this.estVoisinEau() != null) {
-			this.setStopped(true);
 			this.setQuantiteEau(5000);
-			this.setStopped(false);
 		}
 	}
 	

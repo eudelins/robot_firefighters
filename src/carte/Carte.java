@@ -10,6 +10,12 @@ public class Carte {
 	private Case[][] cases;
 	private int tailleCases;
 
+	/**
+	* création d'un objet de tyoe Carte vierge, avec que des terrains libres
+	* @param nbLignes nombre total de lignes dans la carte
+	* @param nbColonnes nombre total de colonnes
+	* @param tailleCases taille d'une case
+	*/
 	public Carte(int nbLignes, int nbColonnes, int tailleCases) {
 		this.tailleCases = tailleCases;
 		this.cases = new Case[nbLignes][nbColonnes];
@@ -20,7 +26,11 @@ public class Carte {
 		}
 	}
 
-
+	/**
+	*	Creation d'un objet de type carte a partir d'une matrice de cases
+	* @param carte matrice de Cases
+	* @param tailleCases taille d'une case
+	*/
 	public Carte(Case[][] carte, int tailleCases) {
 		this.tailleCases = tailleCases;
 		this.cases = carte;
@@ -29,12 +39,14 @@ public class Carte {
 
 	/**
 	*	obtenir la taille d'une case
+	* @return renvoie la taille d'une case
 	*/
 	public int getTailleCases() {
 		return tailleCases;
 	}
 	/**
 	*	changer la taille d'une case
+	* @param tailleCases nouvelle taille de case
 	*/
 	public void setTailleCases(int tailleCases) {
 		this.tailleCases = tailleCases;
@@ -42,6 +54,7 @@ public class Carte {
 
 	/**
 	*	obtenir le nombre de lignes total
+	* @return nombre total de lignes
 	*/
 	public int getNbLignes() {
 		return cases.length;
@@ -49,6 +62,7 @@ public class Carte {
 
 	/**
 	*	obtenir le nombre de colonnes au total
+	* @return nombre total de collones
 	*/
 	public int getNbColonnes() {
 		return cases[0].length;
@@ -65,6 +79,7 @@ public class Carte {
 	*	renvoie un booléen si il existe une case dans la direction donnée
 	*	@param src case de laquelle on veut regarder les voisins
 	* @param dir direction dans laquelle on veut regarder
+	* @return un booléen indiquant si il y un un booléen dans la direction donnée
 	*/
 	public boolean voisinExiste(Case src, Direction dir) {
 		int ligSrc = src.getLigne();
@@ -90,6 +105,7 @@ public class Carte {
 	*	Renvoie la case voisine dans la direction donnée
 	* @param src case de laquelle on veut regarder les voisins
 	* @param dir direction dans laquelle on regarde
+	* @return case voisine dans la direction donnée
 	*/
 
 	public Case getVoisin(Case src, Direction dir) {
@@ -115,7 +131,9 @@ public class Carte {
 	}
 
 	/**
-	*	Permet d'obtenir la liste des voisins d'une case
+	*	Permet d'obtenir la liste des voisins dans les quatre directions d'une case
+	* @param base case dont on veut obtenir les voisins
+	* @return renvoie la liste des voisins
 	*/
 
 	public ArrayList<Case> getVoisins(Case base){

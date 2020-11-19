@@ -105,7 +105,6 @@ public class ChefPompier {
 				} else {
 					Gps chemin = new Gps(robots[j], robots[j].getPosition(), fire.getPosition());
 					if (chemin.trouverChemin(simul, donnees)) {
-//						System.out.println(j + ": Je suis la");
 						long dateArrivee = chemin.dateArrivee(simul);
 						if (dateArrivee < tempsMin) {
 							robMin = robots[j];
@@ -124,11 +123,9 @@ public class ChefPompier {
 				DeverserDebut deversage = new DeverserDebut(tempsMin, simul, robMin, fire.getPosition());
 				simul.ajouteEvenement(deversage);
 			} else {
-				for (int j = 0; j < 100; j++) simul.incrementeDate();
 				return;
 			}
 		}
-		if (fire == null ) for (int j = 0; j < 100; j++) simul.incrementeDate();
 	}
 
 }

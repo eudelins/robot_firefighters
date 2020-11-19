@@ -47,7 +47,7 @@ public class Gps {
 		this.valeursH = new HashMap<Case, Integer>();
 	}
 /**
-* Associe un parent a fille dans le dictionnaire. Créer une assiciation si fille n'a pas encore de parent
+* Associe un parent a fille dans le dictionnaire. Créer une association si fille n'a pas encore de parent
 * @param fille case fille
 * @param parent case parent
 */
@@ -57,6 +57,7 @@ public class Gps {
 	/**
 	* Renvoie le parent de la case demandée
 	* @param fille case dont on veut trouver le parent dans l'itinéraire
+	* @return parent de la case demandée
 	*/
 	public Case getParent(Case fille){
 		return this.parents.get(fille);
@@ -72,6 +73,7 @@ public class Gps {
 	/**
 	*	Permet d'obtenir le temps pour accéder a la case
 	* @param caseActuelle case dont on veut le temps
+	* @return temps calculée depuis la départ
 	*/
 	public int getG(Case caseActuelle){
 		return this.valeursG.get(caseActuelle);
@@ -86,6 +88,7 @@ public class Gps {
 	/**
 	* Permet d'obtenir la distance de Manhattan avec l'arrivée distance de Manhattan entre la case et l'arrivée
 	* @param caseCible case dont on veut la distance de Manhattan avec l'arrivée
+	* @return temps estimée pour l'arrivée
 	*/
 	public int getH(Case caseCible){
 		return this.valeursH.get(caseCible);
@@ -104,6 +107,9 @@ public class Gps {
 	 * On regarde alors ses voisins : pour chaque voisin, si on ne peut pas y accéder ou bien il est déja dans la liste des fermés, on passe.
 	 * Sinon, si il n'est dans la la liste des ouvets, on le rajoutte, et dans le cas inverse, on actualise ses valeurs si on est dans un plus court chemin pour l'atteindre.
 	 * On recommence ces tours de boucle jusqu'à mettre la case de fin dans la liste des fermés ou bien quand il n'y pas plus de candidat.
+	 * @param simul simulation dans laquelle on se situe
+	 * @param donnees donnes utilisées
+	 * @return booléen si le chemin a été trouvé on non
 	 */
 	public boolean trouverChemin(Simulateur simul, DonneesSimulation donnees) {
 		if (this.debut == null) return false;
@@ -144,12 +150,17 @@ public class Gps {
 	}
 /**
 *Permet de calculer la distance de Manhattan entre deux cases.
+* @param case1 premiere case
+* @param case2 deuxieme case
+* @return renvoie la distande Manhattan entre deux cases
 */
 	private int calculManhattan(Case case1, Case case2){
 		return Math.abs(case1.getColonne() - case2.getColonne()) + Math.abs(case1.getLigne() - case2.getLigne());
 	}
 /**
-*Renvoie un booléen permettant de savoir si le robot dont on veut calculer la trajectoire peut accéder  la case
+* Renvoie un booléen permettant de savoir si le robot dont on veut calculer la trajectoire peut accéder la case
+* @param surCase case sur laquelle on veut peut-être marcher
+* @return renvoie si le robot peut marcher sur la case
 */
 	private boolean peutMarcher(Case surCase){
 		return !(this.robot.getTerrainInterdit().contains(surCase.getNature()));
@@ -157,6 +168,7 @@ public class Gps {
 	/**
 	* permet d'obtenir la case d'une liste ayant la valeur de f = g+h la plus faible
 	* @param ouverts liste sur laquelle ont travaille
+	* @return renvoie la case dont la valeur g+h est la plus faible
 	*/
 
 	private Case trouverFMini(ArrayList<Case> ouverts){
@@ -174,6 +186,9 @@ public class Gps {
 	/**
 	*Permet de créer les différents événements permetttant au robot de suivre le chemin
 	* @param caseChemin case que l'on veut atteindre
+	* @param simul simulation utilisée
+	* @param donnees données utilisées
+	* @return date de fin de déplacements
 	*/
 
 	private long creationEvenementChemin(Case caseChemin, Simulateur simul, DonneesSimulation donnees){
@@ -189,7 +204,11 @@ public class Gps {
 			}
 	}
 
-	/** Crée les évènemenets de déplacements du robot et renvoie la date de fin du déplacement */
+	/** Crée les évènemenets de déplacements du robot et renvoie la date de fin du déplacement
+	* @param simul simulation utilisée
+	* @param donnees données utilisées
+	* @return date de fin de déplacements
+	*/
 	public long creationEvenementChemin(Simulateur simul, DonneesSimulation donnees){
 		ArrayList<Case> chemin = new ArrayList<Case>();
 		Case current = this.fin;
@@ -210,7 +229,10 @@ public class Gps {
 	}
 
 
-	/** Renvoie la date de fin du déplacement */
+	/** Renvoie la date de fin du déplacement sans rajoutter des événements
+	*	@param simul simulateur utilisée
+	* @return renvoie la date de fin de déplacement
+	*/
 	public long dateArrivee(Simulateur simul){
 		ArrayList<Case> chemin = new ArrayList<Case>();
 		Case current = this.fin;

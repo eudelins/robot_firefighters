@@ -31,7 +31,6 @@ public class DeverserFin extends Evenement{
 	 */
 	public void execute() {
 		robot.deverserEau(this.qteDeverse);
-		this.robot.setStopped(false);
 		this.robot.setOccupe(false);
 		if (caseDeversage.getIncendie() != null) {
 			caseDeversage.getIncendie().setAffecte(false);
