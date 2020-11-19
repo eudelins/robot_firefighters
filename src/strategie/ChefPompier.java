@@ -105,7 +105,6 @@ public class ChefPompier {
 				} else {
 					Gps chemin = new Gps(robots[j], robots[j].getPosition(), fire.getPosition());
 					if (chemin.trouverChemin(simul, donnees)) {
-//						System.out.println(j + ": Je suis la");
 						long dateArrivee = chemin.dateArrivee(simul);
 						if (dateArrivee < tempsMin) {
 							robMin = robots[j];
