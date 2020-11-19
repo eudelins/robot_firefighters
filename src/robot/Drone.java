@@ -39,7 +39,6 @@ public class Drone extends Robot {
 	@Override
 	public void remplirReservoir() {
 		if (this.getPosition().getNature() == NatureTerrain.EAU) {
-			this.setStopped(true);
 			this.setQuantiteEau(10000);
 		}
 	}

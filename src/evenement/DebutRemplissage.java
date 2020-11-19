@@ -25,7 +25,6 @@ public class DebutRemplissage extends Evenement {
 	 */
 	@Override
 	public void execute() {
-		robot.setStopped(true);
 		robot.setRemplissage(true);
 		
 		// On programme la fin du remplissage

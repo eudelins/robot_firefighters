@@ -30,7 +30,6 @@ public class DeverserDebut extends Evenement{
 	 * Exécute l'évènement
 	 */
 	public void execute() {
-		robot.setStopped(true);
 		robot.setDeversage(true);
 
 		// On programme la fin du déversage

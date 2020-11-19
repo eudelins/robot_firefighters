@@ -176,9 +176,7 @@ public class RobotAChenille extends Robot {
 	@Override
 	public void remplirReservoir() {
 		if (this.estVoisinEau() != null) {
-			this.setStopped(true);
 			this.setQuantiteEau(2000);
-			this.setStopped(false);
 		}
 	}
 

@@ -32,8 +32,6 @@ public class DeplacementDebut extends Evenement {
 	 */
 	@Override
 	public void execute() {
-		assert(!robot.isStopped());
-		
 		// On planifie la fin du déplacement du robot
 		long dateFinDeplacement = dateFinEvenement();
 		DeplacementFin finDeplacement = new DeplacementFin(dateFinDeplacement, getSimul(), robot, dir, carte);

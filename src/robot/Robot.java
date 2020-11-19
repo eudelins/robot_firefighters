@@ -23,7 +23,6 @@ public abstract class Robot {
 	private ArrayList<NatureTerrain> terrainInterdit = new ArrayList<NatureTerrain>();
 	private boolean remplissage;
 	private boolean deversage;
-	private boolean stopped;
 	private boolean occupe;
 	
 	/**	Créer un robot quelconque avec les attributs généraux à tous les robots 
@@ -41,7 +40,6 @@ public abstract class Robot {
 		this.vitesse = vitesse;
 		this.remplissage = false;
 		this.deversage = false;
-		this.stopped = false;
 		this.occupe = false;
 	}
 
@@ -90,18 +88,6 @@ public abstract class Robot {
 	 */
 	public void setQuantiteEau(int quantiteEau) {
 		this.quantiteEau = quantiteEau;
-	}
-
-	/** Indique si le robot est occupé à se remplir ou déverser */
-	public boolean isStopped() {
-		return this.stopped;
-	}
-	
-	/** Change le booléen indiquant si le robot est arrêté pour déverser de l'eau ou remplir
-	 * 	@param stop	statut actuel du robot (stoppé ou non)
-	 */
-	public void setStopped(boolean stop) {
-		this.stopped = stop;
 	}
 
 	/** Indique si le robot est entrain de se remplir */
