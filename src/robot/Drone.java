@@ -114,7 +114,7 @@ public class Drone extends Robot {
     	int rectY = caseY + tailleCase/3 + tailleCase/6;
     	int rectSize = tailleCase/3;
     	
-    	// Dessin du drone avec des figures
+    	// Dessin du drone avec des figures 
 //    	gui.addGraphicalElement(new Rectangle(rectX, rectY, Color.BLACK, Color.gray, rectSize));
 //    	for(int k = 0; k<=1; ++k) {
 //    		for(int j = 0; j<= 1; ++j) {
