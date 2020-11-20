@@ -11,8 +11,8 @@ import gui.Oval;
 import gui.Rectangle;
 
 /**
- * @author equipe 66
  * Classe représentant les robots de type drone
+ * @author equipe 66
  */
 public class Drone extends Robot {
 

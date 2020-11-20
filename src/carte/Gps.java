@@ -12,12 +12,12 @@ import evenement.*;
 import donnees.DonneesSimulation;
 
 /**
- * @author equipe 66
  * Permet de déterminer le plus court chemin pour un robot donné entre deux cases.
  * Pour ce faire, on utilise l'algorithme A*, plus rapide que Dijkstra.
  * En plus de déterminer le plus court chemin entre deux cases, cette classe
  * permet la génération des événements permettant au robot de se déplacer
  * Les parents des cases sont stockées dans des HashMap avec comme clé la fille et comme valeur le parent associé
+ * @author equipe 66
  */
 public class Gps {
 

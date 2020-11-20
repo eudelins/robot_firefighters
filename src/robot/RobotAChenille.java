@@ -9,8 +9,8 @@ import gui.Oval;
 import gui.Rectangle;
 
 /**
- * @author equipe 66
  * Classe représentant les robots possédant des chenilles
+ * @author equipe 66
  */
 public class RobotAChenille extends Robot {
 	

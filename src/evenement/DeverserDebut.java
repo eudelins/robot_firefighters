@@ -4,8 +4,8 @@ import robot.Robot;
 import carte.*;
 
 /**
- * @author equipe 66
  * Evenement qui correspond au début du déversage de l'eau d'un robot
+ * @author equipe 66
  */
 public class DeverserDebut extends Evenement{
 	private Robot robot;

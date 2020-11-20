@@ -8,8 +8,8 @@ import evenement.*;
 
 
 /**
- * @author equipe 66
  * Classe testant les simulations
+ * @author equipe 66
  */
 public class TestSimulateur {
 

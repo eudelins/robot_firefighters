@@ -11,8 +11,8 @@ import gui.Rectangle;
 import gui.ImageElement;
 
 /**
- * @author equipe 66
  * Classe représentant les robots possédant des pattes
+ * @author equipe 66
  */
 public class RobotAPattes extends Robot {
 	

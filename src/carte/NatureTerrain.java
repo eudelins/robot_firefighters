@@ -1,8 +1,8 @@
 package carte;
 
 /**
- * @author equipe 66
  * Classe qui décrit les différents types de terrain qui existent
+ * @author equipe 66
  */
 public enum NatureTerrain {
 	EAU, FORET, ROCHE, TERRAIN_LIBRE, HABITAT;

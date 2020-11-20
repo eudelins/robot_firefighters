@@ -16,8 +16,8 @@ import carte.*;
 import donnees.*;
 
 /**
- * @author equipe 66
  * Classe implémentant un simulateur qui représente la situation et gère les évènements
+ * @author equipe 66
  */
 public class Simulateur implements Simulable {
 	private long dateSimulation;

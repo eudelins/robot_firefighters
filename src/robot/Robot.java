@@ -14,8 +14,8 @@ import gui.Rectangle;
 import gui.Text;
 
 /**
- * @author equipe 66
  * Classe abstraite représentant les robots
+ * @author equipe 66
  */
 public abstract class Robot {
 	private Case position;

@@ -9,8 +9,8 @@ import carte.*;
 import evenement.*;
 
 /**
- * @author equipe 66
  * Classe contenant les données de la simulation (carte, robots, incendies)
+ * @author equipe 66
  */
 public class DonneesSimulation {
 	private Incendie[] incendies;

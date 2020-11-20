@@ -4,8 +4,8 @@ import robot.*;
 import carte.*;
 
 /**
- * @author equipe 66
  * Evenement qui correspond au début du remplissage du réservoir d'un robot
+ * @author equipe 66
  */
 public class DebutRemplissage extends Evenement {
 	Robot robot;

@@ -3,9 +3,9 @@ package carte;
 import java.util.ArrayList;
 
 /**
- * @author equipe 66
  * Classe représentant la carte sur laquelle on travaille
  * Elle contient simplement la taille des cases et une matrice contenant toutes les cases
+ * @author equipe 66
  */
 public class Carte {
 	private Case[][] cases;

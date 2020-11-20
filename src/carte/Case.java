@@ -4,8 +4,8 @@ import gui.GUISimulator;
 import gui.ImageElement;
 
 /**
- * @author equipe 66
  * Classe représentant une case avec sa nature, sa ligne, sa colonne et l'incendie présent si il y en a un
+ * @author equipe 66
  */
 
 public class Case {

@@ -12,8 +12,8 @@ import gui.Rectangle;
 
 
 /**
- * @author equipe 66
  * Classe représentant les robots possédant des roues
+ * @author equipe 66
  */
 public class RobotARoue extends Robot{
 	

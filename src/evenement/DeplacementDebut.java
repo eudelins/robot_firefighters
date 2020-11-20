@@ -5,8 +5,8 @@ import carte.Carte;
 import robot.*;
 
 /**
- * @author equipe 66
  * Evenement qui correspond au début du déplacement d'un robot
+ * @author equipe 66
  */
 public class DeplacementDebut extends Evenement {
 	private Robot robot;

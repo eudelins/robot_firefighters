@@ -6,8 +6,8 @@ import evenement.*;
 import donnees.*;
 
 /**
- * @author equipe 66
  * Classe du chef pompier qui gère la stratégie
+ * @author equipe 66
  */
 public class ChefPompier {
 	private Simulateur simul;

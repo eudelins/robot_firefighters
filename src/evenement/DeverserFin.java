@@ -4,8 +4,8 @@ import carte.Case;
 import robot.Robot;
 
 /**
- * @author equipe 66
  * Evenement qui correspond à la fin du déversage de l'eau d'un robot
+ * @author equipe 66
  */
 public class DeverserFin extends Evenement{
 	private Robot robot;
