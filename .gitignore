@@ -1,6 +1,3 @@
-#Ignorer le fichier bin et son contenu
-bin/
-
 #Ignore le .classpath et .project
 .classpath
 .project
