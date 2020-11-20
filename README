@@ -4,17 +4,6 @@
 /*																	 */
 /*********************************************************************/
 
-/*********************************************************************/
-/*						   Initialisation							 */
-/*********************************************************************/
-
-mkdir bin 
---> create the folder that will contain binary files
-
-mv lib/gui.jar bin/ 
---> move the gui.jar library in the bin folder, because the makefile
-    want gui.jar to be there 
-
 
 /*********************************************************************/
 /*						   		Use									 */
